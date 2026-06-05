@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <!--
@@ -16,30 +16,67 @@
 
   <meta
     name="description"
-    content="Fundación Amigos Como Arroz: programas educativos, acompañamiento social y oportunidades para niños, jóvenes y familias."
+    content="Fundación Amigos Como Arroz en Neiva, Huila: educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias."
   />
 
   <meta name="theme-color" content="#f37021" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fundacionamigoscomoarroz.com/" />
   <title>Fundación Amigos Como Arroz | Educación y oportunidades</title>
-
-  <!--
-    Tipografías:
-    - Baloo 2: títulos cálidos, cercanos y memorables.
-    - Nunito Sans: lectura cómoda y profesional para párrafos.
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
-    rel="stylesheet"
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CO" />
+  <meta property="og:title" content="Fundación Amigos Como Arroz | Educación y oportunidades" />
+  <meta
+    property="og:description"
+    content="Educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias en Neiva, Huila."
   />
+  <meta property="og:url" content="https://fundacionamigoscomoarroz.com/" />
+  <meta property="og:image" content="https://fundacionamigoscomoarroz.com/assets/img/hero/hero-principal.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fundación Amigos Como Arroz | Educación y oportunidades" />
+  <meta
+    name="twitter:description"
+    content="Educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias en Neiva, Huila."
+  />
+  <meta name="twitter:image" content="https://fundacionamigoscomoarroz.com/assets/img/hero/hero-principal.jpg" />
+  <link rel="icon" href="assets/img/brand/logo-fundacion.jpg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="assets/img/brand/logo-fundacion.jpg" />
+  <link rel="manifest" href="site.webmanifest" />
 
   <!-- Enlace al archivo CSS externo -->
-  <link href="css/styles.css" rel="stylesheet" />
+  <link href="assets/css/styles.css?v=3" rel="stylesheet" />
 
   <!-- Optimizaciones de rendimiento -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+  <link rel="dns-prefetch" href="https://i.ytimg.com" />
+  <link
+    rel="preload"
+    as="image"
+    href="assets/img/hero/hero-principal.jpg"
+    fetchpriority="high"
+  />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Fundación Amigos Como Arroz",
+      "url": "https://fundacionamigoscomoarroz.com/",
+      "logo": "https://fundacionamigoscomoarroz.com/assets/img/brand/logo-fundacion.jpg",
+      "email": "amigoscomoarroz@gmail.com",
+      "telephone": "+57 318 707 3308",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrera 7A No. 16-25, barrio Quirinal",
+        "addressLocality": "Neiva",
+        "addressRegion": "Huila",
+        "addressCountry": "CO"
+      },
+      "sameAs": [
+        "https://www.instagram.com/amigoscomoarroz",
+        "https://www.facebook.com/amigoscomoarroz"
+      ]
+    }
+  </script>
 
 </head>
 
@@ -57,21 +94,25 @@
   <header class="site-header" id="site-header">
     <nav class="nav-shell container" aria-label="Navegación principal">
       <a class="brand" href="#inicio" aria-label="Fundación Amigos Como Arroz, inicio">
-        <img loading="lazy"
+        <img
           class="logo-mark"
-          src="data:image/jpeg;base64,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VS+r9kqhfCOkaKhdOiAnVRaVeiwAAAAAAAAAUyjZaJXo6wo3Oswq35bJWztoUruFunz9+ttFXM3apl6lfSKFXZxTaqWsQ90bQpZ29ASd5OsAMfQpHVuwMzM+mxzUrWaxk63l4yILGgR+2cMaVn0p527EewUtgzmjXMqzDtAAAAAAAAADO0a55ZydYAY2vRL/ALQvg5Mfaw9wxdrF2hXsVyrpZukMjXyDVxtnGNtx2CmUNvN0gCj7YyjaAydbCNmtZrC7SumTo52iS4m3im0jkBVM7bytQ4xmwSegAAAAAAAAABmQbXBn1dWcq2wx2xGUKutOQThi7QK9gZukDI1xzxKMKzqQGfxqynnoAM/QGJY0YTLh+g6I610UroZOjKEcgwrOpAUItaU8ydcfPT7QxZ9MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAnRSgAAAAAAAAAAAAAAAAAAAAAADz2ueOJzrujeHHdAud4W2edUbJx7FOTMzTPPKXJomYT9yxk/kPJZocaBFYrxFrvKtlrj2oXQAAAAAAAAAAAAAAAAAAAUbUgV7FcqW1go3qF49oWoSLiS2U7WPsHFmtZK6r6e9RdFyvD6aRycVp4xbzdIULtE9L5DBXsF3noUbnQAAAAAAAAAAAAAAAAAAAcdjjsPKN8UbwQThXm6FBfEfE4Ag7kGf7fHHkgiqaAo3ggnDniUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf//aAAwDAQACAAMAAAAh8888888888888888888888888888888888888888888885wRAiQ8888888//ADMYUsffPPPPPPPPPPPPPNOgwwwwww2lPPP+RQgggggucdPPPPPPPPPPPPVgwwwwwwwww4fgAgggggggggmd/PPPPPPPPOAwwwwwwwwwwwwKqggggggggggggf8AzzzzzzzyMMMMMMMMMMMNTgG48IIIIIIIIIIL/wA888888bDDDDDDDDDDDXgiCRJCCCCCCCCCCCCd888884KDDDDDDDDDDDiACCCCHCCCCCCCCCCCB888889DDDDDDDDDDDDWhCCCEtCCCCCCCCCCCo88888wDDDDDDDDDDDDmCCCCSVCCCCCCCCCCCCd88888DDDDDDDDDDDDXCCCCG8CCCCCCCCCCCCU88888DDDDDDDDDDDDuCCCCGJCCCCCCCCCCCCU88888DDDDDDDDDDDDdBCCCUTCCCCCCCCCCCCU88888DDDDDDDDDDDD7vCCC3CCCCCCCCCCCCCU88888DDDDDDDDDDDDWSKCO1CCCCCCCCCCCCCU88888DDDDDDDDDDDDDPoCoJCCCCCCCCCCCCCU88888DDDDDDDDDDDDDDl4TCCCCCCCCCCCCCCU88888DDDDDDDDDDDDDCs/NCCCCCCCCCCCCCCU88888DDDDDDDDDDDDnd88+aLCCCCCCCCCCCCU8888VBBBBBENEJJkd888888sMP+Wd+xDDDDDd8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888848cUYkUAs84884sUQo8888888888888888888488UU4Us8o8s8U8AoU8888888888888888888o48Ucsc88s4osQos4wc888888888888888888888888888848888888888888888888888888w0800048888ss8484880w8w08888888888ccoUc80skcwU8U88sY88E8ssM8E888888888oU4kc8kU8UoQ040888s88U4088sc888888888884sYA8c8csMU8888U888csMUMcs88888888888888888888888888888888888888888888888888888888888888884888888888888888888888888s8UoYAoQUs8wwQ0U8888888888888888888sM8MQgUo8cMY8sUgEcsc8888888888888888888scM88scM8M8s8M8M888888888888888888888888888888888888888888888888//aAAwDAQACAAMAAAAQ888888888888888888888888888888888888888888888zyjjRG3x8888801vjDQw088888888888888m4AAAAAAA4/886BlAAAAAA6U/wDPPPPPPPPPPOlAAAAAAAAAAB+AgAAAAAAAAAKN/PPPPPPPPAoAAAAAAAAAAAJFowAAAAAAAAAAE9PPPPPPPLwQAAAAAAAAAAB3dgTAAAAAAAAAAADvPPPPPPIAAAAAAAAAAAEVP/fbAAAAAAAAAAAAN/PPPPKKQAAAAAAAAAANP/ffcRQAAAAAAAAAAEvPPPPKwAAAAAAAAAAAG/fffaRQAAAAAAAAAAPfPPPPIwAAAAAAAAAAADvfffeHgAAAAAAAAAAANvPPPFwAAAAAAAAAAAJ/fffelwAAAAAAAAAAAFvPPPFwAAAAAAAAAAAGvfffWCAAAAAAAAAAAAFvPPPFwAAAAAAAAAAABNvffYswAAAAAAAAAAAFvPPPFwAAAAAAAAAAAKH/AH31EAAAAAAAAAAAABbzzzxcAAAAAAAAAAABQh73Y8AAAAAAAAAAAABbzzzxcAAAAAAAAAAAACjF7IkAAAAAAAAAAAABbzzzxcAAAAAAAAAAAAABq3oAAAAAAAAAAAAABbzzzxcAAAAAAAAAAAAAGe8oAAAAAAAAAAAAABbzzzxcAAAAAAAAAAACw/zyF0IAAAAAAAAAAABbzzzzcMMMMM8YcMuf7zzzzzz9yLdMCzEAAAAB/wA88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888o88888888888888888888888888888YQ8cEAUo4844w80sM888888888888888888888s88o8oos8ooc80M888888888888888888888Q488o8oo44o8kg0wwc88888888888888888888888888884s888888888888888888888w8884804888w08sc80404080488888888888oUc4UocMMsco0888gsIoUooUMEIg888888888s088c4E888o488U8s88oUo80848c8888888888I48cA8888s8I88884kscs80k8MM88888888888888888888888888888888888888888888888888888888888888884088888888888888888888888sAU440Qcos4AoQc48888888888888888888s88M8og0QssQ8A8sAAss888888888888888888888sc8MsM8c8MsM8M888888888888888888888888888888888888888888888888//EADkRAAECAwMICAYCAgMAAAAA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"
+          src="assets/img/brand/logo-fundacion.jpg"
+          width="160"
+          height="160"
           alt="Logo Fundación Amigos Como Arroz"
+          decoding="async"
         />
       </a>
 
       <ul class="nav-list" id="nav-list">
-        <li><a class="nav-link active" href="#fundacion">Fundación</a></li>
+        <li><a class="nav-link active" href="#inicio">Inicio</a></li>
+        <li><a class="nav-link" href="#fundacion">Fundación</a></li>
         <li><a class="nav-link" href="#programas">Programas</a></li>
         <li><a class="nav-link" href="#impacto">Impacto</a></li>
         <li><a class="nav-link" href="#testimonios">Testimonios</a></li>
         <li><a class="nav-link" href="#momentos">Momentos</a></li>
-        <li><a class="nav-link" href="#videos">Videos</a></li>
         <li><a class="nav-link" href="#equipo">Equipo</a></li>
+        <li><a class="nav-link" href="#videos">Videos</a></li>
         <li><a class="nav-link" href="#contacto">Contacto</a></li>
       </ul>
 
@@ -96,30 +137,49 @@
     <!-- =========================================================
          Inicio / Hero
          ========================================================= -->
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-content" id="hero-content">
-        <span class="hero-badge">
-          <span class="hero-badge-dot" aria-hidden="true"></span>
-          Educación · familia · comunidad
-        </span>
-        <p class="hero-kicker">Bienvenidos a nuestra fundación</p>
-        <h1 class="hero-title" id="hero-title">Amigos Como Arroz</h1>
-        <p class="hero-description">
-          Creamos oportunidades educativas, sociales y culturales para que
-          <span class="highlight-text">niños, jóvenes y familias</span>
-          construyan un futuro con esperanza.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-pink" href="#contacto">
-            <span>Quiero apoyar</span>
-          </a>
-          <a class="btn btn-secondary" href="#programas">Conocer programas</a>
-        </div>
-</div>
-
-      <div class="hero-scroll" aria-hidden="true">
-        <span></span>
-        Descubre más
+    <section class="hero" id="inicio" aria-label="Galería principal de la fundación">
+      <div class="hero-gallery" aria-hidden="true">
+        <figure class="hero-slide is-active">
+          <img
+            src="assets/img/hero/hero-principal.jpg"
+            alt=""
+            width="1200"
+            height="507"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </figure>
+        <figure class="hero-slide">
+          <img
+            src="assets/img/content/taller-educativo.jpg"
+            alt=""
+            width="1200"
+            height="675"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <figure class="hero-slide">
+          <img
+            src="assets/img/content/presentacion-cultural.jpg"
+            alt=""
+            width="1200"
+            height="431"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <figure class="hero-slide">
+          <img
+            src="assets/img/content/programa-semilla-deporte.jpg"
+            alt=""
+            width="833"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
 
       <!-- Curva blanca inferior -->
@@ -131,6 +191,44 @@
       </svg>
     </section>
 
+    <section class="hero-intro" aria-labelledby="hero-title">
+      <div class="hero-content container" id="hero-content">
+        <span class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Neiva, Huila · educación · comunidad
+        </span>
+        <p class="hero-kicker">Acompañamos procesos educativos y sociales</p>
+        <h1 class="hero-title" id="hero-title">Amigos Como Arroz</h1>
+        <p class="hero-description">
+          Impulsamos a <span class="highlight-text">niños, jóvenes y familias</span>
+          con programas de educación, liderazgo, bienestar psicosocial y comunidad
+          para construir proyectos de vida con esperanza.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-pink" href="#contacto">
+            <span>Quiero apoyar la misión</span>
+          </a>
+          <a
+            class="btn btn-whatsapp"
+            href="https://wa.me/573187073308?text=Hola%2C%20quiero%20apoyar%20a%20la%20Fundaci%C3%B3n%20Amigos%20Como%20Arroz."
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="clic_whatsapp"
+            data-analytics-category="contacto"
+            data-analytics-label="Hero - apoyar por WhatsApp"
+          >
+            Escribir por WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="#programas">Conocer programas</a>
+        </div>
+        <div class="hero-trust" aria-label="Resumen de impacto de la fundación">
+          <span><strong>12+ años</strong> acompañando procesos</span>
+          <span><strong>4.200+</strong> participantes beneficiados</span>
+          <span><strong>65+</strong> aliados e instituciones</span>
+        </div>
+      </div>
+    </section>
+
     <!-- =========================================================
          Fundación / About
          ========================================================= -->
@@ -138,9 +236,12 @@
       <div class="about-grid container">
         <div class="about-card reveal">
           <img
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=80"
+            src="assets/img/content/programa-semilla-deporte.jpg"
             alt="Jóvenes y voluntarios trabajando juntos"
             loading="lazy"
+            decoding="async"
+            width="833"
+            height="1080"
           />
           <div class="about-badge">
             <strong>12+ años</strong>
@@ -150,7 +251,7 @@
 
         <div class="about-content reveal">
           <span class="eyebrow">Fundación</span>
-          <h2>Educación, acompañamiento y comunidad para <span class="highlight-text">transformar vidas</span>.</h2>
+          <h2 id="about-title">Educación que <span class="highlight-text">transforma vidas</span>.</h2>
           <p class="lead">
             Trabajamos con niños, jóvenes y familias mediante programas que fortalecen el aprendizaje,
             el liderazgo, la permanencia educativa y el bienestar psicosocial.
@@ -158,15 +259,15 @@
 
           <ul class="check-list">
             <li>
-              <span class="check-icon" aria-hidden="true">✓</span>
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
               <span>Apoyo pedagógico y social para niños, jóvenes y familias.</span>
             </li>
             <li>
-              <span class="check-icon" aria-hidden="true">✓</span>
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
               <span>Programas culturales, deportivos, productivos y educativos.</span>
             </li>
             <li>
-              <span class="check-icon" aria-hidden="true">✓</span>
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
               <span>Acompañamiento integral para construir proyectos de vida.</span>
             </li>
           </ul>
@@ -183,7 +284,7 @@
       <div class="container">
         <div class="section-header center reveal">
           <span class="eyebrow">Programas</span>
-          <h2 id="programs-title">Rutas de acompañamiento para cada etapa.</h2>
+          <h2 id="programs-title">Acompañamiento para cada etapa.</h2>
           <p class="lead">
             Organizamos nuestro trabajo en programas que promueven educación, liderazgo y bienestar.
           </p>
@@ -191,34 +292,46 @@
 
         <div class="program-grid">
           <article class="program-card reveal">
-            <div class="program-icon" aria-hidden="true">🌱</div>
+            <div class="program-icon" aria-hidden="true">&#127793;</div>
             <h3>Semilla</h3>
             <span class="program-target">Para niños, niñas y familias</span>
             <p>
-              Actividades deportivas, culturales, productivas y educativas para fortalecer hábitos,
-              confianza y participación.
+              Formación deportiva, cultural y productiva para fortalecer talentos,
+              valores y uso sano del tiempo libre.
             </p>
-            <a href="#contacto">Más información →</a>
+            <a href="programas/semilla.html">Más información &rarr;</a>
           </article>
 
           <article class="program-card reveal">
-            <div class="program-icon" aria-hidden="true">📚</div>
+            <div class="program-icon" aria-hidden="true">&#128218;</div>
             <h3>Siembra</h3>
             <p>
-              Alternativas para acceder a educación técnica, tecnológica o profesional con acompañamiento.
+              Becas y acompañamiento para acceder a educación superior técnica, tecnológica
+              o profesional de excelente calidad.
             </p>
-            <a href="#contacto">Más información →</a>
+            <a href="programas/siembra.html">Más información &rarr;</a>
           </article>
 
           <article class="program-card reveal">
-            <div class="program-icon" aria-hidden="true">🏆</div>
+            <div class="program-icon" aria-hidden="true">&#127942;</div>
             <h3>Cosecha</h3>
             <span class="program-target">Para líderes comunitarios</span>
             <p>
-              Formación de jóvenes líderes mediante proyectos sociales que aportan valor
-              a sus comunidades.
+              Liderazgo juvenil y proyectos sociales para servir, participar y generar
+              impacto en la comunidad.
             </p>
-            <a href="#contacto">Más información →</a>
+            <a href="programas/cosecha.html">Más información &rarr;</a>
+          </article>
+
+          <article class="program-card reveal">
+            <div class="program-icon" aria-hidden="true">&#129504;</div>
+            <h3>Acompañamiento Psicosocial</h3>
+            <span class="program-target">Para familias y beneficiarios</span>
+            <p>
+              Eje transversal que apoya el sano desarrollo de beneficiarios
+              y familias en su proyecto de vida.
+            </p>
+            <a href="programas/psicosocial.html">Más información &rarr;</a>
           </article>
         </div>
       </div>
@@ -231,12 +344,25 @@
       <div class="impact-grid container">
         <div class="impact-copy reveal">
           <span class="eyebrow">Impacto</span>
-          <h2 id="impact-title">Historias y resultados que muestran el valor de acompañar.</h2>
+          <h2 id="impact-title">Resultados que transforman.</h2>
           <p class="lead">
             Cada actividad, beca, taller o encuentro representa una oportunidad para fortalecer
             habilidades, confianza y comunidad.
           </p>
-          <a class="btn btn-outline" href="#contacto">Quiero apoyar</a>
+          <div class="impact-actions">
+            <a class="btn btn-outline" href="#contacto">Quiero apoyar</a>
+            <a
+              class="btn btn-whatsapp"
+              href="https://wa.me/573187073308?text=Hola%2C%20quiero%20saber%20c%C3%B3mo%20puedo%20apoyar%20a%20la%20fundaci%C3%B3n."
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="clic_whatsapp"
+              data-analytics-category="contacto"
+              data-analytics-label="Impacto - hablar con la fundacion"
+            >
+              Hablar con la fundación
+            </a>
+          </div>
         </div>
 
         <div class="metrics">
@@ -266,6 +392,20 @@
           </div>
         </div>
       </div>
+      <div class="impact-proof container reveal" aria-label="Formas de impacto">
+        <article>
+          <strong>Educación continua</strong>
+          <span>Becas, refuerzo académico y acompañamiento para permanecer y avanzar.</span>
+        </article>
+        <article>
+          <strong>Bienestar familiar</strong>
+          <span>Orientación psicosocial para fortalecer confianza, vínculos y proyecto de vida.</span>
+        </article>
+        <article>
+          <strong>Comunidad activa</strong>
+          <span>Voluntarios, aliados y líderes que multiplican oportunidades en el territorio.</span>
+        </article>
+      </div>
     </section>
 
 
@@ -276,9 +416,9 @@
       <div class="container">
         <div class="section-header center reveal">
           <span class="eyebrow">Testimonios</span>
-          <h2 id="testimonials-title">Voces que muestran lo que construimos juntos.</h2>
+          <h2 id="testimonials-title">Historias que se quedan.</h2>
           <p class="lead">
-            El impacto real de la fundación vive en las personas que acompañamos cada día.
+            A veces el cambio empieza con una clase, una conversación o alguien que decide creer contigo.
           </p>
         </div>
 
@@ -286,18 +426,14 @@
           <article class="testimonial-card reveal">
             <div class="testimonial-quote" aria-hidden="true">"</div>
             <p class="testimonial-text">
-              Gracias a Amigos Como Arroz pude terminar el bachillerato y conseguir una beca técnica.
-              Sin su apoyo, no habría seguido estudiando. Hoy trabajo y puedo ayudar a mi familia.
+              Llegué pensando que solo iba a recibir ayuda con tareas. Terminé descubriendo que
+              también podía soñar con una carrera, presentar entrevistas y hablar sin miedo de mi futuro.
             </p>
             <div class="testimonial-author">
-              <img
-                src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=80"
-                alt="Fotografía de Valentina"
-                loading="lazy"
-              />
+              <span class="testimonial-avatar" aria-hidden="true">LM</span>
               <div>
-                <strong>Valentina M.</strong>
-                <span>Programa Siembra · Egresada 2023</span>
+                <strong>Laura M.</strong>
+                <span>Programa Siembra · Beneficiaria</span>
               </div>
             </div>
           </article>
@@ -305,17 +441,13 @@
           <article class="testimonial-card testimonial-card--accent reveal">
             <div class="testimonial-quote" aria-hidden="true">"</div>
             <p class="testimonial-text">
-              Mi hijo cambió completamente. Pasó de no querer ir al colegio a ser líder en su salón.
-              Los talleres y el acompañamiento de la fundación hicieron la diferencia.
+              Mi hijo antes contaba los minutos para salirse de clase. Ahora llega a casa explicándome
+              lo que aprendió, pregunta por el próximo taller y hasta organiza a sus primos para practicar.
             </p>
             <div class="testimonial-author">
-              <img
-                src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=200&q=80"
-                alt="Fotografía de Claudia"
-                loading="lazy"
-              />
+              <span class="testimonial-avatar" aria-hidden="true">MR</span>
               <div>
-                <strong>Claudia R.</strong>
+                <strong>Martha R.</strong>
                 <span>Madre beneficiaria · Programa Semilla</span>
               </div>
             </div>
@@ -324,17 +456,13 @@
           <article class="testimonial-card reveal">
             <div class="testimonial-quote" aria-hidden="true">"</div>
             <p class="testimonial-text">
-              Ser voluntario aquí me enseñó más sobre liderazgo y trabajo en equipo que cualquier curso.
-              Ver el impacto directo en la comunidad es algo que no tiene precio.
+              Vine como voluntario para enseñar algo y terminé aprendiendo el doble. Cada jornada tiene
+              una sorpresa: un niño que se anima, una familia que vuelve, una idea que prende en grupo.
             </p>
             <div class="testimonial-author">
-              <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
-                alt="Fotografía de Andrés"
-                loading="lazy"
-              />
+              <span class="testimonial-avatar" aria-hidden="true">JC</span>
               <div>
-                <strong>Andrés F.</strong>
+                <strong>Juan C.</strong>
                 <span>Voluntario · Programa Cosecha</span>
               </div>
             </div>
@@ -350,7 +478,7 @@
     <div class="container">
       <div class="section-header center reveal">
         <span class="eyebrow">Mejores momentos</span>
-        <h2 id="timeline-title">Una línea de tiempo para recordar lo que construimos juntos.</h2>
+        <h2 id="timeline-title">Momentos que nos unen.</h2>
         <p class="lead">
           Un espacio para destacar los momentos que marcaron nuestro año:
           actividades, celebraciones, talleres, entregas, logros y encuentros con la comunidad.
@@ -363,7 +491,7 @@
 
           <div class="timeline-card">
             <span class="timeline-date">Febrero 2025</span>
-            <h3>Inicio de actividades con la comunidad</h3>
+            <h3>Inicio comunitario</h3>
             <p>
               Apertura del año con actividades educativas, recreativas y culturales para motivar
               la participación de niños, jóvenes y familias.
@@ -372,9 +500,12 @@
 
           <div class="timeline-media">
             <img
-              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80"
+              src="assets/img/hero/hero-principal.jpg"
               alt="Grupo de niños y jóvenes compartiendo una actividad comunitaria"
               loading="lazy"
+              decoding="async"
+              width="1200"
+              height="507"
             />
           </div>
         </article>
@@ -384,7 +515,7 @@
 
           <div class="timeline-card">
             <span class="timeline-date">Mayo 2025</span>
-            <h3>Talleres de formación y liderazgo</h3>
+            <h3>Formación y liderazgo</h3>
             <p>
               Espacios para fortalecer habilidades socioemocionales, trabajo en equipo,
               comunicación y proyecto de vida.
@@ -393,9 +524,12 @@
 
           <div class="timeline-media">
             <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+              src="assets/img/content/taller-educativo.jpg"
               alt="Jóvenes participando en un taller educativo"
               loading="lazy"
+              decoding="async"
+              width="1200"
+              height="675"
             />
           </div>
         </article>
@@ -405,7 +539,7 @@
 
           <div class="timeline-card">
             <span class="timeline-date">Agosto 2025</span>
-            <h3>Jornada cultural y encuentro familiar</h3>
+            <h3>Cultura y familia</h3>
             <p>
               Un momento para celebrar el talento, la cultura y la unión familiar como parte
               esencial del acompañamiento social.
@@ -414,9 +548,12 @@
 
           <div class="timeline-media">
             <img
-              src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80"
+              src="assets/img/content/presentacion-cultural.jpg"
               alt="Presentación cultural con público reunido"
               loading="lazy"
+              decoding="async"
+              width="1200"
+              height="431"
             />
           </div>
         </article>
@@ -426,7 +563,7 @@
 
           <div class="timeline-card">
             <span class="timeline-date">Diciembre 2025</span>
-            <h3>Cierre del año y reconocimiento de logros</h3>
+            <h3>Cierre y logros</h3>
             <p>
               Celebración de aprendizajes, permanencia, liderazgo y compromiso de los participantes,
               voluntarios, familias y aliados.
@@ -435,9 +572,12 @@
 
           <div class="timeline-media">
             <img
-              src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80"
+              src="assets/img/content/presentacion-cultural.jpg"
               alt="Celebración comunitaria de cierre de año"
               loading="lazy"
+              decoding="async"
+              width="1200"
+              height="431"
             />
           </div>
         </article>
@@ -452,10 +592,10 @@
     <div class="container">
       <div class="section-header center reveal">
         <span class="eyebrow">Nuestro equipo</span>
-        <h2 id="team-title">Las personas que hacen posible esta misión.</h2>
+        <h2 id="team-title">El equipo de la misión.</h2>
         <p class="lead">
-          Presenta aquí a los 6 integrantes principales de la fundación: directivos,
-          coordinadores, voluntarios líderes o aliados estratégicos.
+          Personas que lideran, coordinan y acompañan los procesos educativos,
+          sociales y comunitarios de la fundación.
         </p>
       </div>
 
@@ -463,11 +603,18 @@
         <div class="team-slider" id="teamSlider" aria-label="Carrusel del equipo">
           <article class="team-card-modern">
             <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Integrante 1 del equipo" loading="lazy" />
+              <img
+                src="assets/img/team/directora.jpg"
+                alt="Moira Quintero, directora de la fundación"
+                loading="lazy"
+                decoding="async"
+                width="720"
+                height="817"
+              />
               <span class="team-chip">Directora</span>
             </div>
             <div class="team-info-modern">
-              <h3>Nombre Integrante 1</h3>
+              <h3>Moira Quintero</h3>
               <p>Lidera la visión institucional, el crecimiento de la fundación y el relacionamiento estratégico.</p>
               <div class="team-meta">
                 <span>Dirección general</span>
@@ -478,11 +625,18 @@
 
           <article class="team-card-modern">
             <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Integrante 2 del equipo" loading="lazy" />
+              <img
+                src="assets/img/brand/logo-fundacion.jpg"
+                alt="Logo de la Fundación Amigos Como Arroz"
+                loading="lazy"
+                decoding="async"
+                width="720"
+                height="900"
+              />
               <span class="team-chip">Coordinación</span>
             </div>
             <div class="team-info-modern">
-              <h3>Nombre Integrante 2</h3>
+              <h3>Coordinación de programas</h3>
               <p>Coordina las actividades educativas, la planeación y el seguimiento de cada programa.</p>
               <div class="team-meta">
                 <span>Programas</span>
@@ -493,11 +647,18 @@
 
           <article class="team-card-modern">
             <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=80" alt="Integrante 3 del equipo" loading="lazy" />
+              <img
+                src="assets/img/team/andres.jpg"
+                alt="Andrés Cabrera, integrante del equipo de acompañamiento"
+                loading="lazy"
+                decoding="async"
+                width="720"
+                height="960"
+              />
               <span class="team-chip">Acompañamiento</span>
             </div>
             <div class="team-info-modern">
-              <h3>Nombre Integrante 3</h3>
+              <h3>Andrés Cabrera</h3>
               <p>Impulsa el bienestar emocional, el acompañamiento familiar y el enfoque psicosocial.</p>
               <div class="team-meta">
                 <span>Bienestar</span>
@@ -508,27 +669,19 @@
 
           <article class="team-card-modern">
             <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80" alt="Integrante 4 del equipo" loading="lazy" />
-              <span class="team-chip">Programas</span>
-            </div>
-            <div class="team-info-modern">
-              <h3>Nombre Integrante 4</h3>
-              <p>Diseña experiencias de aprendizaje, jornadas culturales y actividades de integración social.</p>
-              <div class="team-meta">
-                <span>Educación</span>
-                <span>Cultura</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="team-card-modern">
-            <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80" alt="Integrante 5 del equipo" loading="lazy" />
+              <img
+                src="assets/img/team/karen.jpg"
+                alt="Karen, integrante del equipo de voluntariado"
+                loading="lazy"
+                decoding="async"
+                width="720"
+                height="900"
+              />
               <span class="team-chip">Voluntariado</span>
             </div>
             <div class="team-info-modern">
-              <h3>Nombre Integrante 5</h3>
-              <p>Articula voluntarios, aliados y redes de apoyo para ampliar el alcance de cada iniciativa.</p>
+              <h3>Caren González </h3>
+              <p>Comprometida con una gestión sostenible que transforme recursos en impacto social.</p>
               <div class="team-meta">
                 <span>Redes</span>
                 <span>Apoyo</span>
@@ -536,25 +689,11 @@
             </div>
           </article>
 
-          <article class="team-card-modern">
-            <div class="team-photo-modern">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80" alt="Integrante 6 del equipo" loading="lazy" />
-              <span class="team-chip">Alianzas</span>
-            </div>
-            <div class="team-info-modern">
-              <h3>Nombre Integrante 6</h3>
-              <p>Gestiona convenios, donaciones y relaciones institucionales con empresas y aliados.</p>
-              <div class="team-meta">
-                <span>Convenios</span>
-                <span>Relaciones</span>
-              </div>
-            </div>
-          </article>
         </div>
 
         <div class="team-slider-controls" aria-label="Controles del carrusel">
-          <button class="team-slider-btn" type="button" id="teamPrev" aria-label="Ver integrante anterior">←</button>
-          <button class="team-slider-btn" type="button" id="teamNext" aria-label="Ver integrante siguiente">→</button>
+          <button class="team-slider-btn" type="button" id="teamPrev" aria-label="Ver integrante anterior">&larr;</button>
+          <button class="team-slider-btn" type="button" id="teamNext" aria-label="Ver integrante siguiente">&rarr;</button>
         </div>
 
         <div class="team-dots" id="teamDots" aria-label="Indicadores del carrusel"></div>
@@ -569,7 +708,7 @@
     <div class="container">
       <div class="section-header center reveal">
         <span class="eyebrow">Videos</span>
-        <h2 id="videos-title">Historias que se viven y se sienten</h2>
+        <h2 id="videos-title">Historias en video</h2>
         <p class="lead">
           Un espacio visual para mostrar testimonios, eventos y momentos reales de la fundación.
         </p>
@@ -578,13 +717,23 @@
       <div class="video-grid-modern">
         <article class="video-card-modern reveal">
           <div class="video-frame">
-            <iframe
-              src="https://www.youtube.com/embed/ysz5S6PUM-U"
-              title="Video institucional de la fundación"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            <button
+              class="video-lazy"
+              type="button"
+              data-video-id="ysz5S6PUM-U"
+              data-title="Video institucional de la fundación"
+              aria-label="Reproducir video institucional de la fundación"
+            >
+              <img
+                src="https:"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="480"
+                height="360"
+              />
+              <span class="video-play" aria-hidden="true"></span>
+            </button>
           </div>
           <div class="video-body">
             <h3>Conoce nuestra misión</h3>
@@ -594,13 +743,23 @@
 
         <article class="video-card-modern reveal">
           <div class="video-frame">
-            <iframe
-              src="https://www.youtube.com/embed/jfKfPfyJRdk"
-              title="Video de actividades y comunidad"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            <button
+              class="video-lazy"
+              type="button"
+              data-video-id="jfKfPfyJRdk"
+              data-title="Video de actividades y comunidad"
+              aria-label="Reproducir video de actividades y comunidad"
+            >
+              <img
+                src="https://i.ytimg.com/vi/jfKfPfyJRdk/hqdefault.jpg"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="480"
+                height="360"
+              />
+              <span class="video-play" aria-hidden="true"></span>
+            </button>
           </div>
           <div class="video-body">
             <h3>Momentos de impacto</h3>
@@ -620,29 +779,53 @@
       <div class="contact-card container reveal">
         <div class="contact-info">
           <span class="eyebrow">Contáctanos</span>
-          <h2 id="contact-title">¿Quieres apoyar o ser parte de nuestra misión?</h2>
+          <h2 id="contact-title">Sé parte de la misión.</h2>
           <p class="lead">
             Escríbenos, haz una donación, únete como voluntario o conviértete en aliado estratégico.
             Cada contribución transforma vidas.
           </p>
+          <div class="contact-quick-actions" aria-label="Acciones rápidas de contacto">
+            <a
+              class="btn btn-pink"
+              href="https://wa.me/573187073308?text=Hola%2C%20quiero%20hacer%20una%20donaci%C3%B3n%20a%20la%20Fundaci%C3%B3n%20Amigos%20Como%20Arroz."
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="clic_donar"
+              data-analytics-category="contacto"
+              data-analytics-label="Contacto - donar o apoyar"
+            >
+              Donar o apoyar
+            </a>
+            <a
+              class="btn btn-secondary"
+              href="https://wa.me/573187073308?text=Hola%2C%20quiero%20ser%20voluntario%20en%20la%20Fundaci%C3%B3n%20Amigos%20Como%20Arroz."
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="clic_voluntario"
+              data-analytics-category="contacto"
+              data-analytics-label="Contacto - ser voluntario"
+            >
+              Ser voluntario
+            </a>
+          </div>
 
           <ul class="contact-list">
             <li class="contact-item">
-              <span aria-hidden="true">📍</span>
+              <span aria-hidden="true">&#128205;</span>
               <div>
                 <strong>Ubicación</strong>
-                <small>Neiva, Huila · Colombia</small>
+                <small>Carrera 7A No. 16-25, barrio Quirinal · Neiva, Huila</small>
               </div>
             </li>
             <li class="contact-item">
-              <span aria-hidden="true">📱</span>
+              <span aria-hidden="true">&#128241;</span>
               <div>
                 <strong>WhatsApp</strong>
                 <a href="https://wa.me/573187073308">+57 318 707 3308</a>
               </div>
             </li>
             <li class="contact-item">
-              <span aria-hidden="true">✉</span>
+              <span aria-hidden="true">&#9993;</span>
               <div>
                 <strong>Correo</strong>
                 <a href="mailto:amigoscomoarroz@gmail.com">amigoscomoarroz@gmail.com</a>
@@ -653,39 +836,73 @@
 
         <div class="contact-form-shell">
           <div class="contact-form-head">
-            <h3>Envíanos un mensaje</h3>
-            <p>Déjanos tus datos y nos comunicamos contigo a la brevedad.</p>
+            <span class="form-eyebrow">Contacto directo</span>
+            <h3>Envíanos tu mensaje</h3>
+            <p>Cuéntanos cómo quieres apoyar o recibir información. Te responderemos de forma cercana y clara.</p>
           </div>
 
           <form class="contact-form" id="contact-form" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Nombre completo</label>
-                <input id="name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Escribe tu nombre"
+                  minlength="3"
+                  maxlength="80"
+                  aria-describedby="name-error"
+                  required
+                />
+                <small class="field-error" id="name-error" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
                 <label for="phone">Teléfono</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Tu teléfono" required />
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="+57 300 000 0000"
+                  maxlength="20"
+                  aria-describedby="phone-error"
+                  required
+                />
+                <small class="field-error" id="phone-error" aria-live="polite"></small>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Correo electrónico</label>
-                <input id="email" name="email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" required />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="nombre@correo.com"
+                  maxlength="120"
+                  aria-describedby="email-error"
+                  required
+                />
+                <small class="field-error" id="email-error" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
                 <label for="interest">Interés</label>
-                <select id="interest" name="interest" required>
-                  <option value="">Selecciona una opción</option>
+                <select id="interest" name="interest" aria-describedby="interest-error" required>
+                  <option value="">Elige una opción</option>
                   <option value="programas">Programas</option>
                   <option value="donacion">Donación</option>
                   <option value="voluntariado">Voluntariado</option>
                   <option value="alianza">Alianza</option>
                   <option value="informacion">Información general</option>
                 </select>
+                <small class="field-error" id="interest-error" aria-live="polite"></small>
               </div>
             </div>
 
@@ -694,15 +911,19 @@
               <textarea
                 id="message"
                 name="message"
-                placeholder="Cuéntanos cómo podemos ayudarte o de qué manera quieres apoyar"
+                placeholder="Escribe tu mensaje con los detalles importantes"
+                minlength="20"
+                maxlength="700"
+                aria-describedby="message-error"
                 required
               ></textarea>
+              <small class="field-error" id="message-error" aria-live="polite"></small>
             </div>
 
             <div class="contact-submit">
               <button class="btn btn-pink" type="submit">
                 <span>Enviar mensaje</span>
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true">&rarr;</span>
               </button>
             </div>
 
@@ -782,6 +1003,9 @@
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
+      data-analytics-event="clic_whatsapp_flotante"
+      data-analytics-category="contacto"
+      data-analytics-label="Dock flotante - WhatsApp"
     >
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
         <path d="M12 2.5c-5.25 0-9.5 4.02-9.5 8.98 0 1.76.53 3.4 1.45 4.78L2.5 21.5l5.42-1.37c1.23.65 2.63 1.01 4.08 1.01 5.25 0 9.5-4.02 9.5-8.98S17.25 2.5 12 2.5z" fill="currentColor"/>
@@ -820,6 +1044,56 @@
 
   </div>
 
+  <!-- Asistente flotante -->
+  <div class="site-chatbot" id="site-chatbot" aria-label="Chat de ayuda de la fundación">
+    <button
+      class="chatbot-toggle"
+      type="button"
+      id="chatbotToggle"
+      aria-controls="chatbotPanel"
+      aria-expanded="false"
+      aria-label="Abrir asistente de ayuda"
+    >
+      <span class="chatbot-robot-face" aria-hidden="true">
+        <span></span>
+      </span>
+    </button>
+
+    <div class="chatbot-panel" id="chatbotPanel" hidden>
+      <div class="chatbot-head">
+        <div>
+          <strong>Asistente Amigos Como Arroz</strong>
+          <span>Respuestas rápidas de la fundación</span>
+        </div>
+        <button class="chatbot-close" type="button" id="chatbotClose" aria-label="Cerrar chat">&times;</button>
+      </div>
+
+      <div class="chatbot-messages" id="chatbotMessages" aria-live="polite">
+        <div class="chatbot-message chatbot-message--bot">
+          Hola, soy el asistente de la fundación. Puedo ayudarte con teléfono, WhatsApp, ubicación, programas y formas de apoyo.
+        </div>
+      </div>
+
+      <div class="chatbot-quick" aria-label="Preguntas frecuentes">
+        <button type="button" data-chat-question="telefono">Teléfono</button>
+        <button type="button" data-chat-question="ubicacion">Ubicación</button>
+        <button type="button" data-chat-question="programas">Programas</button>
+        <button type="button" data-chat-question="apoyar">Apoyar</button>
+      </div>
+
+      <form class="chatbot-form" id="chatbotForm">
+        <label class="sr-only" for="chatbotInput">Escribe tu pregunta</label>
+        <input
+          id="chatbotInput"
+          type="text"
+          autocomplete="off"
+          placeholder="Escribe tu duda"
+        />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Botón flotante para volver al inicio -->
   <button class="scroll-to-top" id="scrollTopBtn" aria-label="Volver al inicio">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -827,7 +1101,8 @@
     </svg>
   </button>
 
-<script src="js/main.js"></script>
+<script src="assets/js/analytics.js?v=1" defer></script>
+<script src="assets/js/main.js?v=3" defer></script>
 
 </body>
 </html>

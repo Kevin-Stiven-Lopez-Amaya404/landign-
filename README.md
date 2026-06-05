@@ -12,11 +12,26 @@ Si prefieres levantarlo con servidor local, puedes usar cualquier servidor está
 
 ```text
 fundacion/
-  index.html              Página principal y contenido
-  css/styles.css          Estilos, responsive y animaciones
-  js/main.js              Interacciones del sitio
-  docs/DOCUMENTACION.md   Guía completa del proyecto
-  README.md               Resumen rápido
+  index.html                    Página principal
+  assets/
+    css/styles.css              Estilos, responsive y animaciones
+    js/main.js                  Interacciones del sitio
+    img/
+      brand/                    Logo e identidad visual
+      hero/                     Imagen principal
+      content/                  Imágenes de secciones y momentos
+      team/                     Fotos del equipo
+  programas/
+    index.html                  Vista general de todos los programas
+    semilla.html                Detalle individual de Semilla
+    siembra.html                Detalle individual de Siembra
+    cosecha.html                Detalle individual de Cosecha
+    psicosocial.html            Detalle individual de Acompañamiento Psicosocial
+  docs/
+    DOCUMENTACION.md            Guía completa del proyecto
+    PROGRAMAS.md                Explicación del index de Programas
+    CODIGO.md                   Documentación técnica del código
+  README.md                     Resumen rápido
 ```
 
 ## Qué incluye
@@ -31,12 +46,44 @@ fundacion/
 - Formulario que abre WhatsApp con el mensaje armado.
 - Dock flotante de redes sociales.
 - Botón para volver al inicio.
+- Analítica opcional para contar visitas reales con Google Analytics 4.
+
+## Contador de visitas
+
+El sitio ya queda preparado para contar personas y visitas reales con Google Analytics 4.
+
+Para activarlo:
+
+1. Crea una propiedad web en Google Analytics 4.
+2. Copia el ID de medición, normalmente con formato `G-XXXXXXXXXX`.
+3. En `assets/js/analytics.js`, busca:
+
+```js
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+```
+
+4. Reemplaza `G-XXXXXXXXXX` por tu ID real y publica la pagina.
+
+Cuando publiques la página, Google Analytics empezará a mostrar usuarios, visitas, páginas vistas y clics importantes como WhatsApp, donar y voluntariado.
+
+## Despliegue
+
+El sitio es estatico. Para publicarlo, sube la carpeta completa a tu hosting o conecta este repositorio a GitHub Pages, Netlify, Vercel u otro servicio de sitios estaticos.
+
+Antes de publicar, revisa [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md).
 
 ## Documentación principal
 
 La explicación completa está en:
 
 [docs/DOCUMENTACION.md](docs/DOCUMENTACION.md)
+
+También quedan guías específicas en:
+
+- [docs/README.md](docs/README.md)
+- [docs/GUIA_PROGRAMADOR.md](docs/GUIA_PROGRAMADOR.md)
+- [docs/PROGRAMAS.md](docs/PROGRAMAS.md)
+- [docs/CODIGO.md](docs/CODIGO.md)
 
 Ahí encontrarás:
 
@@ -51,9 +98,10 @@ Ahí encontrarás:
 ## Mantenimiento rápido
 
 - Cambios de contenido: edita `index.html`.
-- Cambios visuales: edita `css/styles.css`.
-- Cambios de interacción: edita `js/main.js`.
-- Cambios de WhatsApp: busca el número en `index.html` y `js/main.js`.
+- Cambios visuales: edita `assets/css/styles.css`.
+- Cambios de interacción: edita `assets/js/main.js`.
+- Cambios de programas: edita los archivos dentro de `programas/`.
+- Cambios de WhatsApp: busca el número en `index.html` y `assets/js/main.js`.
 
 ## Recomendación
 

@@ -6,9 +6,10 @@ Esta guia explica el sitio de la Fundacion Amigos Como Arroz de la forma mas dir
 
 El proyecto es una pagina web estatica. No necesita instalacion, base de datos ni servidor especial para funcionar.
 
-- `index.html`: contiene todo el contenido visible de la pagina.
-- `css/styles.css`: define colores, tamanos, animaciones, responsive y apariencia visual.
-- `js/main.js`: agrega interacciones como menu movil, animaciones al hacer scroll, formulario hacia WhatsApp, carrusel y boton para volver arriba.
+- `index.html`: contiene el contenido visible de la pagina principal.
+- `programas/`: contiene la vista general y las paginas individuales de cada programa.
+- `assets/css/styles.css`: define colores, tamanos, animaciones, responsive y apariencia visual.
+- `assets/js/main.js`: agrega interacciones como menu movil, animaciones al hacer scroll, formulario hacia WhatsApp, carrusel y boton para volver arriba.
 - `README.md`: explica como abrir y mantener el proyecto.
 
 Para probarlo, abre `index.html` en el navegador. Si algun navegador bloquea recursos externos por abrirlo como archivo local, usa un servidor estatico sencillo desde la carpeta del proyecto.
@@ -18,24 +19,38 @@ Para probarlo, abre `index.html` en el navegador. Si algun navegador bloquea rec
 Piensa en la pagina como tres capas:
 
 1. `index.html` es el esqueleto: textos, secciones, enlaces, imagenes, formularios y botones.
-2. `css/styles.css` es la presentacion: colores, distribucion, sombras, tamanos, movimiento y version movil.
-3. `js/main.js` es el comportamiento: acciones que pasan despues de hacer clic, scrollear, cargar la pagina o enviar el formulario.
+2. `assets/css/styles.css` es la presentacion: colores, distribucion, sombras, tamanos, movimiento y version movil.
+3. `assets/js/main.js` es el comportamiento: acciones que pasan despues de hacer clic, scrollear, cargar la pagina o enviar el formulario.
 
-Cuando quieras cambiar algo visual, normalmente empiezas por `index.html` para ubicar el elemento y luego buscas su clase en `css/styles.css`.
+Cuando quieras cambiar algo visual, normalmente empiezas por `index.html` para ubicar el elemento y luego buscas su clase en `assets/css/styles.css`.
 
-Cuando quieras cambiar una interaccion, buscas el `id` o la clase en `js/main.js`.
+Cuando quieras cambiar una interaccion, buscas el `id` o la clase en `assets/js/main.js`.
 
 ## Estructura de archivos
 
 ```text
 fundacion/
   index.html
-  css/
-    styles.css
-  js/
-    main.js
+  assets/
+    css/
+      styles.css
+    js/
+      main.js
+    img/
+      brand/
+      hero/
+      content/
+      team/
+  programas/
+    index.html
+    semilla.html
+    siembra.html
+    cosecha.html
+    psicosocial.html
   docs/
     DOCUMENTACION.md
+    PROGRAMAS.md
+    CODIGO.md
   README.md
 ```
 
@@ -47,12 +62,12 @@ Todas las secciones principales estan dentro de `<main id="main">`.
 |---|---|---|
 | Hero / Inicio | `inicio` | Primera pantalla con nombre de la fundacion y botones principales. |
 | Fundacion | `fundacion` | Presenta la mision general y una imagen de apoyo. |
-| Programas | `programas` | Muestra los programas Semilla, Siembra y Cosecha. |
+| Programas | `programas` | Muestra Semilla, Siembra, Cosecha y Acompanamiento Psicosocial. |
 | Impacto | `impacto` | Muestra metricas con contadores animados. |
 | Testimonios | `testimonios` | Incluye opiniones o historias de beneficiarios y comunidad. |
 | Momentos | `momentos` | Linea de tiempo con hitos del ano. |
 | Equipo | `equipo` | Carrusel horizontal de integrantes. |
-| Videos | `videos` | Videos incrustados desde YouTube. |
+| Videos | `videos` | Enlaces visuales a redes oficiales de la fundacion. |
 | Contacto | `contacto` | Datos de contacto y formulario que abre WhatsApp. |
 | Footer | sin ID principal | Enlaces finales y redes sociales. |
 
@@ -98,11 +113,11 @@ Cada programa es una tarjeta:
   <div class="program-icon" aria-hidden="true">🌱</div>
   <h3>Semilla</h3>
   <p>...</p>
-  <a href="#contacto">Mas informacion →</a>
+  <a href="programas/semilla.html">Mas informacion</a>
 </article>
 ```
 
-Para agregar otro programa, copia una tarjeta completa y cambia icono, titulo, descripcion y enlace.
+Para agregar otro programa, copia una tarjeta completa y cambia icono, titulo, descripcion y enlace. Si el enlace apunta a `programas/nuevo-programa.html`, tambien debe existir ese archivo dentro de la carpeta `programas/`.
 
 ### Cambiar metricas de impacto
 
@@ -126,26 +141,26 @@ Cada integrante esta dentro de:
 <article class="team-card-modern">
 ```
 
-Edita la imagen, el nombre, el rol y los datos de `team-meta`. El carrusel se ajusta automaticamente porque `js/main.js` detecta todas las tarjetas con la clase `.team-card-modern`.
+Edita la imagen, el nombre, el rol y los datos de `team-meta`. El carrusel se ajusta automaticamente porque `assets/js/main.js` detecta todas las tarjetas con la clase `.team-card-modern`.
 
-### Cambiar videos
+### Cambiar redes visuales
 
 Archivo: `index.html`
 
-Los videos estan en iframes de YouTube:
+La seccion actual muestra tarjetas visuales que enlazan a los canales oficiales. Cada tarjeta usa una imagen local y un enlace externo:
 
 ```html
-<iframe src="https://www.youtube.com/embed/VIDEO_ID"></iframe>
+<a class="video-link-card" href="https://www.instagram.com/amigoscomoarroz">
 ```
 
-Para usar otro video, copia el ID del video de YouTube y reemplaza `VIDEO_ID`.
+Si mas adelante tienes videos oficiales, puedes reemplazar estos enlaces por botones `.video-lazy` con el ID real del video.
 
 ### Cambiar WhatsApp
 
 Archivos:
 
 - `index.html`
-- `js/main.js`
+- `assets/js/main.js`
 
 En `index.html` hay enlaces directos como:
 
@@ -153,7 +168,7 @@ En `index.html` hay enlaces directos como:
 https://wa.me/573187073308
 ```
 
-En `js/main.js` el formulario arma un mensaje y abre:
+En `assets/js/main.js` el formulario arma un mensaje y abre:
 
 ```js
 const whatsappUrl = `https://wa.me/573187073308?text=${encodeURIComponent(whatsappMessage)}`;
@@ -163,7 +178,7 @@ Si cambia el numero, hay que actualizarlo en ambos archivos para que el boton fl
 
 ## Guia del CSS
 
-Archivo: `css/styles.css`
+Archivo: `assets/css/styles.css`
 
 El CSS esta organizado por bloques, aunque al final hay varios refinamientos y overrides acumulados. En CSS gana la regla que aparece mas abajo si tiene la misma prioridad, por eso los bloques finales son importantes.
 
@@ -214,7 +229,7 @@ Recomendacion para futuras mejoras: compactar el CSS en secciones definitivas y 
 
 ## Guia del JavaScript
 
-Archivo: `js/main.js`
+Archivo: `assets/js/main.js`
 
 El JavaScript se ejecuta en el navegador cuando carga la pagina. No usa librerias externas.
 
@@ -294,7 +309,7 @@ hero.style.setProperty("--hero-y", "...");
 
 ### 8. Formulario de contacto
 
-El formulario no envia datos a un servidor. Valida campos basicos y abre WhatsApp con un mensaje armado automaticamente.
+El formulario no envia datos a un servidor. Valida campos y abre WhatsApp con un mensaje armado automaticamente.
 
 Campos requeridos:
 
@@ -304,7 +319,7 @@ Campos requeridos:
 - Interes
 - Mensaje
 
-Si el correo no tiene formato valido, muestra un mensaje de error en `#form-status`.
+Las validaciones actuales revisan nombre completo, longitud del telefono, formato de correo, seleccion de interes y longitud del mensaje. Los errores se muestran por campo y tambien en `#form-status`.
 
 ### 9. Carrusel del equipo
 
@@ -337,14 +352,14 @@ El boton `#scrollTopBtn` aparece cuando el usuario baja mas de 200px y vuelve al
 1. CSS demasiado acumulado.
    Hay muchas reglas repetidas y overrides finales. Funciona, pero cada cambio visual puede tener efectos inesperados porque una regla posterior puede pisar una anterior.
 
-2. Imagen del logo embebida en base64.
-   El logo dentro de `index.html` hace crecer mucho el archivo. Es mejor moverlo a `assets/logo.jpg` o `assets/logo.png` y referenciarlo con `src="assets/logo.png"`.
+2. CSS acumulado en los ultimos bloques.
+   El sitio funciona, pero conviene limpiar reglas antiguas para que cada componente tenga una sola version final.
 
 3. Dependencia de recursos externos.
-   La pagina usa Google Fonts, Unsplash y YouTube. Si no hay internet, esas imagenes, fuentes o videos pueden fallar.
+   Los enlaces a redes sociales necesitan internet, pero las imagenes principales del sitio ya son locales.
 
 4. Datos de ejemplo en equipo.
-   Los integrantes dicen "Nombre Integrante 1", etc. Conviene reemplazarlos por nombres reales antes de publicar.
+   Conviene revisar que nombres, roles y fotos finales sean los correctos antes de publicar.
 
 5. Formulario sin backend.
    El contacto abre WhatsApp, pero no guarda mensajes en una base de datos ni envia correo. Si se necesita historial, hay que conectar un backend, Formspree, Netlify Forms o servicio similar.
@@ -352,14 +367,14 @@ El boton `#scrollTopBtn` aparece cuando el usuario baja mas de 200px y vuelve al
 6. JavaScript asume que algunos elementos existen.
    Como la pagina actual si los tiene, funciona. Pero si en el futuro se elimina `#hero-content`, `#contact-form`, `#reading-progress-bar` o `.menu-toggle`, el script puede fallar. Para hacerlo mas robusto, se pueden agregar validaciones antes de usar esos elementos.
 
-7. Videos de YouTube sin `sandbox`.
-   Los iframes tienen permisos acotados por `allow`, pero no usan `sandbox`. No es obligatorio para este caso, aunque seria una mejora de seguridad si se quiere endurecer la pagina.
+7. Formulario sin envio por correo real.
+   Actualmente el formulario abre WhatsApp. Si se necesita envio automatico a correo, hay que conectar un servicio externo o backend.
 
 ## Como hacer cambios comunes
 
 ### Cambiar colores principales
 
-Edita `:root` en `css/styles.css`.
+Edita `:root` en `assets/css/styles.css`.
 
 ```css
 --orange: #f37021;
@@ -372,7 +387,7 @@ Edita `:root` en `css/styles.css`.
 Busca el numero en todo el proyecto:
 
 ```powershell
-Select-String -Path index.html,js\main.js -Pattern "573187073308"
+Select-String -Path index.html,assets\js\main.js -Pattern "573187073308"
 ```
 
 Luego reemplazalo en cada aparicion.
@@ -381,7 +396,7 @@ Luego reemplazalo en cada aparicion.
 
 1. Crea un bloque `<section class="section" id="nuevo-id">` en `index.html`.
 2. Agrega un enlace en el menu: `<a class="nav-link" href="#nuevo-id">Nombre</a>`.
-3. Agrega estilos en `css/styles.css` si necesita diseno especial.
+3. Agrega estilos en `assets/css/styles.css` si necesita diseno especial.
 4. Si quieres animacion, agrega la clase `reveal` a los elementos internos.
 
 ### Agregar una tarjeta con animacion
@@ -406,8 +421,8 @@ Mantener `alt` es importante para accesibilidad.
 
 ## Recomendaciones de mantenimiento
 
-- Crear carpeta `assets/` para logo, imagenes propias y recursos locales.
-- Limpiar `css/styles.css` y dejar una sola definicion final por componente.
+- Mantener `assets/` para logo, imagenes propias y recursos locales.
+- Limpiar `assets/css/styles.css` y dejar una sola definicion final por componente.
 - Separar el CSS en bloques mas pequenos si el proyecto crece: `base.css`, `layout.css`, `components.css`, `responsive.css`.
 - Reemplazar nombres e imagenes genericas del equipo por informacion real.
 - Probar siempre en computador y celular despues de tocar header, hero, contacto o responsive.

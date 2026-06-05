@@ -1,0 +1,17 @@
+{
+  "name": "Fundacion Amigos Como Arroz",
+  "short_name": "Amigos Como Arroz",
+  "description": "Educacion, acompanamiento social y oportunidades para ninos, jovenes y familias en Neiva, Huila.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff9f2",
+  "theme_color": "#f37021",
+  "icons": [
+    {
+      "src": "/assets/img/brand/logo-fundacion.jpg",
+      "sizes": "160x160",
+      "type": "image/jpeg"
+    }
+  ]
+}
