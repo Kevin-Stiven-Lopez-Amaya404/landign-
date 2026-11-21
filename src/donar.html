@@ -1,0 +1,142 @@
+---
+layout: layouts/interna.njk
+title: "Donar a la Fundación Amigos Como Arroz | Neiva y Espinal"
+description: "Dona a la Fundación Amigos Como Arroz y apoya la educación, el liderazgo y el acompañamiento de niños, jóvenes y familias en Neiva, Huila, y Espinal, Tolima."
+canonical: /donar.html
+nombre: "Donar"
+bodyClass: pagina-texto
+ogImagen: "assets/img/compartir/donar.jpg"
+---
+{#- Todo sale de site.donacion y site.legal: cada bloque aparece solo si tiene datos.
+    Sin medios ni pasarela, la página explica que la donación se coordina por WhatsApp. -#}
+{%- set d = site.donacion %}
+{%- set hayMedios = d.medios.length > 0 or d.pasarela.url %}
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@type": "DonateAction",
+      "name": "Donar a " + site.name,
+      "recipient": { "@type": "NGO", "name": site.name, "url": site.url + "/" },
+      "target": (d.pasarela.url or (site.url + "/donar.html"))
+    } | json | safe }}</script>
+
+    <section class="pagina-seccion container" aria-labelledby="donar-titulo">
+      <p class="eyebrow">Donaciones</p>
+      <h1 id="donar-titulo">Tu aporte abre oportunidades.</h1>
+      <p class="lead">
+        Cada actividad, beca, taller o encuentro representa una oportunidad para fortalecer habilidades,
+        confianza y comunidad en niños, jóvenes y familias de Neiva y Espinal.
+      </p>
+      <ul class="cifras-mini" aria-label="Resultados de la fundación">
+        {%- for cifra in site.impacto.cifras %}
+        <li><strong>{{ cifra.valor | numero }}</strong> <span>{{ cifra.texto }}</span></li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    {%- if hayMedios %}
+    <section class="pagina-seccion container" aria-labelledby="medios-titulo">
+      <h2 id="medios-titulo">Cómo donar</h2>
+      {%- if d.medios.length %}
+      <ul class="medios-pago">
+        {%- for medio in d.medios %}
+        <li class="medio-pago">
+          <strong>{{ medio.nombre }}</strong>
+          {%- if medio.tipo %}<span class="medio-tipo">{{ medio.tipo }}</span>{% endif %}
+          <span class="medio-numero">{{ medio.numero }}</span>
+          {%- if medio.titular %}<span class="medio-titular">A nombre de {{ medio.titular }}</span>{% endif %}
+          <button
+            class="btn btn-secondary"
+            type="button"
+            data-copiar="{{ medio.numero }}"
+            data-analytics-event="copiar_medio_pago"
+            data-analytics-category="donacion"
+            data-analytics-label="{{ medio.nombre }}"
+          >Copiar número<span class="sr-only"> de {{ medio.nombre }}</span></button>
+        </li>
+        {%- endfor %}
+      </ul>
+      <p class="sr-only" role="status" data-copiar-estado></p>
+      {%- endif %}
+      {%- if d.pasarela.url %}
+      <p>
+        <a
+          class="btn btn-pink"
+          href="{{ d.pasarela.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="ir_pasarela"
+          data-analytics-category="donacion"
+          data-analytics-label="{{ d.pasarela.nombre }}"
+        >Donar en línea{% if d.pasarela.nombre %} con {{ d.pasarela.nombre }}{% endif %}<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      </p>
+      {%- endif %}
+      <p>Cuando dones, cuéntanos por WhatsApp para agradecerte y, si lo necesitas, enviarte el soporte.</p>
+    </section>
+    {%- else %}
+    <section class="pagina-seccion container" aria-labelledby="medios-titulo">
+      <h2 id="medios-titulo">Cómo donar</h2>
+      <p>Por ahora coordinamos cada donación por WhatsApp: escríbenos y te contamos cómo hacerla.</p>
+      <p>
+        <a class="btn btn-pink" href="{{ 'Hola, quiero hacer una donación a la Fundación Amigos Como Arroz.' | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_donar" data-analytics-category="donacion" data-analytics-label="Donar - WhatsApp">Donar por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      </p>
+    </section>
+    {%- endif %}
+
+    {%- if d.montos.length %}
+    <section class="pagina-seccion container" aria-labelledby="montos-titulo">
+      <h2 id="montos-titulo">Lo que hace tu aporte</h2>
+      <ul class="montos">
+        {%- for monto in d.montos %}
+        <li><strong>{{ monto.valor }}</strong> <span>{{ monto.impacto }}</span></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if d.especie.length %}
+    <section class="pagina-seccion container" aria-labelledby="especie-titulo">
+      <h2 id="especie-titulo">Donaciones en especie</h2>
+      <p>También recibimos:</p>
+      <ul class="lista-simple">
+        {%- for cosa in d.especie %}
+        <li>{{ cosa }}</li>
+        {%- endfor %}
+      </ul>
+      <p><a href="{{ 'Hola, quiero hacer una donación en especie a la Fundación Amigos Como Arroz.' | whatsapp }}" target="_blank" rel="noopener noreferrer">Coordinar una donación en especie<span class="sr-only"> (se abre en una pestaña nueva)</span></a></p>
+    </section>
+    {%- endif %}
+
+    {%- if site.legal.rte %}
+    <section class="pagina-seccion container" aria-labelledby="beneficio-titulo">
+      <h2 id="beneficio-titulo">Beneficio tributario</h2>
+      <p>
+        La fundación pertenece al Régimen Tributario Especial. Si donas, puedes pedir el certificado de donación para
+        solicitar el descuento del artículo 257 del Estatuto Tributario. Consulta con tu contador.
+      </p>
+      <p>
+        <a
+          class="btn btn-secondary"
+          href="{{ 'Hola, quiero pedir el certificado de mi donación. Nombre o razón social: … Documento o NIT: … Fecha de la donación: … Valor: …' | whatsapp }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="pedir_certificado"
+          data-analytics-category="donacion"
+          data-analytics-label="Certificado de donación"
+        >Pedir el certificado por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      </p>
+      <p class="nota">Tus datos los escribes tú en WhatsApp; el sitio no los guarda.</p>
+    </section>
+    {%- endif %}
+
+    <section class="pagina-seccion container" aria-labelledby="empresas-titulo">
+      <h2 id="empresas-titulo">Empresas</h2>
+      <p>
+        Si tu empresa quiere patrocinar un programa, construir una alianza o sumar a la fundación a su estrategia de
+        responsabilidad social, hablemos.
+      </p>
+      <div class="acciones">
+        <a class="btn btn-secondary" href="{{ 'Hola, escribo de una empresa y queremos apoyar a la Fundación Amigos Como Arroz (patrocinio o alianza).' | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_alianza" data-analytics-category="donacion" data-analytics-label="Donar - empresas WhatsApp">Escribir por WhatsApp<span class="sr-only"> sobre patrocinio o alianzas (se abre en una pestaña nueva)</span></a>
+        <a class="btn btn-secondary" href="mailto:{{ site.email }}?subject={{ 'Alianza con la Fundación Amigos Como Arroz' | urlencode }}">Escribir un correo</a>
+        <a class="btn btn-secondary" href="aliados.html">Conocer las alianzas</a>
+      </div>
+    </section>

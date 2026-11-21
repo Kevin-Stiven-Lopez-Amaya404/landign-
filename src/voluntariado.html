@@ -1,0 +1,65 @@
+---
+layout: layouts/interna.njk
+title: "Voluntariado | Fundación Amigos Como Arroz, Neiva y Espinal"
+description: "Súmate como voluntario a la Fundación Amigos Como Arroz y acompaña a niños, jóvenes y familias de Neiva, Huila, y Espinal, Tolima, en sus procesos educativos."
+canonical: /voluntariado.html
+nombre: "Voluntariado"
+bodyClass: pagina-texto
+---
+{#- Perfiles, compromiso y pasos salen de site.voluntariado y solo se muestran si existen. -#}
+{%- set v = site.voluntariado %}
+{%- set voluntarios = site.impacto.cifras | selectattr("texto", "equalto", "voluntarios y mentores activos.") | first %}
+    <section class="pagina-seccion container" aria-labelledby="voluntariado-titulo">
+      <p class="eyebrow">Voluntariado</p>
+      <h1 id="voluntariado-titulo">Súmate como voluntario.</h1>
+      <p class="lead">
+        Voluntarios, aliados y líderes multiplican oportunidades en el territorio.
+        {%- if voluntarios %} Hoy {{ voluntarios.valor | numero }} voluntarios y mentores acompañan los programas de la fundación.{% endif %}
+      </p>
+      <p>
+        Como voluntario acompañas los procesos educativos, sociales y comunitarios de Semilla, Siembra, Cosecha y el
+        acompañamiento psicosocial, en Neiva y Espinal.
+      </p>
+    </section>
+
+    {%- if v.perfiles.length %}
+    <section class="pagina-seccion container" aria-labelledby="perfiles-titulo">
+      <h2 id="perfiles-titulo">Perfiles que buscamos</h2>
+      <ul class="lista-simple">
+        {%- for perfil in v.perfiles %}
+        <li>{{ perfil }}</li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if v.compromiso %}
+    <section class="pagina-seccion container" aria-labelledby="compromiso-titulo">
+      <h2 id="compromiso-titulo">Tiempo que pedimos</h2>
+      <p>{{ v.compromiso }}</p>
+    </section>
+    {%- endif %}
+
+    <section class="pagina-seccion container" aria-labelledby="empezar-titulo">
+      <h2 id="empezar-titulo">Cómo empezar</h2>
+      {%- if v.pasos.length %}
+      <ol class="pasos">
+        {%- for paso in v.pasos %}
+        <li>{{ paso }}</li>
+        {%- endfor %}
+      </ol>
+      {%- else %}
+      <p>Escríbenos por WhatsApp: te contamos qué necesitamos ahora y cuál es el siguiente paso.</p>
+      {%- endif %}
+      <p>
+        <a
+          class="btn btn-pink"
+          href="{{ 'Hola, quiero ser voluntario de la Fundación Amigos Como Arroz. Me interesa apoyar en:' | whatsapp }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="clic_voluntariado"
+          data-analytics-category="contacto"
+          data-analytics-label="Voluntariado - WhatsApp"
+        >Quiero ser voluntario<span class="sr-only"> (se abre WhatsApp en una pestaña nueva)</span></a>
+      </p>
+    </section>

@@ -1,6 +1,8 @@
 import { SELECTORS } from "./config.js";
+import { registrarEvento } from "./eventos.js";
 
-// Carga videos solo cuando el usuario hace clic para evitar peso inicial innecesario.
+// Carga cada video solo cuando la persona pulsa su póster (evita peso inicial). El video llega con controles
+// nativos, el póster, un nombre accesible y, si el botón trae data-captions (ruta a un .vtt), subtítulos en español.
 export function initLazyVideos() {
   document.querySelectorAll(SELECTORS.localVideoLoader).forEach((button) => {
     button.addEventListener("click", () => {
@@ -12,17 +14,29 @@ export function initLazyVideos() {
       video.controls = true;
       video.autoplay = true;
       video.playsInline = true;
-      video.preload = "metadata";
+      video.preload = "none";
       video.poster = button.dataset.poster || "";
       video.setAttribute("aria-label", button.dataset.label || "Video");
+      video.title = button.dataset.label || "Video";
 
       const source = document.createElement("source");
       source.src = videoSrc;
       source.type = "video/mp4";
-
       video.appendChild(source);
+
+      if (button.dataset.captions) {
+        const pista = document.createElement("track");
+        pista.kind = "captions";
+        pista.srclang = "es";
+        pista.label = "Español";
+        pista.src = button.dataset.captions;
+        pista.default = true;
+        video.appendChild(pista);
+      }
+
       video.append("Tu navegador no puede reproducir este video.");
       button.replaceWith(video);
+      registrarEvento("reproducir_video", "videos", button.dataset.label || videoSrc);
       video.play().catch(() => {});
     });
   });

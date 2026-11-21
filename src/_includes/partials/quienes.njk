@@ -1,0 +1,20 @@
+{#- Misión, visión, valores y junta directiva (site.institucional). Solo aparece si hay al menos uno. -#}
+{%- set inst = site.institucional %}
+{%- if inst.mision or inst.vision or inst.valores.length or inst.junta.length %}
+    <section class="pantalla pantalla--larga quienes" id="quienes-somos" aria-labelledby="quienes-titulo">
+      <div class="encabezado reveal">
+        <h2 id="quienes-titulo">Quiénes somos.</h2>
+        <p class="eyebrow">La fundación</p>
+      </div>
+      <div class="quienes-grid reveal">
+        {%- if inst.mision %}<div><h3>Misión</h3><p>{{ inst.mision }}</p></div>{% endif %}
+        {%- if inst.vision %}<div><h3>Visión</h3><p>{{ inst.vision }}</p></div>{% endif %}
+        {%- if inst.valores.length %}
+        <div><h3>Valores</h3><ul class="lista-simple">{% for v in inst.valores %}<li>{{ v }}</li>{% endfor %}</ul></div>
+        {%- endif %}
+        {%- if inst.junta.length %}
+        <div><h3>Junta directiva</h3><ul class="lista-simple">{% for p in inst.junta %}<li>{{ p.nombre }}{% if p.cargo %}, {{ p.cargo }}{% endif %}</li>{% endfor %}</ul></div>
+        {%- endif %}
+      </div>
+    </section>
+{%- endif %}

@@ -1,5 +1,7 @@
 # Auditoría de código, estructura y diseño · noviembre 2026
 
+> **Documento histórico.** Describe el sitio antes de HU26 y ya no corresponde al estado actual. Lo vigente está en [AUDITORIA-HU26.md](AUDITORIA-HU26.md) y [README.md](README.md).
+
 **Proyecto:** sitio web de la Fundación Amigos Como Arroz (7 páginas estáticas).
 **Alcance:** `index.html`, `programas/*.html`, `sede-espinal/index.html`, `assets/` (CSS, JS, imágenes y videos), `docs/` e `informes/`.
 **Método:** medición automática del código (selectores, duplicados, tokens, recursos), Chromium sin interfaz en 320, 390, 768, 1024 y 1440 px, axe-core (WCAG 2.1 A/AA) en todas las páginas, y revisión manual.

@@ -1,0 +1,25 @@
+---
+layout: layouts/interna.njk
+title: "Noticias | Fundación Amigos Como Arroz en Neiva y Espinal"
+description: "Novedades, actividades y logros de la Fundación Amigos Como Arroz con niños, jóvenes y familias en Neiva, Huila, y Espinal, Tolima."
+canonical: /noticias/
+nombre: "Noticias"
+bodyClass: pagina-texto
+eleventyExcludeFromCollections: true
+---
+{#- Listado de noticias. Si no hay ninguna noticia, esta página no se publica (ver noticias.11tydata.js). -#}
+    <section class="pagina-seccion container" aria-labelledby="noticias-titulo">
+      <p class="eyebrow">Noticias</p>
+      <h1 id="noticias-titulo">Lo que está pasando.</h1>
+      <ul class="lista-noticias">
+        {%- for noticia in collections.noticias | reverse %}
+        <li>
+          <a href="{{ noticia.page.fileSlug }}.html">
+            <time datetime="{{ noticia.date.toISOString().slice(0, 10) }}">{{ noticia.date.toISOString().slice(0, 10) | fechaLarga }}</time>
+            <strong>{{ noticia.data.title }}</strong>
+            <p>{{ noticia.data.description }}</p>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>

@@ -30,6 +30,10 @@
     font-weight: 600;
     text-decoration: none;
   }
+  /* La guirnalda sube ~22 px por encima de la barra: el inicio deja ese espacio extra para que no tape la pastilla */
+  html[data-season="navidad"] .hero { padding-bottom: calc(var(--marco) + var(--pie-libre) + 28px); }
+  /* En celular el texto del inicio llena la pantalla y la barra quedaría encima: la pastilla sube al lugar de la insignia */
+  @media (max-width: 759px) { .xmas-hero-pill { order: -2; } }
   .xmas-hero-pill:hover { background: rgb(212 166 74 / 0.16); }
   .xmas-hero-pill svg { color: var(--xmas-gold); }
 
@@ -75,8 +79,8 @@
   .xmas-garland span:nth-child(3n + 2) { --bulb: var(--xmas-gold); }
   .xmas-garland span:nth-child(3n + 3) { --bulb: var(--xmas-green); }
 
-  /* Nieve: solo transform/opacity, detrás de la barra */
-  .xmas-snow { position: fixed; inset: 0; z-index: 1000; overflow: hidden; pointer-events: none; contain: strict; }
+  /* Nieve: dentro del inicio, la campaña y las portadas internas, sobre la foto y detrás del texto */
+  .xmas-snow { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; contain: strict; }
   .xmas-flake {
     position: absolute;
     top: -24px;
@@ -93,31 +97,15 @@
   }
   .xmas-flake--sparkle { border-radius: 0; background: var(--xmas-gold); clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
 
-  /* Botón para pausar la nieve (lo crea seasonal.js en la barra) */
-  .xmas-snow-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 44px;
-    padding: 0 14px;
-    border: 1px solid var(--linea-fuerte);
-    border-radius: 999px;
-    background: none;
-    font-family: var(--f-mono);
-    font-size: var(--t-nota);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .xmas-snow-toggle:hover { border-color: var(--texto); }
-  /* En la píldora va al final, como un ícono más */
-  .nav-shell .xmas-snow-toggle, .program-detail-nav .xmas-snow-toggle { order: 9; }
-  @media (max-width: 1279px) { .xmas-snow-toggle { width: 44px; padding: 0; justify-content: center; } .xmas-snow-toggle-text { display: none; } }
+  /* Botón para pausar la nieve (lo crea seasonal.js). Va en el menú de la barra, junto a Compartir, y toma su
+     estilo (.nav-compartir): ícono en escritorio, fila con texto en el menú del celular. */
+  .nav-item--nieve .xmas-snow-toggle { border-top: 0; margin-top: 0; }
   .xmas-snow-toggle[aria-pressed="false"] { color: var(--texto-3); }
-  @media (max-width: 560px) { .xmas-snow-toggle-text { display: none; } }
+
 
   @keyframes xmas-fall {
     from { transform: translate3d(0, -5vh, 0) rotate(0deg); }
-    to { transform: translate3d(var(--drift), 108vh, 0) rotate(200deg); }
+    to { transform: translate3d(var(--drift), calc(100svh + 48px), 0) rotate(200deg); }
   }
   @keyframes xmas-sway {
     0%, 100% { transform: rotate(-3deg); }

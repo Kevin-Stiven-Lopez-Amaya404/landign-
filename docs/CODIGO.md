@@ -1,50 +1,51 @@
 # Documentación técnica del código
 
-Detalle de cómo funciona cada pieza. Para la vista general (carpetas, cambios comunes, flujo de trabajo) lee primero [`GUIA_PROGRAMADOR.md`](GUIA_PROGRAMADOR.md).
+Detalle de cómo funciona cada pieza. Para la vista general (carpetas, cambios comunes, flujo de trabajo) lee
+primero [`GUIA_PROGRAMADOR.md`](GUIA_PROGRAMADOR.md).
 
-## 1. Compilación (Eleventy)
+## 1. Compilación
 
 `eleventy.config.mjs`:
 
-- **Entrada `src/`, salida `_site/`.** Solo se procesan `.html` y `.njk` (los `README.md` de `src/` no se publican).
-- **Las páginas HTML se leen como plantillas Nunjucks**, así que pueden usar `{{ site.* }}`, filtros y `layout`.
-- **`permalink` global `{{ page.filePathStem }}.html`** mantiene las URL con `.html` (`/programas/semilla.html`, `/sede-espinal/index.html`).
-- **Se copian tal cual** `assets/`, `informes/`, `robots.txt`, `sitemap.xml`, `site.webmanifest` y `.nojekyll`.
-- **Filtro `whatsapp`:** `{{ 'texto' | whatsapp }}` devuelve `https://wa.me/<número>?text=<texto codificado>`; sin texto, solo `https://wa.me/<número>`.
+- **Entrada `src/`, salida `_site/`.** Se procesan `.html`, `.njk` y `.md` (los `README.md` de `src/` no se
+  publican). Las páginas HTML se leen como plantillas Nunjucks: pueden usar `{{ site.* }}`, filtros y `layout`.
+- **`permalink` global `{{ page.filePathStem }}.html`:** URL con `.html` (`/programas/semilla.html`). Los enlaces
+  internos usan la forma canónica de las carpetas (`programas/`, `sede-espinal/`).
+- **Recursos que se copian** (lista `RECURSOS`): `assets/img/opt`, `iconos`, `compartir`, `fonts`, los videos
+  comprimidos, los subtítulos, los PDF, `robots.txt`, el manifiesto y el favicon. Los originales no se publican.
+- **`eleventy.after` → `scripts/empaquetar.mjs`:** esbuild empaqueta `main.js` e `interna.js` (con *code
+  splitting*: lo que se importa diferido queda en `assets/js/chunks/` con huella en el nombre), minifica
+  `arranque.js` y `seasonal.js`, y minifica el CSS.
+- **Transformación `html`:** agrega «(se abre en una pestaña nueva)» oculto a los enlaces con `target="_blank"`
+  que no lo digan y quita comentarios y sangría del HTML.
+- **Datos globales:** `site` (`src/_data/site.json`), `fechas` (`src/_data/fechas.js`: año, años de trayectoria,
+  mes y fecha de hoy), `donar.pagina` (si hay medios o pasarela) y `entorno` (`VERCEL_ENV`).
+- **Filtros:** `whatsapp`, `raiz` (prefijo relativo según la profundidad de la página), `huella`, `numero`,
+  `fechaLarga`, `peso`, `json` (seguro dentro de `<script>`), `faqDe`, `convocatoriasAbiertas`, `migasLd`,
+  `ngoLd`, `lugarLd`, `faqLd`, `programaLd`, `esIndexable` y `paraSitemap`. **Shortcode** `donarAtributos`:
+  el `href` de Donar (y `target`/`rel` cuando es WhatsApp). La lógica vive en `lib/sitio.mjs`, con pruebas.
+- **`SITIO_DATOS`:** carpeta de datos alternativa; la usa `npm run build:ejemplo` (`scripts/ejemplo.mjs`).
 
-`vercel.json` le indica a Vercel `npm run build` y publicar `_site/`.
+**GSAP 3.15.0.** `assets/js/vendor/gsap.js` es GSAP con ScrollTrigger y SplitText, generado con
+`npm run vendor:gsap` desde `gsap-entry.js` (solo los plugins que se usan). esbuild lo incluye en el *chunk*
+diferido de las animaciones: no lo descargan las páginas internas.
 
-**Librería de animación (GSAP 3.15.0).** El sitio no tiene empaquetador, así que `assets/js/vendor/gsap.js` se genera una vez con esbuild y se guarda en Git (48 KB comprimido): `assets/js/vendor/gsap-entry.js` registra y exporta `gsap`, `ScrollTrigger` y `SplitText` (todos los plugins de GSAP son gratuitos). Si cambias la versión o necesitas otro plugin, edita esa entrada y ejecuta `npm run vendor:gsap`. `gsap` y `esbuild` son dependencias de desarrollo: Vercel no las usa para publicar.
+## 2. Plantillas
 
-## 2. Portada: `src/index.html`
+- **`partials/head.njk`:** meta, Open Graph, Twitter, canónica, `robots` (`indexar: false` → `noindex`),
+  verificación de Search Console, íconos, manifiesto, precarga de las 2 fuentes del inicio, CSS y `seasonal.js`.
+- **`partials/nav.njk`:** la barra flotante (en la portada, enlaces a secciones; en las internas, a páginas, con
+  los 4 programas en el panel del menú). **`partials/pie.njk`:** el pie común.
+- **`layouts/interna.njk`:** `<head>`, JSON-LD de migas (y de programa o sede si aplica), barra, migas visibles,
+  `<main>` con el contenido y, en los programas, convocatorias, preguntas frecuentes y «Otros programas».
+  Encabezado de cada página: `title`, `description`, `canonical`, `nombre`, `migas`, `programa`, `lugar`,
+  `ogImagen`, `bodyClass`, `indexar`, `raizFija` (la 404 usa `/`).
+- **Bloques que aparecen solo con datos:** `faq`, `convocatorias`, `quienes`, `franja-aliados`, `sede`,
+  `documento`, `aviso-legal`.
 
-Orden del documento:
+## 3. CSS
 
-1. `<head>`: metadatos, precarga de las dos fuentes, `sitio.css` y `navidad.css` (con `?v={{ site.cache.* }}`), precarga del hero, `seasonal.js` (debe ir en el `<head>` para marcar la temporada antes de pintar) y datos estructurados JSON-LD.
-2. `#entrada` (pantalla de bienvenida), `#historias` (línea de progreso), `.site-header` (barra flotante abajo: logo, enlaces, Compartir, Donar, WhatsApp y el botón del asistente) y `<main id="main">` con las secciones (`#inicio`, la secuencia de palabras `.ciclo`, `#fundacion`, `#programas`, `#impacto`, `#testimonios` (con los videos institucionales), `#momentos`, `#equipo`, `#informes` y `#contacto`).
-3. `.site-footer` y el panel del chat.
-4. Al final: `analytics.js`, el JSON `#site-data` (WhatsApp para el JS) y `main.js` como `type="module"`.
-
-Cada sección del menú se enlaza por su `id` (`href="#programas"`); `active-section.js` depende de eso.
-
-## 3. Páginas internas: `src/_includes/layouts/interna.njk`
-
-Variables que lee del encabezado de cada página: `title`, `description`, `canonical` (ruta; la plantilla le antepone `site.url`), `bodyClass` (opcional) y `back.href` / `back.text`.
-
-Estructura que genera:
-
-```html
-<body class="program-page {{ bodyClass }}">
-  <header class="program-detail-header"> logo + <a class="program-back-link" href="{{ back.href }}">{{ back.text }}</a> </header>
-  {{ content }}            ← el <main> de la página
-  <footer> WhatsApp, correo, redes (de site.json) </footer>
-```
-
-Las páginas internas cargan `sitio.css`, `navidad.css`, `seasonal.js` y `analytics.js`, pero no `main.js`. Su primera sección lleva `pagina-portada` y una foto propia en `.pantalla-fondo`; su barra flotante tiene el logo, volver, Donar, WhatsApp y Programas.
-
-## 4. CSS
-
-`assets/css/sitio.css` es la única hoja del sitio (más `seasonal/navidad.css`). La dirección visual y sus reglas están en [`../DESIGN.md`](../DESIGN.md).
+`assets/css/sitio.css` (más `seasonal/navidad.css`). Dirección visual en [`../DESIGN.md`](../DESIGN.md).
 
 ```css
 @layer reset, tokens, base, layout, components, sections, utilities;
@@ -52,94 +53,87 @@ Las páginas internas cargan `sitio.css`, `navidad.css`, `seasonal.js` y `analyt
 
 | Capa | Contenido |
 |---|---|
-| `reset` | Márgenes, `box-sizing` y `[hidden]` (el único `!important` además del movimiento reducido). |
-| `tokens` | Colores (`--vacio`, `--texto*`, `--rosa`, `--rosa-boton`, `--sol`), velos sobre fotos, tipos, márgenes (`--margen`, `--marco`, `--pildora`, `--pie-libre`), radios y la curva `--ease-out`. |
-| `base` | Cuerpo, títulos (`h1` en Unbounded mayúscula; `h2` y `h3` en Schibsted Grotesk), enlaces, selección, foco (`--sol`) y barras de desplazamiento. |
-| `layout` | `.pantalla`, `.pantalla-fondo` (y `--encaje` para fotos pequeñas), `.pantalla-cuerpo`, `.lead` y la línea de autor `.eyebrow`. |
-| `components` | Botones, línea `.historias`, barra flotante (`.site-header`/`.program-detail-header`) y su menú, punto del cursor, chat, carruseles `.carrusel`/`.historia`, videos y listas. |
-| `sections` | Cada sección de la portada y las páginas internas (`.program-detail-*`, galerías, Sede Espinal). `navidad.css` también va aquí. |
-| `utilities` | Entrada de `.reveal` (solo con JavaScript: `html.js`, que pone `seasonal.js`), movimiento reducido e impresión. |
+| `reset` | Márgenes, `box-sizing` y `[hidden]`. |
+| `tokens` | Colores, velos, tipos, espacios, radios, curvas. |
+| `base` | Cuerpo, títulos, enlaces, foco. |
+| `layout` | `.pantalla`, `.pantalla-fondo`, `.pantalla-cuerpo`, `.lead`, `.eyebrow`. |
+| `components` | Botones, `.historias`, barra flotante y menú, cursor, chat, carruseles, videos, listas. |
+| `sections` | Cada sección; páginas internas; pie, migas, páginas de texto, Donar, FAQ, aviso de cookies. `navidad.css` también va aquí. |
+| `utilities` | Entrada de `.reveal` (solo con `html.js`), movimiento reducido e impresión. |
 
-Botones: `.btn-pink` para la acción principal (Donar, Inscribirme), `.btn-whatsapp` (azul noche) para «Escribir por WhatsApp», `.btn-secondary` (contorno) para lo demás. Todo «Donar» apunta a `#donar` (acciones de Contacto); el bloque «Cómo donar» se pinta solo si `site.donacion.medios` trae datos (ver README).
-
-## 5. JavaScript
+## 4. JavaScript
 
 ### Carga
 
-`main.js` es un módulo ES (`<script type="module">`): importa cada `init*` de `modules/` y los llama en orden:
-
-```js
-const menuApi = initMenu();
-initMeta();
-initHero();
-initActiveSection();
-initReveal();
-initScrollState(menuApi);   // necesita saber si el menú está abierto
-initContactForm();
-initTeamSlider();
-initLazyVideos();
-initStoryBook();
-initChatbot();
-initHistorias();            // indicador segmentado y botón Compartir
-```
+- **`<head>`, sin `defer`:** `seasonal.js` (decide la temporada y pone `html.js`) y, en la portada,
+  `arranque.js` (decide la entrada y la animación del inicio). Son mínimos.
+- **`main.js`** (portada) e **`interna.js`** (las demás): módulos ES empaquetados. `main.js` arranca todo lo que
+  no usa GSAP y, después de la primera pintura, importa `modules/animaciones.js` (GSAP), que arranca cada parte
+  en una tarea corta. Al terminar ponen `html[data-listo]` (lo usan las pruebas).
 
 ### `modules/config.js`
 
-- **`CONTACT` y `WHATSAPP_URL`:** se leen de `#site-data`, que Eleventy genera a partir de `site.json`.
-- **`SELECTORS`:** las clases e ids que usa el JS, para no repetirlos por todo el código.
-- **`shouldLimitMotion`:** vale `true` si la persona pidió menos movimiento o menos datos, si la pantalla mide 760 px o menos, o si el equipo tiene poca memoria. En esos casos los módulos reducen las animaciones.
+Lee `#site-data` (JSON que Eleventy escribe desde `site.json`): `SITE_DATA`, `CONTACT`, `WHATSAPP_URL`, los
+`SELECTORS` y las preferencias de movimiento (`prefersLessMotion`, `shouldLimitMotion`).
 
 ### Módulos
 
-| Módulo | Detalle |
+| Módulo | Qué hace |
 |---|---|
-| `menu.js` | Abre/cierra el panel, fondo oscuro, Escape, cierre al pulsar un enlace, `aria-expanded`/`aria-label`. Al abrir lleva el foco a la primera entrada y Escape lo devuelve al botón (el botón va después de la lista en el HTML). Devuelve `menuApi`. |
-| `meta.js` | Escribe el año actual en `#current-year`. |
-| `active-section.js` | Marca `.active` en el enlace de la sección visible. |
-| `reveal.js` | Añade `.visible` a `.reveal` al entrar en pantalla y anima `data-counter="180"`. Los que entran a la vez (por ejemplo las 4 tarjetas de programas) reciben `--delay` de 0, 70, 140… ms, hasta 280. Los contadores se animan también en celular; solo se saltan con movimiento o datos reducidos (`prefersLessMotion`). |
-| `encaje.js` | Fotos sin recortar: en las cajas de forma fija pone la foto entera (`.encajada`, `object-fit: contain`) y detrás una copia desenfocada (`.encaje-relleno`, la versión más chica del `srcset`). En los videos el relleno va fuera del botón para seguir detrás cuando empieza el video. Lo cargan `main.js` y, en las páginas internas, `interna.js`. |
-| `portada.js` | Pantalla de entrada (`#entrada`: la decide un script del `<head>`; se cierra con el botón, la rueda, deslizando o el teclado, no vuelve en la sesión y al cerrarse avisa con el evento `entrada:cerrada`), secuencia de palabras `.ciclo` (fija con el scroll: primero se escribe la frase con cursor y luego cambia la palabra; `ScrollTrigger`) y punto rosa que sigue al cursor con `gsap.quickTo` (solo con mouse y sin movimiento reducido); sobre zonas con `data-cursor` se vuelve una píldora con ese texto («Arrastra», «Ver»). |
-| `movimiento.js` | Movimiento de la portada con GSAP, todo dentro de `gsap.matchMedia()` (con movimiento reducido no se crea nada; al cambiar de tamaño se deshace y se vuelve a armar): entrada del inicio (clase `intro` del `<head>`; tras `entrada:cerrada` si hay entrada), la foto del inicio que se aleja al bajar, títulos `h2` letra a letra (SplitText), fotos que se descubren con `clip-path` y paralaje en Programas, intro de Programas que aparece y se va con el scroll, Sede Espinal fija en escritorio (foto, ESPINAL y texto), tarjetas de Programas que se apilan en escritorio (con fondo opaco y el texto intacto hasta que la siguiente las tapa), tarjetas de carruseles e informes que suben en grupo (`ScrollTrigger.batch`), carruseles que se arrastran con inercia con mouse y rebote de «Sigue». Los desenfoques solo en escritorio. |
-| `contact-form.js` | Valida campos con `aria-invalid` y mensajes de error; si todo está bien abre WhatsApp. Nombre, interés y mensaje son obligatorios; teléfono y correo, opcionales pero validados si se escriben. |
-| `team-slider.js` | Anterior/siguiente, puntos, avance automático que se pausa fuera de pantalla o con el cursor encima. |
-| `lazy-videos.js` | Carga cada video local (`.local-video-loader`) solo al pulsarlo. |
-| `story-book.js` | Visor de la historia institucional: muestra una página a la vez (las demás con `hidden`), arma su indicador segmentado y anuncia «Página X de Y» en `role="status"`. |
-| `chatbot.js` | Las preguntas rápidas responden al instante con textos fijos. Lo que la persona escribe va a `/api/chat` con las últimas 8 intervenciones; mientras tanto muestra «Escribiendo…» y bloquea el campo. La respuesta se arma con `textContent`, y solo las URL `https` de WhatsApp, Instagram, Facebook o el dominio de la fundación se convierten en enlace. Si la API falla o no existe (con `npm start` no hay funciones), responde con el texto fijo y no reenvía esa pregunta. |
-| `historias.js` | Arma `#historias`: un enlace por `main > section[id]` visible, con el título de la sección como nombre accesible. Cada segmento se llena con un `ScrollTrigger` (scrub) cuando su pantalla sale por arriba; el de la pantalla actual lleva `aria-current="true"`. También maneja el botón Compartir de la barra flotante (menú nativo o copia del enlace). |
+| `entrada.js` | Pantalla de entrada (solo pantallas ≥ 900 px y primera visita): se cierra sola a los 1,2 s desde que empezó la carga, o con scroll, toque, clic, tecla o «Saltar al contenido». Avisa con `entrada:cerrada`. |
+| `menu.js` | Panel del menú como diálogo (con `foco.js`): foco dentro, Escape y fondo cierran, `aria-expanded`. |
+| `foco.js` | `atraparFoco(panel, boton)`: Tab y Mayús+Tab en círculo dentro del panel. |
+| `active-section.js` | `.active` en el enlace de la sección visible. |
+| `reveal.js` | `.visible` en `.reveal` al entrar en pantalla y contadores `data-counter`. |
+| `contact-form.js` | Validación con `aria-invalid`, autorización de datos obligatoria, aviso de menores, resumen de errores con foco y enlaces; abre WhatsApp con el mensaje armado. |
+| `team-slider.js` | Equipo: anterior/siguiente, puntos, avance automático que se pausa con el cursor o el foco dentro. |
+| `carruseles.js` | Todos los carruseles: roles, flechas del teclado, Anterior/Siguiente, «N de T» en `role="status"`. |
+| `lazy-videos.js` | Carga cada video al pulsar su póster; subtítulos si hay `data-captions`; registra el evento. |
+| `encaje.js` | Fotos sin recortar con relleno desenfocado. |
+| `story-book.js` | Libro de la historia: una página a la vez, flechas del teclado, `aria-disabled` en los extremos. |
+| `chatbot.js` | Panel del chat como diálogo; lo escrito va a `/api/chat`; si falla, `respuestas.js`. |
+| `respuestas.js` | Respuestas fijas desde `#site-data` (sedes, FAQ, donar, RTE); sin dato claro, remite al equipo por WhatsApp con la pregunta. Sin DOM: tiene pruebas. |
+| `compartir.js` | Web Share API o copia del enlace, anunciada en `role="status"`. |
+| `eventos.js` | `registrarEvento()` y registro de los clics con `data-analytics-*` (solo si GA está cargado). |
+| `cookies.js` | Aviso de cookies y carga de GA4 solo con permiso; «Preferencias de cookies» del pie. |
+| `copiar.js` | Botones «Copiar número» de Donar, con anuncio en `role="status"`. |
+| `temporada.js` | Guirnalda, nieve (solo sobre las fotos del inicio, la campaña y las portadas internas; no con movimiento reducido ni Save-Data), botón Nieve y cuenta regresiva. |
+| `animaciones.js` | Importa y arranca, en tareas separadas, `movimiento.js`, `portada.js` e `historias.js` (los que usan GSAP). |
+| `movimiento.js` | Movimiento de la portada dentro de `gsap.matchMedia()` (nada con movimiento reducido). Ver `DESIGN.md`. |
+| `portada.js` | Secuencia de palabras `.ciclo` y punto que sigue al cursor. |
+| `historias.js` | Indicador segmentado `#historias`. |
 
-Fuera de `modules/`:
+## 5. Asistente con Claude (`api/`)
 
-- **`seasonal.js`:** enciende o apaga la Navidad. Se controla con `SEASON_CONFIG.mode`, y en la URL con `?temporada=off` o `?temporada=navidad` para probar.
-- **`analytics.js`:** Google Analytics 4 opcional y eventos `data-analytics-*`.
+- **`api/chat.mjs`** (`POST /api/chat`): SDK oficial `@anthropic-ai/sdk`, modelo `claude-haiku-5-5`,
+  `max_tokens: 400`, prompt del sistema con caché. Solo `POST`, solo desde el dominio, `landign*.vercel.app` o
+  `localhost`, máximo 8 mensajes por minuto e IP (en memoria; cómo pasarlo a Upstash está en el código), cuerpo
+  de máximo 8 KB, 1 a 600 caracteres por mensaje y 8 turnos. `CHAT_ACTIVO=false` lo apaga. Los registros no
+  guardan el texto de los usuarios.
+- **`api/_contexto.mjs`:** arma las instrucciones y los datos desde `site.json` (`armarContexto`), con la regla
+  de no pedir ni guardar datos de menores. No escribas datos a mano aquí: cámbialos en `site.json`.
 
-## 6. Asistente con Claude (`api/`)
+## 6. Imágenes, videos y PDF
 
-Vercel publica cada archivo de `api/` como una función; los que empiezan por `_` no se publican.
+- **Imágenes:** WebP de `assets/img/opt/` (480, 960, 1600 px) con `srcset`; `npm run imagenes` crea las de los
+  originales nuevos. El relleno del inicio es una imagen ya desenfocada (`…-relleno-480.webp`).
+- **Íconos y compartir:** `npm run iconos` y `npm run compartir` (sharp).
+- **Videos:** comprimidos en `assets/videos/`; originales en `assets/videos/originales/` (no se publican).
+- **PDF:** versión web en la URL de siempre y original como `…-ALTA-CALIDAD.pdf`.
 
-- **`api/chat.mjs`** (`POST /api/chat`) usa el SDK oficial `@anthropic-ai/sdk` con `claude-opus-5-5`, esfuerzo `low` (es un chat breve) y `max_tokens: 2048` como tope de gasto. Si el modelo rechaza la pregunta, `fallbacks: "default"` la reintenta en otro modelo. Si aun así la rechaza, responde con un mensaje amable.
-- **Protecciones:** solo acepta `POST`, solo desde el dominio de la fundación, `landign*.vercel.app` y `localhost`, y como mucho 8 mensajes por minuto e IP. Ese límite vive en la memoria de cada instancia; si hay abuso, pasarlo a Upstash o Vercel KV. Cada mensaje tiene de 1 a 600 caracteres y la conversación como mucho 8 turnos. El historial lo manda el navegador, así que no es de fiar: va como texto dentro de un solo mensaje del usuario, nunca como turnos del asistente.
-- **Errores:** usa las clases del SDK (`RateLimitError`, `AuthenticationError`, `APIError`) y devuelve 503/502/500 sin detalles. El navegador entonces usa la respuesta fija.
-- **`api/_contexto.mjs`** tiene las reglas y los datos de la fundación. Lee WhatsApp, correo y redes de `site.json`; el resto está copiado del sitio. **Si cambias programas, cifras, equipo o contacto en la portada, cámbialo también aquí.** No pongas fechas ni nada variable, porque rompería la caché del prompt.
-- **Clave:** la variable `ANTHROPIC_API_KEY` se configura en Vercel (Settings → Environment Variables). Nunca va en el código ni en el navegador.
+## 7. Pruebas y calidad
 
-## 7. Imágenes y videos
+- `npm test` → `test/unitarias.test.mjs` (`node:test`).
+- `npm run check` → `scripts/verificar.mjs` (referencias, JSON-LD, sitemap, textos de relleno) y `html-validate`.
+- `npm run lint` → ESLint (`eslint.config.mjs`) y Stylelint (`.stylelintrc.json`), reglas mínimas.
+- `npm run test:e2e` → Playwright (`playwright.config.cjs`, `test/e2e/sitio.spec.cjs`). Va en CommonJS porque
+  Playwright 1.49 se queda cargando pruebas ES con Node 24. `CHROMIUM_PATH` permite usar un Chromium ya instalado.
+- `npm run lighthouse` → `scripts/lighthouse.mjs` (mediana de varias corridas y umbrales).
 
-- **Imágenes:** las páginas usan las WebP de `assets/img/opt/`, de 480, 960 y 1600 px, con `srcset`. Los originales quedan en `brand/`, `hero/`, `content/` y `team/`.
-- **Carga:** `loading="lazy"` y `decoding="async"` en todo lo que no aparece al abrir la página. La imagen del hero se precarga.
-- **Videos:** viven en `assets/videos/` con su póster y solo se cargan al pulsarlos.
+## 8. Reglas para mantener el código limpio
 
-## 8. Formulario
-
-```html
-<form class="contact-form" id="contact-form" novalidate>
-```
-
-Cada campo tiene su mensaje de error enlazado con `aria-describedby="name-error"`. `contact-form.js` actualiza `aria-invalid`, el texto del error y `#form-status`. El envío abre WhatsApp. No hay backend.
-
-## 9. Reglas para mantener el código limpio
-
-1. El contenido va en `src/`, el aspecto en `assets/css/` y el comportamiento en `assets/js/modules/`.
-2. No pongas JavaScript dentro del HTML. Los datos de contacto van en `site.json`.
-3. El CSS nuevo va en una capa posterior a `legacy`, con tokens y sin `!important`.
-4. Cuando una sección deba conectarse con el menú, dale un `id` claro.
-5. Mantén `alt` en las imágenes y sube la versión de caché al tocar un CSS o JS.
+1. Datos en `site.json`; contenido en `src/`; aspecto en `assets/css/`; comportamiento en `assets/js/modules/`.
+2. Nada de JavaScript en línea en el HTML (la CSP lo bloquearía): todo va en archivos.
+3. CSS nuevo con los tokens existentes y en la capa que corresponde, sin `!important`.
+4. Las secciones del menú necesitan un `id` claro. Todas las imágenes, un `alt` real.
+5. Lógica nueva de la compilación en `lib/sitio.mjs`, con su prueba.

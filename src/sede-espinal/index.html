@@ -1,14 +1,13 @@
 ---
 layout: layouts/interna.njk
-title: "Sede Espinal | Fundación Amigos Como Arroz"
-description: "Conoce la sede Espinal de la Fundación Amigos Como Arroz: un espacio para formación, comunidad y acompañamiento social."
+title: "Sede Espinal en el Tolima | Fundación Amigos Como Arroz"
+description: "La Sede Espinal de la Fundación Amigos Como Arroz acerca formación, actividades y acompañamiento social a niños, jóvenes y familias de Espinal, Tolima."
 canonical: /sede-espinal/
 bodyClass: sede-page
-back:
-  href: "../index.html#sede-espinal"
-  text: "Volver a la portada"
+ogImagen: "assets/img/compartir/sede-espinal.jpg"
+nombre: "Sede Espinal"
+lugar: "Espinal"
 ---
-  <main id="main">
     <section class="pagina-portada sede-detail-hero" aria-labelledby="sede-title">
       <div class="pantalla-fondo pagina-foto" aria-hidden="true">
         <img src="../assets/img/opt/img-content-taller-educativo-960.webp" srcset="../assets/img/opt/img-content-taller-educativo-480.webp 480w, ../assets/img/opt/img-content-taller-educativo-960.webp 960w, ../assets/img/opt/img-content-taller-educativo-1200.webp 1200w" sizes="100vw" alt="" width="1200" height="675" fetchpriority="high" decoding="async" />
@@ -25,7 +24,7 @@ back:
           </p>
           <div class="hero-actions">
             <a class="btn btn-whatsapp" href="{{ 'Hola, quiero recibir información sobre la Sede Espinal de la Fundación Amigos Como Arroz.' | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_whatsapp" data-analytics-category="programas" data-analytics-label="Sede Espinal - Quiero recibir información">Quiero recibir información</a>
-            <a class="btn btn-secondary" href="../index.html#programas">Ver programas</a>
+            <a class="btn btn-secondary" href="../programas/">Ver programas</a>
           </div>
         </div>
 
@@ -34,7 +33,7 @@ back:
             src="../assets/img/opt/img-content-taller-educativo-960.webp"
             srcset="../assets/img/opt/img-content-taller-educativo-480.webp 480w, ../assets/img/opt/img-content-taller-educativo-960.webp 960w, ../assets/img/opt/img-content-taller-educativo-1200.webp 1200w"
             sizes="(max-width: 760px) 94vw, 529px"
-            alt="Jóvenes participando en un taller educativo de la fundación"
+            alt="Cinco adultos de la fundación posan sosteniendo una camiseta de fútbol"
             width="1200"
             height="675"
             loading="eager"
@@ -113,6 +112,9 @@ back:
             Comunícate con la fundación para recibir orientación sobre actividades, participación,
             voluntariado o formas de apoyo.
           </p>
+          {#- Dirección, horario, teléfono y «Cómo llegar» desde site.sedes (solo lo que exista) #}
+          {%- set sede = site.sedes | selectattr("ciudad", "equalto", "Espinal") | first %}
+          {%- if sede %}{% include "partials/sede.njk" %}{% endif %}
         </div>
         <a
           class="btn btn-whatsapp"
@@ -127,4 +129,3 @@ back:
         </a>
       </div>
     </section>
-  </main>

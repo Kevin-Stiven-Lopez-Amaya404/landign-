@@ -1,59 +1,11 @@
 import { gsap, ScrollTrigger } from "../vendor/gsap.js";
 import { prefersLessMotion } from "./config.js";
 
-// Efectos propios de la portada: la pantalla de entrada, la secuencia de palabras y el punto que sigue al cursor.
+// Efectos propios de la portada que usan GSAP: la secuencia de palabras y el punto que sigue al cursor.
+// (La pantalla de entrada está en entrada.js, que no necesita GSAP y carga de inmediato.)
 export function initPortada() {
-  initEntrada();
   initCiclo();
   initCursor();
-}
-
-// Entrada: la decide un script en el <head> (clase con-entrada) para que no parpadee la página.
-// Se cierra con el botón, con la rueda, deslizando o con el teclado, y no vuelve en la misma sesión.
-function initEntrada() {
-  const raiz = document.documentElement;
-  const entrada = document.getElementById("entrada");
-  if (!entrada || !raiz.classList.contains("con-entrada")) {
-    entrada?.remove();
-    return;
-  }
-
-  entrada.hidden = false;
-  const resto = Array.from(document.body.children).filter((el) => el !== entrada && el.tagName !== "SCRIPT");
-  resto.forEach((el) => (el.inert = true));
-  const boton = entrada.querySelector(".entrada-boton");
-  boton.focus({ preventScroll: true });
-
-  const control = new AbortController();
-  const cerrar = () => {
-    control.abort();
-    try {
-      sessionStorage.setItem("entrada", "1");
-    } catch {
-      // Sin almacenamiento (modo privado): la entrada vuelve a salir en la próxima visita, nada más.
-    }
-    resto.forEach((el) => (el.inert = false));
-    raiz.classList.remove("con-entrada");
-    window.scrollTo(0, 0);
-    document.dispatchEvent(new Event("entrada:cerrada"));
-    const quitar = () => entrada.remove();
-    if (prefersLessMotion) return quitar();
-    entrada.classList.add("saliendo");
-    entrada.addEventListener("transitionend", quitar, { once: true });
-    setTimeout(quitar, 1000);
-  };
-
-  const opciones = { signal: control.signal, passive: true };
-  boton.addEventListener("click", cerrar, { signal: control.signal });
-  window.addEventListener("wheel", cerrar, opciones);
-  window.addEventListener("touchmove", cerrar, opciones);
-  document.addEventListener(
-    "keydown",
-    (evento) => {
-      if (["Escape", "ArrowDown", "PageDown", "End"].includes(evento.key)) cerrar();
-    },
-    { signal: control.signal }
-  );
 }
 
 // Secuencia de palabras: la pantalla queda fija; con el scroll primero se escribe la frase y luego cambia la palabra.

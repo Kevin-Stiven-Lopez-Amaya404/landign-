@@ -90,6 +90,17 @@ export function initTeamSlider() {
     startAuto();
   }
 
+  // Con el foco dentro (teclado o lector de pantalla) también se detiene el avance automático (WCAG 2.2.2).
+  teamSlider.addEventListener("focusin", () => {
+    isPaused = true;
+    stopAuto();
+  });
+  teamSlider.addEventListener("focusout", (event) => {
+    if (teamSlider.contains(event.relatedTarget)) return;
+    isPaused = false;
+    startAuto();
+  });
+
   teamSlider.addEventListener("mouseenter", () => {
     isPaused = true;
     stopAuto();

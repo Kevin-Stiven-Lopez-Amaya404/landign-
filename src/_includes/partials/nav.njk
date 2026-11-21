@@ -1,0 +1,96 @@
+{#- Barra flotante en forma de píldora, igual en todas las páginas (la controla assets/js/modules/menu.js).
+    En la portada los enlaces van a sus secciones; en las demás páginas, a las páginas del sitio.
+    Variable: portada (true solo en index.html). Necesita raiz. -#}
+  <header class="site-header" id="site-header">
+    <nav class="nav-shell" aria-label="Navegación principal">
+      <a class="brand" href="{{ '#inicio' if portada else raiz or './' }}" aria-label="Fundación Amigos Como Arroz, inicio">
+        <img
+          class="logo-mark"
+          src="{{ raiz }}assets/img/opt/img-brand-logo-fundacion-160.webp"
+          width="160"
+          height="160"
+          alt="Logo Fundación Amigos Como Arroz"
+          decoding="async"
+        />
+      </a>
+
+      <ul class="nav-list" id="nav-list">
+        {%- if portada %}
+        <li><a class="nav-link" href="#fundacion">Fundación</a></li>
+        <li><a class="nav-link" href="#programas">Programas</a></li>
+        <li><a class="nav-link" href="#impacto">Impacto</a></li>
+        <li><a class="nav-link" href="#sede-espinal">Sede Espinal</a></li>
+        <li><a class="nav-link" href="#informes">Informes</a></li>
+        <li><a class="nav-link" href="#contacto">Contacto</a></li>
+        {%- else %}
+        <li><a class="nav-link" href="{{ raiz or './' }}">Inicio</a></li>
+        <li><a class="nav-link{% if (page.url or '').startsWith('/programas/') %} active{% endif %}" href="{{ raiz }}programas/">Programas</a>
+          {#- Los cuatro programas: en el panel del menú (celular y tableta); en escritorio se llega desde Programas. #}
+          <ul class="nav-sub">
+            {%- for programa in site.programas %}
+            <li><a class="nav-link nav-link--sub"{% if page.url == '/programas/' + programa.pagina %} aria-current="page"{% endif %} href="{{ raiz }}programas/{{ programa.pagina }}">{{ programa.nombre }}</a></li>
+            {%- endfor %}
+          </ul>
+        </li>
+        <li><a class="nav-link{% if (page.url or '').startsWith('/sede-espinal/') %} active{% endif %}" href="{{ raiz }}sede-espinal/">Sede Espinal</a></li>
+        <li><a class="nav-link" href="{{ raiz }}transparencia.html">Transparencia</a></li>
+        <li><a class="nav-link" href="{{ raiz }}#contacto">Contacto</a></li>
+        {%- endif %}
+        <li class="nav-item--compartir">
+          <button class="nav-compartir" type="button" data-compartir data-analytics-event="compartir" data-analytics-category="compartir" data-analytics-label="Barra">
+            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/></svg>
+            <span>Compartir</span>
+          </button>
+        </li>
+      </ul>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-list"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a
+        class="nav-donate"
+        {% donarAtributos raiz %}
+        data-analytics-event="clic_donar"
+        data-analytics-category="contacto"
+        data-analytics-label="Barra - donar"
+      >Donar</a>
+      <a
+        class="pill-icono"
+        href="{{ 'Hola, quiero recibir información sobre la Fundación Amigos Como Arroz.' | whatsapp }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
+        data-analytics-event="clic_whatsapp_flotante"
+        data-analytics-category="contacto"
+        data-analytics-label="Barra - WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-5.25 0-9.5 4.02-9.5 8.98 0 1.76.53 3.4 1.45 4.78L2.5 21.5l5.42-1.37c1.23.65 2.63 1.01 4.08 1.01 5.25 0 9.5-4.02 9.5-8.98S17.25 2.5 12 2.5zm4.4 12.5c-.18.5-1.06.97-1.47 1.03-.38.05-.85.08-1.37-.09-.32-.1-.72-.24-1.24-.46-2.18-.96-3.6-3.18-3.71-3.33-.11-.15-.89-1.2-.89-2.28 0-1.09.57-1.62.77-1.84.2-.22.44-.28.59-.28h.42c.14 0 .32-.05.5.38.18.43.62 1.49.67 1.6.06.11.09.24.02.38-.07.15-.11.24-.22.37-.11.13-.23.29-.33.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.56.86.77 1.59 1.01 1.81 1.12.22.11.35.09.48-.06.13-.15.55-.64.7-.86.15-.22.29-.18.5-.11.2.07 1.27.6 1.49.71.22.11.37.16.42.25.05.09.05.53-.13 1.03z"/></svg>
+      </a>
+      {%- if portada %}
+      <button
+        class="pill-icono"
+        type="button"
+        id="chatbotToggle"
+        aria-controls="chatbotPanel"
+        aria-expanded="false"
+        aria-label="Abrir asistente de ayuda"
+        data-analytics-event="abrir_chat"
+        data-analytics-category="chat"
+        data-analytics-label="Barra"
+      >
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5a2 2 0 0 1-2 2H8l-4 3.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/></svg>
+      </button>
+      {%- endif %}
+    </nav>
+  </header>
+
+  <div class="menu-backdrop" id="menu-backdrop" hidden></div>

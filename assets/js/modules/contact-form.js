@@ -1,7 +1,10 @@
 import { SELECTORS, WHATSAPP_URL } from "./config.js";
+import { registrarEvento } from "./eventos.js";
 
 // Valida el formulario antes de abrir WhatsApp con el mensaje armado por el usuario.
 // Teléfono y correo son opcionales (WhatsApp ya muestra el número); si se escriben, deben ser válidos.
+// La autorización de datos es obligatoria. Si hay errores, un resumen arriba del formulario recibe el foco
+// y enlaza a cada campo.
 export function initContactForm() {
   const form = document.querySelector(SELECTORS.form);
   const status = document.querySelector(SELECTORS.formStatus);
@@ -13,12 +16,15 @@ export function initContactForm() {
     phone: form.elements.phone,
     email: form.elements.email,
     interest: form.elements.interest,
-    message: form.elements.message
+    message: form.elements.message,
+    autorizo: form.elements.autorizo
   };
+  const resumen = form.querySelector("#form-resumen");
+  const avisoMenor = form.querySelector("#aviso-menor");
 
-  const setStatus = (message, color) => {
+  const setStatus = (message, tipo = "") => {
     status.textContent = message;
-    status.style.color = color;
+    status.dataset.tipo = tipo;
   };
 
   const setFieldError = (field, message) => {
@@ -58,51 +64,76 @@ export function initContactForm() {
       if (value.length < 10) return "Cuéntanos un poco más (al menos 10 caracteres).";
       if (value.length > 700) return "El mensaje no debe superar los 700 caracteres.";
       return "";
+    },
+    autorizo(marcada) {
+      if (!marcada) return "Para enviar tu mensaje, autoriza el tratamiento de tus datos.";
+      return "";
     }
   };
 
-  const getValues = () => ({
-    name: fields.name.value.trim(),
-    phone: fields.phone.value.trim(),
-    email: fields.email.value.trim(),
-    interest: fields.interest.value.trim(),
-    message: fields.message.value.trim()
-  });
+  const valorDe = (field) => (field.type === "checkbox" ? field.checked : field.value.trim());
 
   const validateField = (name) => {
     const field = fields[name];
-    const value = field.value.trim();
-    const error = validators[name](value);
+    const error = validators[name](valorDe(field));
     setFieldError(field, error);
-    return !error;
+    return error;
+  };
+
+  const mostrarAvisoMenor = () => {
+    if (avisoMenor) avisoMenor.hidden = fields.interest.value !== "programas";
   };
 
   Object.keys(fields).forEach((name) => {
-    const eventName = fields[name].tagName === "SELECT" ? "change" : "input";
-    fields[name].addEventListener(eventName, () => {
-      if (fields[name].getAttribute("aria-invalid") === "true") {
+    const field = fields[name];
+    const eventName = field.tagName === "SELECT" || field.type === "checkbox" ? "change" : "input";
+    field.addEventListener(eventName, () => {
+      if (field.getAttribute("aria-invalid") === "true") {
         validateField(name);
       }
-      setStatus("", "");
+      if (name === "interest") mostrarAvisoMenor();
+      setStatus("");
     });
 
-    fields[name].addEventListener("blur", () => {
+    field.addEventListener("blur", () => {
       validateField(name);
     });
   });
 
+  const mostrarResumen = (errores) => {
+    if (!resumen) return;
+    const lista = resumen.querySelector("ul");
+    lista.replaceChildren(
+      ...errores.map(([name, mensaje]) => {
+        const item = document.createElement("li");
+        const enlace = document.createElement("a");
+        enlace.href = `#${fields[name].id}`;
+        enlace.textContent = mensaje;
+        enlace.addEventListener("click", (event) => {
+          event.preventDefault();
+          fields[name].focus();
+        });
+        item.append(enlace);
+        return item;
+      })
+    );
+    resumen.hidden = errores.length === 0;
+    if (errores.length) resumen.focus();
+  };
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const isValid = Object.keys(fields).map(validateField).every(Boolean);
-    const values = getValues();
+    const errores = Object.keys(fields)
+      .map((name) => [name, validateField(name)])
+      .filter(([, error]) => error);
 
-    if (!isValid) {
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
-      firstInvalid?.focus();
-      setStatus("Revisa los campos marcados antes de enviar.", "#b42318");
+    if (errores.length) {
+      setStatus("Revisa los campos marcados antes de enviar.", "error");
+      mostrarResumen(errores);
       return;
     }
+    mostrarResumen([]);
 
     const interestLabels = {
       programas: "Inscripción a un programa",
@@ -111,6 +142,8 @@ export function initContactForm() {
       alianza: "Alianza",
       informacion: "Información general"
     };
+    const values = Object.fromEntries(Object.keys(fields).map((name) => [name, valorDe(fields[name])]));
+    const interes = interestLabels[values.interest] || values.interest;
 
     const whatsappMessage = [
       "Hola, quiero contactar a la Fundación Amigos Como Arroz.",
@@ -118,7 +151,7 @@ export function initContactForm() {
       `Nombre: ${values.name}`,
       values.phone ? `Teléfono: ${values.phone}` : null,
       values.email ? `Correo: ${values.email}` : null,
-      `Interés: ${interestLabels[values.interest] || values.interest}`,
+      `Interés: ${interes}`,
       "",
       `Mensaje: ${values.message}`
     ]
@@ -127,15 +160,11 @@ export function initContactForm() {
 
     const whatsappUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(whatsappMessage)}`;
 
-    setStatus("Validación correcta. Te redirigiremos a WhatsApp para completar el envío.", "#5f8f73");
-    if (typeof window.gtag === "function") {
-      window.gtag("event", "envio_formulario_whatsapp", {
-        event_category: "contacto",
-        event_label: interestLabels[values.interest] || values.interest
-      });
-    }
+    setStatus("Todo listo. Se abrirá WhatsApp para que termines de enviar tu mensaje.", "ok");
+    registrarEvento("envio_formulario_whatsapp", "contacto", interes);
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     form.reset();
+    mostrarAvisoMenor();
     Object.values(fields).forEach((field) => setFieldError(field, ""));
   });
 }

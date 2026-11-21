@@ -1,0 +1,25 @@
+{
+  "legal": { "razonSocial": "EJEMPLO Fundación S. A. S.", "nit": "900.000.000-0", "representanteLegal": "EJEMPLO Nombre Apellido", "rte": true, "politicaRevisada": false, "vigenciaPolitica": "1 de enero de 2027", "estadosFinancieros": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2024.pdf", "certificadoExistencia": "", "actaAsamblea": "" },
+  "sedes": [
+    { "nombre": "Sede Neiva", "ciudad": "Neiva", "departamento": "Huila", "direccion": "Carrera 7A No. 16-25, barrio Quirinal", "horario": "EJEMPLO lunes a viernes, 8:00 a. m. a 5:00 p. m.", "telefono": "EJEMPLO 300 000 0000", "mapa": "https://maps.google.com/?q=Neiva" },
+    { "nombre": "Sede Espinal", "ciudad": "Espinal", "departamento": "Tolima", "direccion": "EJEMPLO Calle 1 # 2-3", "horario": "EJEMPLO sábados, 8:00 a. m. a 12:00 m.", "telefono": "", "mapa": "https://maps.google.com/?q=Espinal" }
+  ],
+  "analytics": { "ga4": "G-EJEMPLO123" },
+  "verificacion": { "google": "EJEMPLO-verificacion" },
+  "donacion": {
+    "medios": [ { "nombre": "EJEMPLO Banco", "tipo": "Cuenta de ahorros", "numero": "000-000000-00", "titular": "EJEMPLO Fundación" }, { "nombre": "EJEMPLO Nequi", "tipo": "Nequi", "numero": "300 000 0000", "titular": "EJEMPLO Fundación" } ],
+    "pasarela": { "nombre": "EJEMPLO Pasarela", "url": "https://example.com/donar" },
+    "montos": [ { "valor": "$20.000", "impacto": "EJEMPLO: un mes de refrigerios para un niño." }, { "valor": "$50.000", "impacto": "EJEMPLO: uniformes para una práctica." } ],
+    "especie": [ "EJEMPLO útiles escolares", "EJEMPLO balones" ]
+  },
+  "voluntariado": { "perfiles": [ "EJEMPLO docentes de refuerzo", "EJEMPLO entrenadores" ], "compromiso": "EJEMPLO cuatro horas a la semana durante seis meses.", "pasos": [ "EJEMPLO escríbenos", "EJEMPLO entrevista", "EJEMPLO inducción" ] },
+  "alianzas": { "tipos": [ { "nombre": "EJEMPLO Patrocinio", "descripcion": "EJEMPLO apoyo a un programa completo." } ] },
+  "aliados": [ { "nombre": "EJEMPLO Aliado", "logo": "assets/img/opt/img-brand-logo-fundacion-160.webp", "url": "https://example.com" } ],
+  "impacto": { "corte": "EJEMPLO diciembre de 2025", "fuente": "EJEMPLO Informe de gestión 2025", "informe": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2025.pdf" },
+  "institucional": { "mision": "EJEMPLO misión.", "vision": "EJEMPLO visión.", "valores": [ "EJEMPLO respeto", "EJEMPLO servicio" ], "junta": [ { "nombre": "EJEMPLO Persona", "cargo": "EJEMPLO cargo" } ] },
+  "faq": [
+    { "pregunta": "¿Qué edad deben tener los niños para Semilla?", "respuesta": "EJEMPLO: de 6 a 17 años.", "programa": "semilla.html" },
+    { "pregunta": "¿Los programas tienen costo?", "respuesta": "EJEMPLO: no tienen costo para las familias." }
+  ],
+  "convocatorias": [ { "programa": "siembra.html", "titulo": "EJEMPLO Becas 2027", "abre": "2026-01-01", "cierra": "2099-12-31", "requisitos": "EJEMPLO ser bachiller.", "enlace": "" } ]
+}

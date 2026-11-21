@@ -1,0 +1,38 @@
+# Integración continua: compila, prueba y revisa el sitio en cada PR y en cada push a dev, qa y main.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [dev, qa, main]
+
+permissions:
+  contents: read
+
+jobs:
+  sitio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # el sitemap usa la fecha del último commit de cada archivo
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:ejemplo
+      - run: npm test
+      - run: npm run check
+      - run: npm run lint
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.config.cjs --project=chromium-390 --project=chromium-1440
+      - name: Lighthouse (solo aviso, en los PR)
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          node scripts/servir.mjs _site 8180 &
+          sleep 2
+          CHROME_PATH="$(node -e "console.log(require('@playwright/test').chromium.executablePath())")" npm run lighthouse -- --aviso --veces=1

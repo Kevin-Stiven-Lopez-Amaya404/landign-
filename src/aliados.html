@@ -1,0 +1,43 @@
+---
+layout: layouts/interna.njk
+title: "Alianzas | Fundación Amigos Como Arroz en Neiva y Espinal"
+description: "Construye una alianza con la Fundación Amigos Como Arroz: patrocinio de programas y responsabilidad social para niños, jóvenes y familias en Neiva y Espinal."
+canonical: /aliados.html
+nombre: "Aliados"
+bodyClass: pagina-texto
+---
+{#- Tipos de alianza (site.alianzas.tipos) y logos (site.aliados) solo se muestran si existen. -#}
+{%- set aliadosCifra = site.impacto.cifras | selectattr("texto", "equalto", "aliados e instituciones.") | first %}
+    <section class="pagina-seccion container" aria-labelledby="aliados-titulo">
+      <p class="eyebrow">Alianzas</p>
+      <h1 id="aliados-titulo">Construyamos juntos.</h1>
+      <p class="lead">
+        Voluntarios, aliados y líderes multiplican oportunidades en el territorio.
+        {%- if aliadosCifra %} Hoy trabajamos con {{ aliadosCifra.valor | numero }} aliados e instituciones.{% endif %}
+      </p>
+      <p>
+        Si tu empresa o institución quiere patrocinar un programa, apoyar becas, sumar voluntariado corporativo o
+        incluir a la fundación en su estrategia de responsabilidad social, hablemos.
+      </p>
+    </section>
+
+    {%- if site.alianzas.tipos.length %}
+    <section class="pagina-seccion container" aria-labelledby="tipos-titulo">
+      <h2 id="tipos-titulo">Formas de aliarse</h2>
+      <ul class="tarjetas-simples">
+        {%- for tipo in site.alianzas.tipos %}
+        <li><strong>{{ tipo.nombre }}</strong><p>{{ tipo.descripcion }}</p></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- include "partials/franja-aliados.njk" %}
+
+    <section class="pagina-seccion container" aria-labelledby="contacto-aliados-titulo">
+      <h2 id="contacto-aliados-titulo">Hablemos</h2>
+      <div class="acciones">
+        <a class="btn btn-pink" href="{{ 'Hola, escribo de una empresa o institución y queremos construir una alianza con la Fundación Amigos Como Arroz.' | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_alianza" data-analytics-category="contacto" data-analytics-label="Aliados - WhatsApp">Escribir por WhatsApp<span class="sr-only"> sobre una alianza (se abre en una pestaña nueva)</span></a>
+        <a class="btn btn-secondary" href="mailto:{{ site.email }}?subject={{ 'Alianza con la Fundación Amigos Como Arroz' | urlencode }}">Escribir un correo</a>
+      </div>
+    </section>

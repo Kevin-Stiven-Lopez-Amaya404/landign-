@@ -3,16 +3,36 @@
   "private": true,
   "description": "Sitio de la Fundación Amigos Como Arroz (Eleventy)",
   "scripts": {
-    "build": "eleventy",
+    "build": "node scripts/limpiar.mjs && eleventy",
     "start": "eleventy --serve",
-    "vendor:gsap": "esbuild assets/js/vendor/gsap-entry.js --bundle --format=esm --minify --legal-comments=none --outfile=assets/js/vendor/gsap.js"
+    "vendor:gsap": "esbuild assets/js/vendor/gsap-entry.js --bundle --format=esm --minify --legal-comments=none --outfile=assets/js/vendor/gsap.js",
+    "iconos": "node scripts/iconos.mjs",
+    "compartir": "node scripts/compartir.mjs",
+    "build:ejemplo": "node scripts/ejemplo.mjs",
+    "imagenes": "node scripts/imagenes.mjs",
+    "check": "node scripts/verificar.mjs && html-validate \"_site/**/*.html\"",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"test/*.test.mjs\"",
+    "test:e2e": "playwright test --config playwright.config.cjs",
+    "lint": "eslint . && stylelint \"assets/css/**/*.css\"",
+    "lighthouse": "node scripts/lighthouse.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.1.8",
+    "@eslint/js": "9.17.0",
+    "@playwright/test": "1.49.1",
+    "axe-core": "4.14.1",
     "esbuild": "0.25.10",
-    "gsap": "3.15.0"
+    "eslint": "9.17.0",
+    "globals": "15.14.0",
+    "gsap": "3.15.0",
+    "html-validate": "9.5.0",
+    "sharp": "0.34.4",
+    "stylelint": "16.12.0"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.11.0"
+  },
+  "engines": {
+    "node": ">=20 <25"
   }
 }

@@ -1,0 +1,4 @@
+{#- Aviso para el equipo: se ve fuera de producción mientras site.legal.politicaRevisada sea false. -#}
+{%- if not site.legal.politicaRevisada and entorno != "production" %}
+    <p class="aviso-revision" role="note"><strong>Borrador:</strong> el texto debe revisarlo un abogado antes de publicarse. Este aviso solo se ve fuera de producción; la página lleva <code>noindex</code> hasta que <code>site.legal.politicaRevisada</code> sea <code>true</code>.</p>
+{%- endif %}

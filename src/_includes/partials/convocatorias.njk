@@ -1,0 +1,23 @@
+{#- Convocatorias abiertas al compilar (site.convocatorias). Variable opcional: programa. Necesita raiz. -#}
+{%- set abiertas = site.convocatorias | convocatoriasAbiertas(fechas.iso, programa) %}
+{%- if abiertas.length %}
+    <aside class="convocatorias{% if not portada %} container{% endif %}" aria-label="Convocatorias abiertas">
+      {%- for c in abiertas %}
+      {%- set prog = site.programas | selectattr("pagina", "equalto", c.programa) | first %}
+      <div class="convocatoria">
+        <p class="convocatoria-etiqueta">Convocatoria abierta{% if prog %} · {{ prog.nombre }}{% endif %}</p>
+        <p class="convocatoria-titulo">{{ c.titulo }}</p>
+        {%- if c.cierra %}<p>Cierra el {{ c.cierra | fechaLarga }}.</p>{% endif %}
+        {%- if c.requisitos %}<p>{{ c.requisitos }}</p>{% endif %}
+        <div class="acciones">
+          {%- if c.enlace %}
+          <a class="btn btn-pink" href="{{ c.enlace }}" target="_blank" rel="noopener noreferrer">Ver la convocatoria<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          {%- else %}
+          <a class="btn btn-pink" href="{{ ('Hola, quiero información sobre la convocatoria ' + c.titulo + '.') | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_convocatoria" data-analytics-category="programas" data-analytics-label="{{ c.titulo }}">Preguntar por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          {%- endif %}
+          {%- if prog and portada %}<a class="btn btn-secondary" href="{{ raiz }}programas/{{ prog.pagina }}">Conocer {{ prog.nombre }}</a>{% endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </aside>
+{%- endif %}

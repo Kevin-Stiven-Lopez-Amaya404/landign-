@@ -1,0 +1,15 @@
+{#- Logos de aliados desde site.aliados ({ nombre, logo, url }). Solo aparece si hay datos. Necesita raiz. -#}
+{%- if site.aliados.length %}
+    <section class="franja-aliados" aria-labelledby="aliados-franja-titulo">
+      <h2 class="franja-aliados-titulo" id="aliados-franja-titulo">Aliados que hacen posible el trabajo</h2>
+      <ul>
+        {%- for aliado in site.aliados %}
+        <li>
+          {%- if aliado.url %}<a href="{{ aliado.url }}" target="_blank" rel="noopener noreferrer">{% endif -%}
+          <img src="{{ raiz }}{{ aliado.logo }}" alt="{{ aliado.nombre }}{% if aliado.url %} (se abre en una pestaña nueva){% endif %}" loading="lazy" decoding="async" height="64" />
+          {%- if aliado.url %}</a>{% endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+{%- endif %}

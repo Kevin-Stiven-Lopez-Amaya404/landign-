@@ -1,0 +1,17 @@
+{#- Preguntas frecuentes desde site.faq ({ pregunta, respuesta, programa? }). Variable opcional: programa
+    (página del programa) para mostrar solo las suyas. Si no hay preguntas, no aparece nada. -#}
+{%- set preguntas = site.faq | faqDe(programa) %}
+{%- if preguntas.length %}
+    <section class="faq{% if not portada %} container{% endif %}" aria-labelledby="faq-titulo">
+      <h2 id="faq-titulo">Preguntas frecuentes</h2>
+      <div class="faq-lista">
+        {%- for f in preguntas %}
+        <details>
+          <summary>{{ f.pregunta }}</summary>
+          <p>{{ f.respuesta }}</p>
+        </details>
+        {%- endfor %}
+      </div>
+    </section>
+    <script type="application/ld+json">{{ preguntas | faqLd | json | safe }}</script>
+{%- endif %}

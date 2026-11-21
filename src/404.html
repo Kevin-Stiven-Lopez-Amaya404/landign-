@@ -1,0 +1,22 @@
+---
+layout: layouts/interna.njk
+title: "Página no encontrada | Fundación Amigos Como Arroz"
+description: "La página que buscas no existe o cambió de dirección. Vuelve al inicio de la Fundación Amigos Como Arroz, en Neiva y Espinal, o usa estos enlaces."
+canonical: /404.html
+nombre: "Página no encontrada"
+bodyClass: pagina-texto
+indexar: false
+# Vercel muestra esta página en cualquier dirección que no exista: los enlaces van desde la raíz del dominio.
+raizFija: "/"
+---
+    <section class="pagina-seccion container pagina-404" aria-labelledby="titulo-404">
+      <p class="eyebrow">Error 404</p>
+      <h1 id="titulo-404">No encontramos esta página.</h1>
+      <p class="lead">Puede que la dirección esté mal escrita o que la página haya cambiado. Estos enlaces te llevan a lo más buscado:</p>
+      <ul class="lista-404">
+        <li><a class="btn btn-pink" href="/">Ir al inicio</a></li>
+        <li><a class="btn btn-secondary" href="/programas/">Ver los programas</a></li>
+        <li><a class="btn btn-secondary" {% donarAtributos "/" %}>Donar</a></li>
+        <li><a class="btn btn-secondary" href="/#contacto">Contacto</a></li>
+      </ul>
+    </section>

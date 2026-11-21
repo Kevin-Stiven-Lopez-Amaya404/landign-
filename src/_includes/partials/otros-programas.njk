@@ -1,0 +1,35 @@
+{#- Final de cada página de programa: acción (inscribirse o donar) y las otras tres rutas. Variable: programa (pagina). -#}
+{%- set actual = site.programas | selectattr("pagina", "equalto", programa) | first %}
+  <section class="cierre-programa container" aria-labelledby="cierre-programa-titulo">
+    <div class="cierre-accion">
+      <h2 id="cierre-programa-titulo">¿Quieres ser parte de {{ actual.nombre }}?</h2>
+      <p>Escríbenos por WhatsApp y te contamos requisitos, horarios y el siguiente paso.</p>
+      <div class="acciones">
+        <a
+          class="btn btn-pink"
+          href="{{ ('Hola, quiero inscribirme (o inscribir a alguien de mi familia) en el programa ' + actual.nombre + '.') | whatsapp }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="clic_inscribirme"
+          data-analytics-category="programas"
+          data-analytics-label="Cierre de programa - {{ actual.nombre }}"
+        >Inscribirme por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+        <a class="btn btn-secondary" {% donarAtributos raiz %} data-analytics-event="clic_donar" data-analytics-category="contacto" data-analytics-label="Cierre de programa - donar">Donar</a>
+      </div>
+    </div>
+
+    <div class="otros-programas">
+      <h2>Otros programas</h2>
+      <ul>
+        {%- for p in site.programas %}{% if p.pagina != programa %}
+        <li>
+          <a href="{{ raiz }}programas/{{ p.pagina }}">
+            <strong>{{ p.nombre }}</strong>
+            {%- if p.publico %}<span>{{ p.publico }}</span>{% endif %}
+            <p>{{ p.resumen }}</p>
+          </a>
+        </li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </div>
+  </section>

@@ -1,0 +1,117 @@
+---
+layout: layouts/interna.njk
+title: "Política de tratamiento de datos | Amigos Como Arroz"
+description: "Cómo la Fundación Amigos Como Arroz recoge, usa y protege tus datos personales en Neiva y Espinal, y cómo ejercer tus derechos según la Ley 1581 de 2012."
+canonical: /privacidad.html
+nombre: "Política de datos"
+bodyClass: pagina-texto
+eleventyComputed:
+  indexar: "{{ site.legal.politicaRevisada }}"
+---
+{#-
+  EL TEXTO DEBE REVISARLO UN ABOGADO ANTES DE PUBLICARSE.
+  Es un borrador con la estructura que pide la Ley 1581 de 2012 y el Decreto 1074 de 2015 (antes 1377 de 2013).
+  Los datos de la institución salen de site.json (legal, sedes, email, whatsapp). Cuando el texto esté revisado,
+  pon site.legal.politicaRevisada en true: se quita el aviso y la página deja de llevar noindex.
+-#}
+{%- set neiva = site.sedes | first %}
+    <article class="texto-legal container">
+      <header class="texto-legal-cabeza">
+        <p class="eyebrow">Protección de datos</p>
+        <h1>Política de tratamiento de datos personales</h1>
+        {%- if site.legal.vigenciaPolitica %}
+        <p class="lead">Vigente desde {{ site.legal.vigenciaPolitica }}.</p>
+        {%- endif %}
+      </header>
+      {%- include "partials/aviso-legal.njk" %}
+
+      <h2>1. Quién es responsable de tus datos</h2>
+      <p>
+        {{ site.legal.razonSocial or site.name }}{% if site.legal.nit %}, NIT {{ site.legal.nit }}{% endif %},
+        con sede en {{ neiva.direccion }}, {{ neiva.ciudad }}, {{ neiva.departamento }}, es la responsable del
+        tratamiento de los datos personales que recoge este sitio.
+      </p>
+      <p>
+        Puedes escribirnos a <a href="mailto:{{ site.email }}">{{ site.email }}</a> o por WhatsApp al
+        <a href="{{ '' | whatsapp }}" target="_blank" rel="noopener noreferrer">{{ site.whatsappLabel }}<span class="sr-only"> (se abre en una pestaña nueva)</span></a>.
+      </p>
+
+      <h2>2. Qué datos recogemos</h2>
+      <ul>
+        <li><strong>Formulario de contacto:</strong> nombre, teléfono y correo (estos dos son opcionales), tu interés y tu mensaje. El formulario no guarda nada en un servidor: arma el mensaje y abre WhatsApp para que tú decidas si lo envías.</li>
+        <li><strong>WhatsApp:</strong> lo que nos escribas por ese canal, con tu número y tu nombre de perfil.</li>
+        <li><strong>Chat del sitio:</strong> las preguntas que escribas. Se envían a un proveedor de inteligencia artificial para generar la respuesta (ver el punto 7).</li>
+        <li><strong>Analítica y cookies:</strong> solo si aceptas el aviso de cookies, Google Analytics recoge datos de navegación anónimos o seudónimos (páginas vistas, tipo de dispositivo, ciudad aproximada). Ver el punto 8.</li>
+      </ul>
+
+      <h2>3. Para qué usamos tus datos</h2>
+      <ul>
+        <li>Responder tus preguntas y solicitudes.</li>
+        <li>Gestionar inscripciones a los programas, voluntariados, donaciones y alianzas.</li>
+        <li>Enviarte información de la fundación cuando nos la pidas.</li>
+        <li>Expedir certificados de donación cuando corresponda.</li>
+        <li>Medir el uso del sitio para mejorarlo, solo si aceptas la analítica.</li>
+      </ul>
+      <p>No vendemos ni cedemos tus datos a terceros para fines comerciales.</p>
+
+      <h2>4. Datos de niñas, niños y adolescentes</h2>
+      <p>
+        Los datos de menores de edad solo se tratan con la autorización de su madre, padre o acudiente, respetando
+        siempre su interés superior y sus derechos fundamentales, y solo para los fines de los programas. Si vas a
+        inscribir a un menor, debes ser su madre, padre o acudiente. No pedimos ni guardamos datos de menores en el
+        chat ni en el formulario.
+      </p>
+
+      <h2>5. Tus derechos</h2>
+      <p>Como titular de los datos tienes derecho a:</p>
+      <ul>
+        <li>Conocer, actualizar y rectificar tus datos.</li>
+        <li>Pedir prueba de la autorización que nos diste.</li>
+        <li>Saber qué uso les hemos dado.</li>
+        <li>Revocar la autorización y pedir que suprimamos tus datos, cuando no exista un deber legal o contractual de conservarlos.</li>
+        <li>Presentar quejas ante la Superintendencia de Industria y Comercio, después de haber agotado el trámite con nosotros.</li>
+        <li>Acceder gratis a tus datos.</li>
+      </ul>
+
+      <h2>6. Cómo ejercer tus derechos</h2>
+      <p>
+        Escríbenos a <a href="mailto:{{ site.email }}">{{ site.email }}</a> con tu nombre, tu documento, lo que
+        pides y un medio para responderte.
+      </p>
+      <ul>
+        <li><strong>Consultas:</strong> respondemos en máximo 10 días hábiles. Si no alcanzamos, te avisamos el motivo y respondemos en máximo 5 días hábiles más.</li>
+        <li><strong>Reclamos</strong> (corrección, actualización, supresión o revocatoria): respondemos en máximo 15 días hábiles. Si no alcanzamos, te avisamos el motivo y respondemos en máximo 8 días hábiles más.</li>
+      </ul>
+
+      <h2>7. El chat del sitio usa inteligencia artificial</h2>
+      <p>
+        Las preguntas que escribes en el chat se envían a un proveedor de inteligencia artificial (Anthropic, en
+        Estados Unidos) solo para generar la respuesta. No escribas en el chat datos personales sensibles (salud,
+        documentos, datos de menores, información financiera). Si quieres hablar de un caso personal, escríbenos
+        por WhatsApp.
+      </p>
+
+      <h2>8. Analítica y cookies</h2>
+      <p>
+        El sitio solo carga Google Analytics si aceptas el aviso de cookies. Si lo rechazas, no se carga nada de
+        Google. Puedes cambiar tu decisión cuando quieras con el botón «Preferencias de cookies» del pie de página.
+        Tu decisión se guarda en tu propio navegador.
+      </p>
+
+      <h2>9. Transferencias y transmisiones</h2>
+      <p>
+        Para prestar estos servicios usamos proveedores que pueden guardar datos fuera de Colombia: WhatsApp (Meta),
+        Google Analytics (Google) y el proveedor del chat (Anthropic), en Estados Unidos. Solo compartimos con ellos
+        lo necesario para cada servicio.
+      </p>
+
+      <h2>10. Seguridad</h2>
+      <p>Aplicamos medidas razonables para proteger tus datos contra pérdida, uso o acceso no autorizado.</p>
+
+      <h2>11. Vigencia y cambios</h2>
+      <p>
+        Esta política rige desde su publicación{% if site.legal.vigenciaPolitica %} ({{ site.legal.vigenciaPolitica }}){% endif %}.
+        Guardamos los datos mientras sean necesarios para los fines descritos o mientras la ley lo exija. Si cambia
+        algo importante, lo publicaremos en esta página.
+      </p>
+    </article>

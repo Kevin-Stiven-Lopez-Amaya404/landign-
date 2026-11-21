@@ -1,0 +1,62 @@
+{#- Pie común de todas las páginas. Todo dato institucional sale de site.json: lo que esté vacío no se muestra.
+    Necesita raiz. -#}
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <img class="footer-logo" src="{{ raiz }}assets/img/opt/img-brand-logo-fundacion-160.webp" width="56" height="56" alt="" loading="lazy" decoding="async" />
+        <p class="footer-lema">{{ site.lema }}</p>
+        <p class="footer-copy">© {{ fechas.anio }} {{ site.name }}.<br>Transformando vidas en Neiva, Huila · Espinal, Tolima.</p>
+        {%- if site.legal.razonSocial or site.legal.nit %}
+        <p class="footer-legal">
+          {%- if site.legal.razonSocial %}{{ site.legal.razonSocial }}{% endif %}
+          {%- if site.legal.razonSocial and site.legal.nit %} · {% endif %}
+          {%- if site.legal.nit %}NIT {{ site.legal.nit }}{% endif -%}
+        </p>
+        {%- endif %}
+        <p class="xmas-footer-note" data-season-only="navidad" hidden>Felices fiestas y un próspero año nuevo para todas las familias.</p>
+      </div>
+
+      <div class="footer-sedes">
+        <h2 class="footer-titulo">Sedes</h2>
+        <ul>
+          {%- for sede in site.sedes %}
+          <li>
+            <strong>{{ sede.nombre }}</strong>
+            <span>{% if sede.direccion %}{{ sede.direccion }} · {% endif %}{{ sede.ciudad }}, {{ sede.departamento }}</span>
+          </li>
+          {%- endfor %}
+        </ul>
+        <p class="footer-contacto">
+          <a href="{{ 'Hola, quiero recibir información sobre la Fundación Amigos Como Arroz.' | whatsapp }}" target="_blank" rel="noopener noreferrer" data-analytics-event="clic_whatsapp" data-analytics-category="contacto" data-analytics-label="Pie - WhatsApp">WhatsApp {{ site.whatsappLabel }}<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </p>
+      </div>
+
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <h2 class="footer-titulo">El sitio</h2>
+        <a href="{{ raiz }}programas/">Programas</a>
+        <a {% donarAtributos raiz %} data-analytics-event="clic_donar" data-analytics-category="contacto" data-analytics-label="Pie - donar">Donar</a>
+        <a href="{{ raiz }}voluntariado.html">Voluntariado</a>
+        <a href="{{ raiz }}aliados.html">Aliados</a>
+        <a href="{{ raiz }}sede-espinal/">Sede Espinal</a>
+        <a href="{{ raiz }}transparencia.html">Transparencia</a>
+        <a href="{{ raiz }}#contacto">Contacto</a>
+        <a href="{{ raiz }}privacidad.html">Política de datos</a>
+        <a href="{{ raiz }}terminos.html">Términos de uso</a>
+        {#- Solo aparece si hay ID de analítica (lo muestra cookies.js) #}
+        <button class="footer-boton" type="button" data-preferencias-cookies hidden>Preferencias de cookies</button>
+      </nav>
+
+      <div class="footer-social" role="group" aria-label="Redes sociales">
+        <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp (se abre en una pestaña nueva)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-5.25 0-9.5 4.02-9.5 8.98 0 1.76.53 3.4 1.45 4.78L2.5 21.5l5.42-1.37c1.23.65 2.63 1.01 4.08 1.01 5.25 0 9.5-4.02 9.5-8.98S17.25 2.5 12 2.5zm4.4 12.5c-.18.5-1.06.97-1.47 1.03-.38.05-.85.08-1.37-.09-.32-.1-.72-.24-1.24-.46-2.18-.96-3.6-3.18-3.71-3.33-.11-.15-.89-1.2-.89-2.28 0-1.09.57-1.62.77-1.84.2-.22.44-.28.59-.28h.42c.14 0 .32-.05.5.38.18.43.62 1.49.67 1.6.06.11.09.24.02.38-.07.15-.11.24-.22.37-.11.13-.23.29-.33.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.56.86.77 1.59 1.01 1.81 1.12.22.11.35.09.48-.06.13-.15.55-.64.7-.86.15-.22.29-.18.5-.11.2.07 1.27.6 1.49.71.22.11.37.16.42.25.05.09.05.53-.13 1.03z"/></svg>
+        </a>
+        <a href="{{ site.instagram }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram (se abre en una pestaña nueva)">
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>
+        </a>
+        <a href="{{ site.facebook }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook (se abre en una pestaña nueva)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0 0 14.27 4.3c-2.3 0-3.87 1.4-3.87 3.98v2.22H7.8v3h2.6V21z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>

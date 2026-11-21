@@ -1,5 +1,8 @@
 // Función de Vercel: POST /api/chat. Recibe la conversación corta del chat de la portada y responde con Claude.
-// Necesita la variable de entorno ANTHROPIC_API_KEY en Vercel (nunca en el navegador ni en Git).
+// Variables de entorno en Vercel (nunca en el navegador ni en Git):
+// - ANTHROPIC_API_KEY: la clave de la API.
+// - CHAT_ACTIVO: "false" apaga el asistente sin tocar código (el chat del sitio usa solo las respuestas fijas).
+// Los registros nunca guardan el texto que escriben las personas: solo el tipo de error.
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM } from "./_contexto.mjs";
 
@@ -10,9 +13,11 @@ const ORIGENES = [
   /^https:\/\/(www\.)?landign(-[\w-]+)?\.vercel\.app$/,
   /^http:\/\/localhost:\d+$/
 ];
-export const LIMITES = { turnos: 8, caracteres: 600, porMinuto: 8 };
+export const LIMITES = { turnos: 8, caracteres: 600, porMinuto: 8, bytesCuerpo: 8_000 };
 
 // shortcut: memoria de cada instancia (se reinicia y no se comparte entre instancias); si hay abuso, pasar a Upstash/Vercel KV.
+// Cómo: crea una base Upstash Redis desde el panel de Vercel (Storage → Marketplace), instala @upstash/ratelimit y
+// @upstash/redis, y reemplaza dentroDelLimite por Ratelimit.slidingWindow(LIMITES.porMinuto, "1 m") con la IP como clave.
 const visitas = new Map();
 function dentroDelLimite(ip, ahora = Date.now()) {
   const recientes = (visitas.get(ip) || []).filter((t) => ahora - t < 60_000);
@@ -47,6 +52,9 @@ export default async function handler(req, res) {
 
   if (req.method !== "POST") return res.status(405).json({ error: "Método no permitido." });
   if (!origen || !ORIGENES.some((r) => r.test(origen))) return res.status(403).json({ error: "Origen no permitido." });
+  if (String(process.env.CHAT_ACTIVO).toLowerCase() === "false") return res.status(503).json({ error: "El asistente está apagado." });
+  const tamano = Number(req.headers["content-length"] || 0) || Buffer.byteLength(JSON.stringify(req.body ?? ""));
+  if (tamano > LIMITES.bytesCuerpo) return res.status(413).json({ error: "La conversación es demasiado larga." });
 
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "sin-ip";
   if (!dentroDelLimite(ip)) return res.status(429).json({ error: "Demasiados mensajes seguidos. Espera un minuto." });
@@ -55,12 +63,11 @@ export default async function handler(req, res) {
   if (error) return res.status(400).json({ error });
 
   try {
-    const respuesta = await client.beta.messages.create({
-      model: "claude-opus-5-5",
-      max_tokens: 2048, // tope de gasto por respuesta; el prompt pide como mucho ~80 palabras
-      output_config: { effort: "low" },
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
+    // Haiku basta para preguntas frecuentes y cuesta mucho menos que Opus. 400 tokens alcanzan de sobra para
+    // respuestas de ~80 palabras y ponen un tope al gasto por mensaje.
+    const respuesta = await client.messages.create({
+      model: "claude-haiku-5-5",
+      max_tokens: 400,
       system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: texto }]
     });
@@ -78,10 +85,10 @@ export default async function handler(req, res) {
       return res.status(503).json({ error: "El asistente no está disponible." });
     }
     if (err instanceof Anthropic.APIError) {
-      console.error("chat: error de la API", err.status, err.message);
+      console.error("chat: error de la API", err.status, err.name);
       return res.status(502).json({ error: "El asistente no está disponible." });
     }
-    console.error("chat: error inesperado", err);
+    console.error("chat: error inesperado", err?.name);
     return res.status(500).json({ error: "El asistente no está disponible." });
   }
 }

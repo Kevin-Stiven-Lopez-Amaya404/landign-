@@ -286,14 +286,16 @@ Fondo `--vacio`, borde `--linea-fuerte` y contorno rosa al enfocar. Las etiqueta
 
 ### Movimiento (GSAP)
 Mismos tiempos y curvas que la referencia, recreados con código propio: salida exponencial (`expo.out`, como 0.16, 1, 0.3, 1) para lo que entra; duraciones de 0.5 s (revelar), 0.8 s (aparecer) y 1.2 s (inicio).
-- Inicio: en cada visita (tras «Entrar» si hay entrada) la foto crece de 0.6 a 1 y el nombre sube línea a línea; al bajar, la foto se aleja y se apaga.
+- Entrada («AMIGOS (Entrar) COMO ARROZ»): solo en pantallas de 900 px o más y en la primera visita de la sesión; se cierra sola a los 1,2 s o con el primer gesto. Su fondo son degradados radiales quietos (sin el cónico que giraba, que era costoso).
+- Inicio: la foto se pinta desde el primer momento y se asienta (escala 1,12 → 1) y el nombre sube línea a línea; al bajar, la foto se aleja y se apaga.
 - Secuencia: la frase se escribe con cursor y las palabras cambian con desenfoque; dos brillos se desplazan detrás.
 - Títulos de sección: las letras se encienden una tras otra (0.026 s), como el «Statement» de la referencia.
 - Fotos: se descubren de abajo hacia arriba y se asientan; las de Programas tienen paralaje.
 - Sede Espinal (escritorio): la pantalla se queda fija mientras la foto se asienta, ESPINAL aparece desde un desenfoque y sube el texto, como «The Shift».
 - Programas (escritorio): cada tarjeta se queda quieta y la siguiente sube por encima.
 - Tarjetas de carruseles e informes: suben en grupo, una tras otra (0.08 s), cuando su fila entra a la pantalla.
-- Carruseles (con mouse): se arrastran con inercia y el cursor dice «Arrastra»; sobre un video, «Ver».
+- Carruseles (con mouse): se arrastran con inercia y el cursor dice «Arrastra»; sobre un video, «Ver». Con teclado, flechas; todos tienen Anterior y Siguiente.
+- Rendimiento: GSAP se carga después de la primera pintura y cada efecto se arma en una tarea corta; los títulos se dividen en letras solo cuando están por aparecer.
 - Impacto: filas escalonadas (0.18 s) y líneas que se dibujan.
 - Con movimiento reducido no corre nada de esto; en celulares todo se mueve, pero sin desenfoques ni pantallas fijas.
 

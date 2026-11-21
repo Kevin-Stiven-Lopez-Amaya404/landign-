@@ -1,145 +1,115 @@
 # Fundación Amigos Como Arroz
 
-Página web institucional para la Fundación Amigos Como Arroz. Es un sitio estático hecho con HTML, CSS y JavaScript puro, que [Eleventy](https://www.11ty.dev/) arma a partir de las páginas de `src/`.
+Sitio web institucional de la Fundación Amigos Como Arroz (Neiva, Huila · Espinal, Tolima). Es un sitio estático
+con HTML, CSS y JavaScript en módulos que [Eleventy](https://www.11ty.dev/) arma a partir de `src/`; esbuild
+empaqueta y minifica el JS y el CSS, y Vercel lo publica. El chat de ayuda usa una función de Vercel
+(`api/chat.mjs`) con Claude.
 
 ## Cómo abrirlo
 
-Necesitas Node.js 18 o superior.
+Necesitas Node.js 22 (está en `.nvmrc`; sirve desde la 20).
 
 ```bash
-npm install      # solo la primera vez
-npm start        # compila y abre un servidor en http://localhost:8080 que se recarga al guardar
-npm run build    # solo compila: el sitio listo para publicar queda en _site/
+npm install             # solo la primera vez
+npm start               # compila y abre http://localhost:8080; se recarga al guardar
+npm run build           # compila el sitio listo para publicar en _site/
+npm run build:ejemplo   # compila en _site-ejemplo/ con datos de ejemplo (para ver las secciones que hoy están ocultas)
 ```
 
-Edita siempre los archivos de `src/` y `assets/`. `_site/` se genera y no se sube a Git.
+Edita siempre `src/`, `assets/` y `src/_data/site.json`. `_site/` se genera y no se sube a Git.
+
+## Dónde se cambia cada cosa
+
+- **Datos de la fundación** (contacto, sedes, legal, donaciones, cifras, equipo, preguntas frecuentes, aliados,
+  convocatorias, documentos, testimonios): solo en `src/_data/site.json`. Lo que esté vacío no se muestra.
+  Guía para no programadores: [docs/GUIA-CONTENIDO.md](docs/GUIA-CONTENIDO.md). Lo que falta entregar:
+  [docs/DATOS-PENDIENTES.md](docs/DATOS-PENDIENTES.md).
+- **Textos de la portada:** `src/index.html`. **Páginas internas:** `src/programas/`, `src/sede-espinal/` y las
+  páginas de la raíz (`donar`, `voluntariado`, `aliados`, `transparencia`, `privacidad`, `terminos`, `404`).
+- **Lo común** (`<head>`, barra, pie, migas, bloques que aparecen con datos): `src/_includes/`.
+- **Estilos:** `assets/css/sitio.css` (dirección visual en `DESIGN.md`). **Interacciones:** `assets/js/modules/`.
 
 ## Estructura
 
 ```text
-fundacion/
-  src/                          Páginas (Eleventy las copia a _site/ con la misma ruta)
-    _data/site.json             WhatsApp, correo, redes y versiones de caché (una sola vez)
-    _includes/layouts/interna.njk   Cabecera, <head> y pie de las 6 páginas internas
-    index.html                  Página principal (14 secciones)
-    programas/
-      index.html                Vista general de los 4 programas
-      semilla.html · siembra.html · cosecha.html · psicosocial.html
-    sede-espinal/index.html     Página de la sede Espinal
-  eleventy.config.mjs           Configuración de Eleventy (qué se copia tal cual)
-  vercel.json                   Vercel ejecuta npm run build y publica _site/
-  assets/
-    css/sitio.css               Todo el estilo: tokens, pantallas, barra flotante y secciones en @layer
-    fonts/                      Unbounded (títulos grandes), Schibsted Grotesk (texto) y Space Mono (etiquetas), servidas desde el sitio
-    css/seasonal/navidad.css    Estilos de temporada (solo con <html data-season="navidad">)
-    js/main.js                  Arranca las interacciones de la portada (<script type="module">)
-    js/modules/                 Un archivo por funcionalidad (menu, chatbot, contact-form…);
-                                config.js = selectores y contacto (leído de site.json)
-    js/seasonal.js              Enciende/apaga la Navidad (SEASON_CONFIG.mode)
-    js/analytics.js             Google Analytics 4 opcional
-    img/opt/                    Imágenes WebP optimizadas (480/960/1600 px) que usan las páginas
-    img/{brand,hero,content,team}/   Originales
-    semilla/ siembra/ cosecha/ psicologia/   Fotos originales por programa
-    videos/                     Videos y pósteres (se cargan al pulsar)
-  informes/                     Informes de gestión en PDF
-  docs/                         Documentación y auditorías (ver docs/README.md)
-  sitemap.xml · robots.txt · site.webmanifest
+src/
+  _data/site.json               Todos los datos de la fundación
+  _data/fechas.js               Años de trayectoria, año del pie y fecha de hoy (se calculan al compilar)
+  _includes/layouts/            interna.njk (páginas internas) y noticia.njk
+  _includes/partials/           head, nav, pie, sede, documento, faq, convocatorias, quienes, franja-aliados…
+  index.html                    Portada
+  programas/ · sede-espinal/    Páginas de programas y de la sede
+  donar.html · voluntariado.html · aliados.html · transparencia.html
+  privacidad.html · terminos.html · 404.html
+  noticias/                     Noticias en Markdown (sin noticias no se publica el listado)
+  sitemap.njk · security.njk    sitemap.xml y /.well-known/security.txt automáticos
+lib/sitio.mjs                   Funciones de la compilación (filtros, JSON-LD, minificación): con pruebas
+scripts/                        empaquetar (esbuild), verificar (npm run check), imagenes, iconos, compartir,
+                                ejemplo, lighthouse, servir, limpiar
+api/chat.mjs · api/_contexto.mjs  Función del chat (Claude) y su contexto, armado desde site.json
+assets/
+  css/sitio.css · css/seasonal/navidad.css
+  js/main.js · js/interna.js    Entradas de la portada y de las internas (esbuild las empaqueta)
+  js/arranque.js · js/seasonal.js  Scripts mínimos del <head> (entrada y temporada)
+  js/modules/                   Un archivo por funcionalidad
+  img/opt/                      Fotos WebP que usa el sitio · img/iconos/ · img/compartir/ (1200 × 630)
+  img/{brand,hero,content,team}/ · semilla/ · siembra/ · cosecha/ · psicologia/   Originales (no se publican)
+  videos/                       Videos comprimidos · videos/originales/ (no se publican) · videos/subtitulos/
+informes/                       PDF de transparencia (versión web y versión en alta calidad)
+test/                           Pruebas unitarias (node:test) y de navegador (test/e2e, Playwright)
 ```
 
-**Fotos nuevas:** guarda el original en su carpeta y crea sus versiones WebP en `assets/img/opt/`
-(480, 960 y 1600 px de ancho como máximo, calidad 80 %). En el HTML usa `src` con la de 960 px y `srcset` con las tres.
+## Comandos de calidad
 
-## Qué incluye
+| Comando | Qué hace |
+|---|---|
+| `npm test` | Pruebas unitarias (filtros, fechas, JSON-LD, chat, respuestas fijas, temporada). |
+| `npm run check` | Revisa `_site/`: archivos referenciados, JSON-LD, sitemap, textos de relleno y HTML válido. |
+| `npm run lint` | ESLint y Stylelint con reglas mínimas. |
+| `npm run test:e2e` | Playwright en Chromium, Firefox y WebKit a 390 y 1440 px (antes: `npm run build` y `npm run build:ejemplo`). |
+| `npm run lighthouse` | Lighthouse móvil en las páginas clave con los umbrales del proyecto (sirve `_site` antes con `node scripts/servir.mjs _site 8180`). |
+| `npm run imagenes` | Versiones WebP (480, 960 y 1600 px) de las fotos originales nuevas. |
+| `npm run iconos` · `npm run compartir` | Íconos y favicon desde el logo; imágenes para compartir de 1200 × 630. |
 
-- Diseño responsivo.
-- Menú móvil.
-- Animaciones al hacer scroll.
-- Contadores animados.
-- Movimiento con GSAP (ScrollTrigger y SplitText): entrada del inicio, títulos letra a letra, fotos que se descubren, Sede Espinal fija, programas que se apilan, carruseles que se arrastran y barra de progreso de lectura.
-- Carrusel del equipo.
-- Videos incrustados.
-- Formulario que abre WhatsApp con el mensaje armado.
-- Botón flotante de WhatsApp (Instagram y Facebook están en el pie).
-- Botón para volver al inicio.
-- Analítica opcional para contar visitas reales con Google Analytics 4.
+GitHub Actions (`.github/workflows/ci.yml`) corre build, pruebas, check, lint y Playwright (Chromium) en cada
+PR y en cada push a `dev`, `qa` y `main`; Lighthouse va como aviso en los PR.
 
-## Contador de visitas
+## Caché y huellas
 
-El sitio ya queda preparado para contar personas y visitas reales con Google Analytics 4.
+El JS y el CSS llevan `?v=<huella>`, calculada del contenido al compilar: no hay números de versión que subir a
+mano. Vercel guarda en caché por un año los recursos de `assets/` (`immutable`) y revalida siempre el HTML.
+Si reemplazas una foto de `assets/img/opt/`, dale otro nombre (`npm run imagenes` ya lo hace).
 
-Para activarlo:
+## Seguridad
 
-1. Crea una propiedad web en Google Analytics 4.
-2. Copia el ID de medición, normalmente con formato `G-XXXXXXXXXX`.
-3. En `assets/js/analytics.js`, busca:
+`vercel.json` define la CSP (sin `unsafe-inline` en scripts), `X-Content-Type-Options`, `Referrer-Policy`,
+`Permissions-Policy`, `X-Frame-Options`, HSTS y las redirecciones (www, `/index.html`). No pongas scripts en
+línea en el HTML: van en archivos de `assets/js/`.
 
-```js
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
-```
+## Analítica y cookies
 
-4. Reemplaza `G-XXXXXXXXXX` por tu ID real y publica la pagina.
+Google Analytics 4 solo se carga si la persona acepta el aviso de cookies. Para activarlo, escribe el ID
+(`G-…`) en `analytics.ga4` de `site.json`. Sin ID no hay aviso ni medición. Los clics con
+`data-analytics-event` se registran solos (donar, copiar medio de pago, pasarela, certificado, formulario, chat,
+videos, PDF, compartir y cookies).
 
-Cuando publiques la página, Google Analytics empezará a mostrar usuarios, visitas, páginas vistas y clics importantes como WhatsApp, donar y voluntariado.
+## Chat
+
+Variables de entorno en Vercel: `ANTHROPIC_API_KEY` (obligatoria para que responda Claude) y `CHAT_ACTIVO`
+(`false` lo apaga y el chat usa solo las respuestas fijas). Usa `claude-haiku-5-5` con respuestas cortas.
+
+## Temporada de Navidad
+
+Se enciende sola del 15 de noviembre al 6 de enero. Para forzarla o apagarla, cambia `mode` en
+`assets/js/seasonal.js` (`"auto"`, `"on"` u `"off"`). Vista previa: `?temporada=navidad` o `?temporada=off`.
+
+## Correo con dominio propio
+
+El sitio lee el correo de `site.email`. Cuando exista, conviene cambiarlo por
+`contacto@fundacionamigoscomoarroz.com` (o el que se cree): se actualiza en todo el sitio, el chat y
+`security.txt`.
 
 ## Despliegue
 
-Vercel compila y publica el sitio solo: cada PR genera una vista previa y cada fusión en `main` publica producción. Para otro hosting, ejecuta `npm run build` y sube el contenido de `_site/`.
-
-Antes de publicar, revisa [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md).
-
-## Documentación principal
-
-La explicación completa está en:
-
-[docs/DOCUMENTACION.md](docs/DOCUMENTACION.md)
-
-También quedan guías específicas en:
-
-- [docs/README.md](docs/README.md)
-- [docs/GUIA_PROGRAMADOR.md](docs/GUIA_PROGRAMADOR.md)
-- [docs/PROGRAMAS.md](docs/PROGRAMAS.md)
-- [docs/CODIGO.md](docs/CODIGO.md)
-
-Ahí encontrarás:
-
-- Qué hace cada archivo.
-- Cómo está organizada cada sección.
-- Cómo cambiar textos, imágenes, videos, programas, equipo y contacto.
-- Cómo funciona el JavaScript.
-- Cómo leer el CSS.
-- Revisión del código con puntos fuertes y riesgos.
-- Checklist antes de publicar.
-
-## Temporadas (Navidad)
-
-La decoración navideña se enciende y apaga sola (15 nov – 6 ene). Para forzarla o apagarla, cambia `mode` en `assets/js/seasonal.js` (`"auto"`, `"on"` u `"off"`). Vista previa: `index.html?temporada=navidad` o `?temporada=off`. Detalles en [docs/AUDITORIA-2026-11.md](docs/AUDITORIA-2026-11.md).
-
-## Mantenimiento rápido
-
-- Cambios de contenido: edita `src/index.html`.
-- Cambios visuales: edita `assets/css/sitio.css` (dirección visual en `DESIGN.md`).
-- Cambios de interacción: edita el módulo de `assets/js/modules/` (y regístralo en `assets/js/main.js` si es nuevo). Los módulos no cargan abriendo el HTML con doble clic: usa `npm start`.
-- Cambios de programas: edita los archivos dentro de `src/programas/`.
-- Cambios de WhatsApp, correo o redes: edita solo `src/_data/site.json` (el HTML y el JavaScript lo leen de ahí).
-- Enlace de WhatsApp con mensaje: `{{ 'Hola, quiero…' | whatsapp }}` (el filtro codifica el texto).
-- Después de cambiar un CSS o JS, sube su número en `cache` de `src/_data/site.json`.
-- Página interna nueva: copia una de `src/programas/` y cambia su encabezado `---` (título, descripción, ruta canónica y enlace de volver).
-
-## Recomendación
-
-Antes de publicar, revisa especialmente nombres reales del equipo, teléfono, correo, redes sociales, videos oficiales e imágenes definitivas.
-
-## Datos para donar
-
-El bloque «Cómo donar» de Contacto aparece solo cuando `src/_data/site.json` trae medios reales en `donacion.medios`, por ejemplo:
-
-```json
-"donacion": {
-  "medios": [
-    { "nombre": "Nequi", "dato": "300 000 0000", "titular": "Fundación Amigos Como Arroz" },
-    { "nombre": "Cuenta de ahorros Bancolombia", "dato": "000-000000-00", "titular": "NIT 000.000.000-0" }
-  ]
-}
-```
-
-Mientras la lista esté vacía, «Donar» lleva a Contacto y abre WhatsApp con el mensaje de donación.
+Vercel compila y publica solo: cada PR genera una vista previa y cada fusión en `main` publica producción.
+Checklist en [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md). Más documentación en [docs/README.md](docs/README.md).

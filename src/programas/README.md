@@ -21,5 +21,5 @@ Cada archivo guarda solo su `<main>` y un encabezado `---` con `layout: layouts/
 
 ## Regla
 
-Si agregas un nuevo programa, copia aqui una pagina existente, cambia su encabezado y agrega la tarjeta en `../index.html` (seccion `#programas`) y la URL en `sitemap.xml`.
+Si agregas un nuevo programa, copia aqui una pagina existente, cambia su encabezado y agrega el programa a `programas` en `src/_data/site.json` y la tarjeta en `../index.html` (seccion `#programas`) y la URL en `sitemap.xml`.
 

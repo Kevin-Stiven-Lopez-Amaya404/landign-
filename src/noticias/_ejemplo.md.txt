@@ -1,0 +1,21 @@
+---
+title: "Título de la noticia (50 a 60 caracteres)"
+description: "Resumen de 140 a 160 caracteres que aparece en el listado, en Google y al compartir el enlace por WhatsApp."
+date: 2027-02-15
+imagen: "assets/img/opt/nombre-de-la-foto-960.webp"
+alt: "Lo que se ve en la foto, sin decir «imagen de»"
+---
+
+Primer párrafo de la noticia. Escribe frases cortas y claras.
+
+## Un subtítulo si hace falta
+
+Más texto. Para un enlace: [texto del enlace](https://ejemplo.com).
+
+<!--
+CÓMO USAR ESTE MODELO
+1. Copia este archivo dentro de src/noticias/ con un nombre corto y sin tildes ni espacios, terminado en .md
+   (por ejemplo: inicio-de-clases-2027.md). Este archivo de ejemplo termina en .txt para que no se publique.
+2. Cambia el encabezado (lo que va entre las líneas ---) y el texto.
+3. La primera noticia que exista activa la página noticias/ y la noticia aparece en el sitemap.
+-->

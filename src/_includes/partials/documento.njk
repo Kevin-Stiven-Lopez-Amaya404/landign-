@@ -1,0 +1,18 @@
+{#- Una fila de documento (variable: doc, de site.documentos). Necesita raiz.
+    Los enlaces llevan el nombre del documento (oculto a la vista) para que se entiendan fuera de contexto. -#}
+{%- set pesoDoc = doc.archivo | peso %}
+          <article class="report-row{% if doc.destacado %} report-row--latest{% endif %}{% if doc.legal %} report-row--legal{% endif %}">
+            <div class="report-year{% if doc.legal %} report-year--document{% endif %}">{{ doc.etiqueta }}</div>
+            <div class="report-content">
+              <span class="report-status">{{ doc.estado }}</span>
+              <h{{ nivelDoc or 3 }}>{{ doc.titulo }}</h{{ nivelDoc or 3 }}>
+              <p>{{ doc.descripcion }}</p>
+            </div>
+            <div class="report-actions">
+              <a class="report-link" href="{{ raiz }}{{ doc.archivo }}" target="_blank" rel="noopener noreferrer" data-analytics-event="ver_pdf" data-analytics-category="transparencia" data-analytics-label="{{ doc.titulo }}">Ver<span class="sr-only"> {{ doc.titulo }} (se abre en una pestaña nueva)</span></a>
+              <a class="report-link report-link--secondary" href="{{ raiz }}{{ doc.archivo }}" download{% if doc.nombreDescarga %}="{{ doc.nombreDescarga }}"{% endif %} data-analytics-event="descargar_pdf" data-analytics-category="transparencia" data-analytics-label="{{ doc.titulo }}">Descargar PDF<span class="sr-only"> {{ doc.titulo }}</span>{% if pesoDoc %} <span class="report-peso">({{ pesoDoc }})</span>{% endif %}</a>
+              {%- if doc.archivoAlta %}
+              <a class="report-link report-link--secondary" href="{{ raiz }}{{ doc.archivoAlta }}" download data-analytics-event="descargar_pdf" data-analytics-category="transparencia" data-analytics-label="{{ doc.titulo }} (alta calidad)">Versión en alta calidad<span class="sr-only"> de {{ doc.titulo }}</span> <span class="report-peso">({{ doc.archivoAlta | peso }})</span></a>
+              {%- endif %}
+            </div>
+          </article>

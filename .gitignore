@@ -8,3 +8,16 @@ _site/
 
 # Impeccable: imágenes de referencia del catálogo (no son del sitio)
 .impeccable/reference/
+
+# Capturas y mediciones locales de HU26 (solo el resumen va a Git)
+docs/auditoria-hu26/antes/
+docs/auditoria-hu26/despues/
+
+# Datos de ejemplo para probar (nunca a Git)
+src/_data/site.ejemplo.json
+_site-ejemplo/
+.cache-ejemplo/
+
+# Resultados de Playwright
+test-results/
+playwright-report/

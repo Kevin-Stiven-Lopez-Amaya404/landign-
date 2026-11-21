@@ -1,17 +1,29 @@
 {
-  "name": "Fundacion Amigos Como Arroz",
+  "name": "Fundación Amigos Como Arroz",
   "short_name": "Amigos Como Arroz",
-  "description": "Educacion, acompanamiento social y oportunidades para ninos, jovenes y familias en Neiva, Huila.",
+  "description": "Educación, liderazgo, acompañamiento psicosocial y oportunidades para niños, jóvenes y familias en Neiva, Huila, y Espinal, Tolima.",
+  "lang": "es-CO",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#fff9f2",
-  "theme_color": "#f37021",
+  "background_color": "#fbfaf8",
+  "theme_color": "#fbfaf8",
   "icons": [
     {
-      "src": "/assets/img/brand/logo-fundacion.jpg",
-      "sizes": "160x160",
-      "type": "image/jpeg"
+      "src": "/assets/img/iconos/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/iconos/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/iconos/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

@@ -1,13 +1,271 @@
 {
   "name": "Fundación Amigos Como Arroz",
   "url": "https://fundacionamigoscomoarroz.com",
+  "lema": "Sembrando esperanza, cosechando futuro",
   "whatsapp": "573187073308",
   "whatsappLabel": "318 707 3308",
   "email": "amigoscomoarroz@gmail.com",
   "instagram": "https://www.instagram.com/amigoscomoarroz",
   "facebook": "https://www.facebook.com/amigoscomoarroz",
-  "cache": { "sitio": 11, "navidad": 8, "seasonal": 3, "analytics": 1, "main": 20 },
+  "compartir": {
+    "imagen": "assets/img/compartir/general.jpg",
+    "alt": "Niños, jóvenes y familias de la Fundación Amigos Como Arroz"
+  },
+  "programas": [
+    {
+      "nombre": "Semilla",
+      "pagina": "semilla.html",
+      "publico": "Para niños, niñas y familias",
+      "resumen": "Formación deportiva, cultural y productiva para fortalecer talentos, valores y uso sano del tiempo libre."
+    },
+    {
+      "nombre": "Siembra",
+      "pagina": "siembra.html",
+      "publico": "",
+      "resumen": "Becas y acompañamiento para acceder a educación superior técnica, tecnológica o profesional de excelente calidad."
+    },
+    {
+      "nombre": "Cosecha",
+      "pagina": "cosecha.html",
+      "publico": "Para líderes comunitarios",
+      "resumen": "Liderazgo juvenil y proyectos sociales para servir, participar y generar impacto en la comunidad."
+    },
+    {
+      "nombre": "Acompañamiento psicosocial",
+      "pagina": "psicosocial.html",
+      "publico": "Para familias y beneficiarios",
+      "resumen": "Eje transversal que apoya el sano desarrollo de beneficiarios y familias en su proyecto de vida."
+    }
+  ],
+  "legal": {
+    "razonSocial": "",
+    "nit": "",
+    "representanteLegal": "",
+    "rte": false,
+    "politicaRevisada": false,
+    "vigenciaPolitica": "",
+    "estadosFinancieros": "",
+    "certificadoExistencia": "",
+    "actaAsamblea": ""
+  },
+  "sedes": [
+    {
+      "nombre": "Sede Neiva",
+      "ciudad": "Neiva",
+      "departamento": "Huila",
+      "direccion": "Carrera 7A No. 16-25, barrio Quirinal",
+      "horario": "",
+      "telefono": "",
+      "mapa": ""
+    },
+    {
+      "nombre": "Sede Espinal",
+      "ciudad": "Espinal",
+      "departamento": "Tolima",
+      "direccion": "",
+      "horario": "",
+      "telefono": "",
+      "mapa": ""
+    }
+  ],
+  "analytics": {
+    "ga4": ""
+  },
+  "verificacion": {
+    "google": ""
+  },
   "donacion": {
-    "medios": []
-  }
+    "medios": [],
+    "pasarela": {
+      "nombre": "",
+      "url": ""
+    },
+    "montos": [],
+    "especie": []
+  },
+  "voluntariado": {
+    "perfiles": [],
+    "compromiso": "",
+    "pasos": []
+  },
+  "alianzas": {
+    "tipos": []
+  },
+  "aliados": [],
+  "impacto": {
+    "cifras": [
+      {
+        "valor": 4200,
+        "texto": "participantes beneficiados por programas educativos y sociales.",
+        "destacada": true
+      },
+      {
+        "valor": 180,
+        "texto": "voluntarios y mentores activos."
+      },
+      {
+        "valor": 65,
+        "texto": "aliados e instituciones."
+      },
+      {
+        "valor": 38,
+        "texto": "proyectos comunitarios realizados."
+      },
+      {
+        "valor": 92,
+        "texto": "% de permanencia en los procesos."
+      }
+    ],
+    "corte": "",
+    "fuente": "",
+    "informe": ""
+  },
+  "institucional": {
+    "mision": "",
+    "vision": "",
+    "valores": [],
+    "junta": [],
+    "historia": "Nació en septiembre de 2007 como expresión del compromiso social de la Organización Roa Florhuila con las comunidades de sus zonas de influencia. Está inspirada en el legado de don Aníbal Roa Villamil (Q.E.P.D.) y de su esposa, doña Clara Inés Solano de Roa. Trabaja con niños, niñas, adolescentes, jóvenes y familias en condición de vulnerabilidad mediante programas que fortalecen el aprendizaje, el liderazgo, la permanencia educativa y el bienestar psicosocial."
+  },
+  "faq": [],
+  "convocatorias": [],
+  "equipo": [
+    {
+      "nombre": "Moira Quintero",
+      "cargo": "Directora",
+      "descripcion": "Lidera la visión institucional, el crecimiento de la fundación y el relacionamiento estratégico.",
+      "etiquetas": [
+        "Dirección general",
+        "+ alianzas"
+      ],
+      "foto": {
+        "src": "assets/img/opt/img-team-directora-480.webp",
+        "srcset": "assets/img/opt/img-team-directora-480.webp 480w, assets/img/opt/img-team-directora-919.webp 919w",
+        "ancho": 720,
+        "alto": 817
+      },
+      "alt": "Moira Quintero, directora de la Fundación Amigos Como Arroz"
+    },
+    {
+      "nombre": "",
+      "cargo": "Coordinación de programas",
+      "descripcion": "Coordina las actividades educativas, la planeación y el seguimiento de cada programa.",
+      "etiquetas": [
+        "Programas",
+        "Gestión"
+      ],
+      "foto": {
+        "src": "assets/img/opt/img-team-laura-373.webp",
+        "srcset": "",
+        "ancho": 720,
+        "alto": 900
+      },
+      "alt": "Persona responsable de la coordinación de programas de la fundación",
+      "pendiente": "Falta el nombre de quien coordina los programas."
+    },
+    {
+      "nombre": "Andrés Cabrera",
+      "cargo": "Acompañamiento",
+      "descripcion": "Impulsa el bienestar emocional, el acompañamiento familiar y el enfoque psicosocial.",
+      "etiquetas": [
+        "Bienestar",
+        "Familias"
+      ],
+      "foto": {
+        "src": "assets/img/opt/img-team-andres-480.webp",
+        "srcset": "assets/img/opt/img-team-andres-480.webp 480w, assets/img/opt/img-team-andres-720.webp 720w",
+        "ancho": 720,
+        "alto": 960
+      },
+      "alt": "Andrés Cabrera, del equipo de acompañamiento psicosocial de la fundación"
+    },
+    {
+      "nombre": "Caren González",
+      "cargo": "Voluntariado",
+      "descripcion": "Comprometida con una gestión sostenible que transforme recursos en impacto social.",
+      "etiquetas": [
+        "Redes",
+        "Apoyo"
+      ],
+      "foto": {
+        "src": "assets/img/opt/img-team-karen-480.webp",
+        "srcset": "assets/img/opt/img-team-karen-480.webp 480w, assets/img/opt/img-team-karen-720.webp 720w",
+        "ancho": 720,
+        "alto": 900
+      },
+      "alt": "Caren González, integrante del equipo de la fundación",
+      "pendiente": "Confirmar su rol: la etiqueta dice «Voluntariado», pero el texto habla de gestión sostenible y las etiquetas de redes y apoyo."
+    }
+  ],
+  "documentos": [
+    {
+      "etiqueta": "2025",
+      "anio": 2025,
+      "tipo": "Informe de gestión",
+      "estado": "Más reciente",
+      "titulo": "Informe de gestión 2025",
+      "descripcion": "Resultados, alianzas, programas e impacto social del año 2025.",
+      "archivo": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2025.pdf",
+      "destacado": true,
+      "archivoAlta": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2025-ALTA-CALIDAD.pdf"
+    },
+    {
+      "etiqueta": "2024",
+      "anio": 2024,
+      "tipo": "Informe de gestión",
+      "estado": "Histórico",
+      "titulo": "Informe de gestión 2024",
+      "descripcion": "Actividades, beneficiarios, proyectos y gestión institucional del periodo.",
+      "archivo": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2024.pdf",
+      "archivoAlta": "informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2024-ALTA-CALIDAD.pdf"
+    },
+    {
+      "etiqueta": "Legal",
+      "anio": 2025,
+      "tipo": "Documento legal",
+      "estado": "Documento legal",
+      "titulo": "Formulario 5245: calificación en el Régimen Tributario Especial",
+      "descripcion": "Presentación de la solicitud de calificación en el Régimen Tributario Especial, año 2025.",
+      "archivo": "informes/PRESENTACION-5245.pdf",
+      "nombreDescarga": "PRESENTACION 5245.pdf",
+      "legal": true
+    }
+  ],
+  "testimonios": [
+    {
+      "video": "assets/videos/testimonio1.mp4",
+      "poster": "assets/img/opt/videos-testimonio1-poster-480.webp",
+      "posterAncho": 480,
+      "posterAlto": 624,
+      "etiqueta": "Historia 01",
+      "titulo": "Una voz que habla desde la experiencia.",
+      "texto": "Momentos reales de acompañamiento, confianza y transformación.",
+      "nombre": "",
+      "programa": "",
+      "cita": "",
+      "subtitulos": "",
+      "transcripcion": ""
+    },
+    {
+      "video": "assets/videos/testimonio2.mp4",
+      "poster": "assets/img/opt/videos-testimonio2-poster-480.webp",
+      "posterAncho": 848,
+      "posterAlto": 480,
+      "etiqueta": "Historia 02",
+      "titulo": "Cuando alguien cree contigo, algo empieza a cambiar.",
+      "texto": "Testimonios que muestran el valor humano detrás de cada proceso.",
+      "nombre": "",
+      "programa": "",
+      "cita": "",
+      "subtitulos": "",
+      "transcripcion": ""
+    }
+  ],
+  "actividades": [
+    "fútbol formativo",
+    "danza",
+    "patinaje",
+    "robótica",
+    "inglés"
+  ]
 }

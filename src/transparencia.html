@@ -1,0 +1,42 @@
+---
+layout: layouts/interna.njk
+title: "Transparencia e informes | Fundación Amigos Como Arroz"
+description: "Informes de gestión, documentos legales y tributarios de la Fundación Amigos Como Arroz, que trabaja con niños, jóvenes y familias en Neiva y Espinal."
+canonical: /transparencia.html
+nombre: "Transparencia"
+bodyClass: pagina-texto
+---
+{#- Documentos de site.documentos; los legales opcionales (estados financieros, certificado de existencia,
+    acta de asamblea) de site.legal, solo si existen. -#}
+{%- set nivelDoc = 2 %}
+{%- set opcionales = [
+  { titulo: "Estados financieros", archivo: site.legal.estadosFinancieros },
+  { titulo: "Certificado de existencia y representación legal", archivo: site.legal.certificadoExistencia },
+  { titulo: "Acta de asamblea", archivo: site.legal.actaAsamblea }
+] %}
+    <section class="pagina-seccion pagina-seccion--ancha container" aria-labelledby="transparencia-titulo">
+      <p class="eyebrow">Transparencia</p>
+      <h1 id="transparencia-titulo">Informes y documentos.</h1>
+      <p class="lead">Consulta los avances, resultados, aprendizajes y documentos institucionales de la fundación.</p>
+      {%- if site.legal.razonSocial or site.legal.nit or site.legal.representanteLegal %}
+      <dl class="datos-legales">
+        {%- if site.legal.razonSocial %}<div><dt>Razón social</dt><dd>{{ site.legal.razonSocial }}</dd></div>{% endif %}
+        {%- if site.legal.nit %}<div><dt>NIT</dt><dd>{{ site.legal.nit }}</dd></div>{% endif %}
+        {%- if site.legal.representanteLegal %}<div><dt>Representante legal</dt><dd>{{ site.legal.representanteLegal }}</dd></div>{% endif %}
+        {%- if site.legal.rte %}<div><dt>Régimen</dt><dd>Régimen Tributario Especial</dd></div>{% endif %}
+      </dl>
+      {%- endif %}
+
+      <div class="reports-list">
+        {%- for doc in site.documentos %}
+        {%- include "partials/documento.njk" %}
+        {%- endfor %}
+        {%- for opcional in opcionales %}{% if opcional.archivo %}
+        {%- set doc = { etiqueta: "Legal", estado: "Documento legal", titulo: opcional.titulo, descripcion: "", archivo: opcional.archivo, legal: true } %}
+        {%- include "partials/documento.njk" %}
+        {%- endif %}{% endfor %}
+      </div>
+
+      <h2>Tus datos</h2>
+      <p>Lee cómo tratamos tus datos personales en la <a href="privacidad.html">Política de tratamiento de datos</a>.</p>
+    </section>

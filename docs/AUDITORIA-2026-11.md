@@ -1,5 +1,7 @@
 # Auditoría frontend y temporada navideña · noviembre 2026
 
+> **Documento histórico.** Describe el sitio antes de HU26 y ya no corresponde al estado actual. Lo vigente está en [AUDITORIA-HU26.md](AUDITORIA-HU26.md) y [README.md](README.md).
+
 Revisión de la landing de la Fundación Amigos Como Arroz (`index.html`, `assets/css/styles.css`, `assets/js/*.js` y páginas internas).
 
 **Suposiciones**

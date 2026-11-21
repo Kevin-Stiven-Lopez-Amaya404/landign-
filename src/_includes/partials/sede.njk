@@ -1,0 +1,11 @@
+{#- Datos de una sede (variable: sede, de site.sedes). Lo vacío no se muestra; «Cómo llegar» abre Google Maps
+    (sin iframe) y solo aparece si hay enlace de mapa. -#}
+<div class="sede-datos">
+  <strong>{{ sede.nombre }}</strong>
+  <span>{% if sede.direccion %}{{ sede.direccion }} · {% endif %}{{ sede.ciudad }}, {{ sede.departamento }}</span>
+  {%- if sede.horario %}<span>Horario: {{ sede.horario }}</span>{% endif %}
+  {%- if sede.telefono %}<span>Teléfono: {{ sede.telefono }}</span>{% endif %}
+  {%- if sede.mapa %}
+  <a class="sede-mapa" href="{{ sede.mapa }}" target="_blank" rel="noopener noreferrer" data-analytics-event="como_llegar" data-analytics-category="sedes" data-analytics-label="{{ sede.nombre }}">Cómo llegar<span class="sr-only"> a la {{ sede.nombre }} (abre Google Maps en una pestaña nueva)</span></a>
+  {%- endif %}
+</div>

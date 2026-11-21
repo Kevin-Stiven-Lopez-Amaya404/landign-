@@ -1,47 +1,15 @@
+---
+title: "Fundación Amigos Como Arroz | Educación en Neiva y Espinal"
+description: "Fundación en Neiva, Huila, y Espinal, Tolima: educación, liderazgo, acompañamiento psicosocial y oportunidades para niños, jóvenes y familias."
+canonical: /
+---
+{%- set raiz = page.url | raiz -%}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
   <!-- Portada de la Fundación Amigos Como Arroz: una historia por pantalla (ver docs/GUIA_PROGRAMADOR.md). -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <meta
-    name="description"
-    content="Fundación Amigos Como Arroz en Neiva, Huila: educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias."
-  />
-
-  <meta name="theme-color" content="#fbfaf8" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://fundacionamigoscomoarroz.com/" />
-  <title>Fundación Amigos Como Arroz | Educación y oportunidades</title>
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_CO" />
-  <meta property="og:title" content="Fundación Amigos Como Arroz | Educación y oportunidades" />
-  <meta
-    property="og:description"
-    content="Educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias en Neiva, Huila."
-  />
-  <meta property="og:url" content="https://fundacionamigoscomoarroz.com/" />
-  <meta property="og:image" content="https://fundacionamigoscomoarroz.com/assets/img/hero/duenos-hero-clean.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Fundación Amigos Como Arroz | Educación y oportunidades" />
-  <meta
-    name="twitter:description"
-    content="Educación, acompañamiento social, liderazgo y oportunidades para niños, jóvenes y familias en Neiva, Huila."
-  />
-  <meta name="twitter:image" content="https://fundacionamigoscomoarroz.com/assets/img/hero/duenos-hero-clean.jpg" />
-  <link rel="icon" href="assets/img/brand/logo-fundacion.jpg" type="image/jpeg" />
-  <link rel="apple-touch-icon" href="assets/img/brand/logo-fundacion.jpg" />
-  <link rel="manifest" href="site.webmanifest" />
-
-  <link rel="preload" href="assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link href="assets/css/sitio.css?v={{ site.cache.sitio }}" rel="stylesheet" />
-  <!-- Temporada (Navidad). Se enciende/apaga en assets/js/seasonal.js -->
-  <link href="assets/css/seasonal/navidad.css?v={{ site.cache.navidad }}" rel="stylesheet" />
-  <script src="assets/js/seasonal.js?v={{ site.cache.seasonal }}"></script>
-  <!-- Pantalla de entrada: solo en la primera visita de la sesión y nunca si se llega con un enlace a una sección -->
-  <script>try{var h=document.documentElement;if(!location.hash){if(sessionStorage.getItem("entrada")!=="1")h.classList.add("con-entrada");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)h.classList.add("intro")}}catch(e){}</script>
+{%- include "partials/head.njk" %}
+  <script src="assets/js/arranque.js?v={{ 'assets/js/arranque.js' | huella }}"></script>
   <link
     rel="preload"
     as="image"
@@ -50,39 +18,18 @@
     imagesizes="(max-width: 899px) 100vw, 58vw"
     fetchpriority="high"
   />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NGO",
-      "name": "Fundación Amigos Como Arroz",
-      "url": "https://fundacionamigoscomoarroz.com/",
-      "logo": "https://fundacionamigoscomoarroz.com/assets/img/brand/logo-fundacion.jpg",
-      "email": "{{ site.email }}",
-      "telephone": "+57 {{ site.whatsappLabel }}",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Carrera 7A No. 16-25, barrio Quirinal",
-        "addressLocality": "Neiva",
-        "addressRegion": "Huila",
-        "addressCountry": "CO"
-      },
-      "sameAs": [
-        "{{ site.instagram }}",
-        "{{ site.facebook }}"
-      ]
-    }
-  </script>
+  <script type="application/ld+json">{{ site | ngoLd | json | safe }}</script>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Saltar al contenido principal</a>
 
   <!-- Entrada: pantalla de bienvenida con un botón central. Solo con JS, una vez por sesión y nunca si se llega con un enlace a una sección (assets/js/modules/portada.js) -->
-  <div class="entrada" id="entrada">
+  <div class="entrada" id="entrada" aria-hidden="true">
     <div class="entrada-fondo" aria-hidden="true"></div>
     <img class="entrada-logo" src="assets/img/opt/img-brand-logo-fundacion-160.webp" width="160" height="160" alt="" decoding="async" />
     <p class="entrada-titulo" aria-hidden="true"><span>Amigos</span><span>Como Arroz</span></p>
-    <button class="entrada-boton" type="button" aria-label="Entrar al sitio de la Fundación Amigos Como Arroz">
+    <button class="entrada-boton" type="button" tabindex="-1">
       <span>Entrar</span>
     </button>
     <p class="entrada-lema">[ Sembrando esperanza, cosechando futuro ]</p>
@@ -92,81 +39,8 @@
   <nav class="historias" id="historias" aria-label="Historias de la página"></nav>
 
   <!-- Barra de navegación flotante (abajo, en forma de píldora) -->
-  <header class="site-header" id="site-header">
-    <nav class="nav-shell" aria-label="Navegación principal">
-      <a class="brand" href="#inicio" aria-label="Fundación Amigos Como Arroz, inicio">
-        <img
-          class="logo-mark"
-          src="assets/img/opt/img-brand-logo-fundacion-160.webp"
-          width="160"
-          height="160"
-          alt="Logo Fundación Amigos Como Arroz"
-          decoding="async"
-        />
-      </a>
-
-      <ul class="nav-list" id="nav-list">
-        <li><a class="nav-link" href="#fundacion">Fundación</a></li>
-        <li><a class="nav-link" href="#programas">Programas</a></li>
-        <li><a class="nav-link" href="#impacto">Impacto</a></li>
-        <li><a class="nav-link" href="#sede-espinal">Sede Espinal</a></li>
-        <li><a class="nav-link" href="#informes">Informes</a></li>
-        <li><a class="nav-link" href="#contacto">Contacto</a></li>
-        <li class="nav-item--compartir">
-          <button class="nav-compartir" type="button" data-compartir>
-            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/></svg>
-            <span>Compartir</span>
-          </button>
-        </li>
-      </ul>
-
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="nav-list"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <a
-        class="nav-donate"
-        href="{{ 'Hola, quiero hacer una donación a la Fundación Amigos Como Arroz.' | whatsapp }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        data-analytics-event="clic_donar"
-        data-analytics-category="contacto"
-        data-analytics-label="Menú - donar"
-      >Donar</a>
-      <a
-        class="pill-icono"
-        href="{{ 'Hola, quiero recibir información sobre la Fundación Amigos Como Arroz.' | whatsapp }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escribir por WhatsApp"
-        data-analytics-event="clic_whatsapp_flotante"
-        data-analytics-category="contacto"
-        data-analytics-label="Barra - WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-5.25 0-9.5 4.02-9.5 8.98 0 1.76.53 3.4 1.45 4.78L2.5 21.5l5.42-1.37c1.23.65 2.63 1.01 4.08 1.01 5.25 0 9.5-4.02 9.5-8.98S17.25 2.5 12 2.5zm4.4 12.5c-.18.5-1.06.97-1.47 1.03-.38.05-.85.08-1.37-.09-.32-.1-.72-.24-1.24-.46-2.18-.96-3.6-3.18-3.71-3.33-.11-.15-.89-1.2-.89-2.28 0-1.09.57-1.62.77-1.84.2-.22.44-.28.59-.28h.42c.14 0 .32-.05.5.38.18.43.62 1.49.67 1.6.06.11.09.24.02.38-.07.15-.11.24-.22.37-.11.13-.23.29-.33.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.56.86.77 1.59 1.01 1.81 1.12.22.11.35.09.48-.06.13-.15.55-.64.7-.86.15-.22.29-.18.5-.11.2.07 1.27.6 1.49.71.22.11.37.16.42.25.05.09.05.53-.13 1.03z"/></svg>
-      </a>
-      <button
-        class="pill-icono"
-        type="button"
-        id="chatbotToggle"
-        aria-controls="chatbotPanel"
-        aria-expanded="false"
-        aria-label="Abrir asistente de ayuda"
-      >
-        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5a2 2 0 0 1-2 2H8l-4 3.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/></svg>
-      </button>
-    </nav>
-  </header>
-
-  <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+  {%- set portada = true %}
+  {%- include "partials/nav.njk" %}
 
   <main id="main">
     <!-- Inicio -->
@@ -174,7 +48,7 @@
       <div class="pantalla-fondo pantalla-fondo--encaje" aria-hidden="true">
         <img
           class="relleno"
-          src="assets/img/opt/img-hero-duenos-hero-clean-480.webp"
+          src="assets/img/opt/img-hero-duenos-hero-clean-relleno-480.webp"
           alt=""
           width="480"
           height="335"
@@ -205,9 +79,7 @@
         <div class="hero-actions">
           <a
             class="btn btn-pink"
-            href="{{ 'Hola, quiero hacer una donación a la Fundación Amigos Como Arroz.' | whatsapp }}"
-            target="_blank"
-            rel="noopener noreferrer"
+            {% donarAtributos raiz %}
             data-analytics-event="clic_donar"
             data-analytics-category="contacto"
             data-analytics-label="Donar"
@@ -264,7 +136,7 @@
           src="assets/img/opt/img-content-programa-semilla-deporte-833.webp"
           srcset="assets/img/opt/img-content-programa-semilla-deporte-480.webp 480w, assets/img/opt/img-content-programa-semilla-deporte-833.webp 833w"
           sizes="(max-width: 899px) 100vw, 40vw"
-          alt="Jóvenes y voluntarios trabajando juntos."
+          alt="Niña patinando entre conos durante una práctica de patinaje"
           width="833"
           height="1080"
           loading="lazy"
@@ -274,7 +146,7 @@
 
       <div class="pantalla-cuerpo about-content reveal">
         <p class="cifra-mayor about-badge">
-          <strong>19 años</strong>
+          <strong>{{ fechas.aniosFundacion }} años</strong>
           <span>acompañando procesos educativos y sociales.</span>
         </p>
         <h2 id="about-title">Educación que <span class="highlight-text">transforma vidas</span>.</h2>
@@ -403,7 +275,7 @@
           </article>
         </div>
 
-        <div class="story-book-controls" aria-label="Controles del libro de historia">
+        <div class="story-book-controls" role="group" aria-label="Controles del libro de historia">
           <button class="story-book-btn" type="button" data-story-prev aria-label="Página anterior">
             Anterior
           </button>
@@ -415,6 +287,8 @@
       </div>
       </div>
     </section>
+
+    {%- include "partials/quienes.njk" %}
 
     <!-- Programas: una pantalla por programa; el acompañamiento psicosocial los cruza a todos -->
     <section id="programas" aria-labelledby="programs-title">
@@ -467,9 +341,9 @@
                 data-analytics-category="programas"
                 data-analytics-label="Programas - inscribirme Semilla"
               >
-                Inscribirme
+                Inscribirme<span class="sr-only"> en Semilla (se abre WhatsApp en una pestaña nueva)</span>
               </a>
-              <a class="btn btn-secondary" href="programas/semilla.html">Conocer el programa <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary" href="programas/semilla.html">Conocer el programa<span class="sr-only"> Semilla</span> <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </article>
@@ -503,9 +377,9 @@
                 data-analytics-category="programas"
                 data-analytics-label="Programas - inscribirme Siembra"
               >
-                Inscribirme
+                Inscribirme<span class="sr-only"> en Siembra (se abre WhatsApp en una pestaña nueva)</span>
               </a>
-              <a class="btn btn-secondary" href="programas/siembra.html">Conocer el programa <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary" href="programas/siembra.html">Conocer el programa<span class="sr-only"> Siembra</span> <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </article>
@@ -540,9 +414,9 @@
                 data-analytics-category="programas"
                 data-analytics-label="Programas - inscribirme Cosecha"
               >
-                Inscribirme
+                Inscribirme<span class="sr-only"> en Cosecha (se abre WhatsApp en una pestaña nueva)</span>
               </a>
-              <a class="btn btn-secondary" href="programas/cosecha.html">Conocer el programa <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary" href="programas/cosecha.html">Conocer el programa<span class="sr-only"> Cosecha</span> <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </article>
@@ -577,9 +451,9 @@
                 data-analytics-category="programas"
                 data-analytics-label="Programas - inscribirme Psicosocial"
               >
-                Inscribirme
+                Inscribirme<span class="sr-only"> en Psicosocial (se abre WhatsApp en una pestaña nueva)</span>
               </a>
-              <a class="btn btn-secondary" href="programas/psicosocial.html">Conocer el programa <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary" href="programas/psicosocial.html">Conocer el programa<span class="sr-only"> Acompañamiento psicosocial</span> <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </article>
@@ -604,6 +478,8 @@
           Inscribirme por WhatsApp
         </a>
       </div>
+      {%- include "partials/convocatorias.njk" %}
+      {%- include "partials/faq.njk" %}
     </section>
 
     <!-- Impacto: las cifras como frases -->
@@ -618,9 +494,7 @@
           <div class="impact-actions">
             <a
             class="btn btn-pink"
-            href="{{ 'Hola, quiero hacer una donación a la Fundación Amigos Como Arroz.' | whatsapp }}"
-            target="_blank"
-            rel="noopener noreferrer"
+            {% donarAtributos raiz %}
             data-analytics-event="clic_donar"
             data-analytics-category="contacto"
             data-analytics-label="Donar"
@@ -641,29 +515,21 @@
         </div>
 
         <div class="metrics reveal">
-          <p class="metric-card featured">
-            <strong data-counter="4200">4.200</strong>
-            <span>participantes beneficiados por programas educativos y sociales.</span>
+          {%- for cifra in site.impacto.cifras %}
+          <p class="metric-card{% if cifra.destacada %} featured{% endif %}">
+            <strong data-counter="{{ cifra.valor }}">{{ cifra.valor | numero }}</strong>
+            <span>{{ cifra.texto }}</span>
           </p>
-          <p class="metric-card">
-            <strong data-counter="180">180</strong>
-            <span>voluntarios y mentores activos.</span>
-          </p>
-          <p class="metric-card">
-            <strong data-counter="65">65</strong>
-            <span>aliados e instituciones.</span>
-          </p>
-          <p class="metric-card">
-            <strong data-counter="38">38</strong>
-            <span>proyectos comunitarios realizados.</span>
-          </p>
-          <p class="metric-card">
-            <strong data-counter="92">92</strong>
-            <span>% de permanencia en los procesos.</span>
-          </p>
+          {%- endfor %}
         </div>
+        {%- if site.impacto.corte or site.impacto.fuente %}
+        <p class="metrics-fuente">
+          Cifras{% if site.impacto.corte %} a {{ site.impacto.corte }}{% endif %}{% if site.impacto.fuente %}, según {{ site.impacto.fuente }}{% endif %}.
+          {%- if site.impacto.informe %} <a href="{{ site.impacto.informe }}" target="_blank" rel="noopener noreferrer">Ver el informe<span class="sr-only"> (se abre en una pestaña nueva)</span></a>.{% endif %}
+        </p>
+        {%- endif %}
       </div>
-      <div class="impact-proof reveal" aria-label="Formas de impacto">
+      <div class="impact-proof reveal" role="group" aria-label="Formas de impacto">
         <article>
           <strong>Educación continua</strong>
           <span>Becas, refuerzo académico y acompañamiento para permanecer y avanzar.</span>
@@ -717,9 +583,7 @@
         <div class="xmas-actions">
           <a
             class="btn btn-pink xmas-btn-primary"
-            href="{{ 'Hola, quiero hacer una donación de Navidad a la Fundación Amigos Como Arroz.' | whatsapp }}"
-            target="_blank"
-            rel="noopener noreferrer"
+            {% donarAtributos raiz, "Hola, quiero hacer una donación de Navidad a la Fundación Amigos Como Arroz." %}
             data-analytics-event="clic_donar"
             data-analytics-category="navidad"
             data-analytics-label="Campaña Navidad - donar"
@@ -753,43 +617,31 @@
       </div>
 
       <div class="carrusel testimonial-video-carousel" role="region" tabindex="0" aria-label="Carrusel de testimonios en video">
+        {#- Testimonios desde site.testimonios: nombre, programa, cita, subtítulos (.vtt) y transcripción son opcionales #}
+        {%- for t in site.testimonios %}
         <article class="historia testimonial-video-showcase">
           <button
             data-cursor="Ver" class="local-video-loader testimonial-video"
             type="button"
-            data-video-src="assets/videos/testimoni1.mp4"
-            data-poster="assets/img/opt/videos-testimoni1-poster-480.webp"
-            data-label="Video testimonial 1 de la fundación"
-            aria-label="Video testimonial 1 de la fundación"
+            data-video-src="{{ t.video }}"
+            data-poster="{{ t.poster }}"
+            data-label="{{ t.etiqueta }}: {{ t.titulo }}"
+            {%- if t.subtitulos %} data-captions="{{ t.subtitulos }}"{% endif %}
+            aria-label="Reproducir video {{ t.etiqueta }}: {{ t.titulo }}"
           >
-            <img src="assets/img/opt/videos-testimoni1-poster-480.webp" alt="" width="480" height="624" loading="lazy" decoding="async" />
+            <img src="{{ t.poster }}" alt="" width="{{ t.posterAncho }}" height="{{ t.posterAlto }}" loading="lazy" decoding="async" />
             <span class="video-play-control" aria-hidden="true"></span>
           </button>
           <div class="testimonial-video-info">
-            <span>Historia 01</span>
-            <strong>Una voz que habla desde la experiencia.</strong>
-            <p>Momentos reales de acompañamiento, confianza y transformación.</p>
+            <span>{{ t.etiqueta }}</span>
+            <strong>{{ t.titulo }}</strong>
+            <p>{{ t.texto }}</p>
+            {%- if t.cita %}<blockquote class="testimonio-cita">«{{ t.cita }}»</blockquote>{% endif %}
+            {%- if t.nombre or t.programa %}<p class="testimonio-autor">{{ t.nombre }}{% if t.nombre and t.programa %} · {% endif %}{{ t.programa }}</p>{% endif %}
+            {%- if t.transcripcion %}<a class="testimonio-transcripcion" href="{{ t.transcripcion }}">Leer la transcripción<span class="sr-only"> de {{ t.etiqueta }}</span></a>{% endif %}
           </div>
         </article>
-
-        <article class="historia testimonial-video-showcase">
-          <button
-            data-cursor="Ver" class="local-video-loader testimonial-video"
-            type="button"
-            data-video-src="assets/videos/testimonio2.mp4"
-            data-poster="assets/img/opt/videos-testimonio2-poster-480.webp"
-            data-label="Video testimonial 2 de la fundación"
-            aria-label="Video testimonial 2 de la fundación"
-          >
-            <img src="assets/img/opt/videos-testimonio2-poster-480.webp" alt="" width="848" height="480" loading="lazy" decoding="async" />
-            <span class="video-play-control" aria-hidden="true"></span>
-          </button>
-          <div class="testimonial-video-info">
-            <span>Historia 02</span>
-            <strong>Cuando alguien cree contigo, algo empieza a cambiar.</strong>
-            <p>Testimonios que muestran el valor humano detrás de cada proceso.</p>
-          </div>
-        </article>
+        {%- endfor %}
 
         <article class="historia video-card-modern">
           <button
@@ -845,7 +697,7 @@
         </article>
       </div>
 
-      <div class="testimonial-story-strip" aria-label="Valores presentes en los testimonios">
+      <div class="testimonial-story-strip" role="group" aria-label="Valores presentes en los testimonios">
         <span>Confianza</span>
         <span>Acompañamiento</span>
         <span>Esperanza</span>
@@ -970,7 +822,7 @@
           educativos, sociales y comunitarios a más niños, jóvenes y familias.
         </p>
 
-        <div class="sede-espinal-details" aria-label="Enfoque de la sede Espinal">
+        <div class="sede-espinal-details" role="group" aria-label="Enfoque de la sede Espinal">
           <article>
             <span>01</span>
             <strong>Formación</strong>
@@ -983,7 +835,7 @@
           </article>
         </div>
         <div class="acciones">
-          <a class="btn btn-secondary" href="./sede-espinal/index.html">Conocer la sede</a>
+          <a class="btn btn-secondary" href="sede-espinal/">Conocer la sede</a>
         </div>
         <p class="eyebrow">Sede Espinal</p>
         <p class="sede-espinal-badge"><strong>Espinal</strong> · Tolima</p>
@@ -1007,7 +859,7 @@
             src="assets/img/opt/img-hero-hero-principal-480.webp"
             srcset="assets/img/opt/img-hero-hero-principal-480.webp 480w, assets/img/opt/img-hero-hero-principal-960.webp 960w, assets/img/opt/img-hero-hero-principal-1200.webp 1200w"
             sizes="(max-width: 759px) 78vw, 440px"
-            alt="Grupo de niños y jóvenes compartiendo una actividad comunitaria"
+            alt="Niños y niñas con uniforme blanco frente a un mural, en el inicio de actividades del año"
             loading="lazy"
             decoding="async"
             width="1200"
@@ -1026,7 +878,7 @@
             src="assets/img/opt/img-content-taller-educativo-480.webp"
             srcset="assets/img/opt/img-content-taller-educativo-480.webp 480w, assets/img/opt/img-content-taller-educativo-960.webp 960w, assets/img/opt/img-content-taller-educativo-1200.webp 1200w"
             sizes="(max-width: 759px) 78vw, 440px"
-            alt="Jóvenes participando en un taller educativo"
+            alt="Cinco adultos de la fundación posan sosteniendo una camiseta de fútbol"
             loading="lazy"
             decoding="async"
             width="1200"
@@ -1045,7 +897,7 @@
             src="assets/img/opt/img-content-presentacion-cultural-480.webp"
             srcset="assets/img/opt/img-content-presentacion-cultural-480.webp 480w, assets/img/opt/img-content-presentacion-cultural-960.webp 960w, assets/img/opt/img-content-presentacion-cultural-1200.webp 1200w"
             sizes="(max-width: 759px) 78vw, 440px"
-            alt="Presentación cultural con público reunido"
+            alt="Bailarinas con faldas típicas en una presentación cultural"
             loading="lazy"
             decoding="async"
             width="1200"
@@ -1060,20 +912,22 @@
         </article>
 
         <article class="historia timeline-item">
-          <img
+          <img style="--encuadre: 50% 75%"
             src="assets/img/opt/img-content-logro-cierre-480.webp"
             srcset="assets/img/opt/img-content-logro-cierre-480.webp 480w, assets/img/opt/img-content-logro-cierre-720.webp 720w"
             sizes="(max-width: 759px) 78vw, 440px"
-            alt="Celebración comunitaria de cierre de año"
+            alt="Familias en la salida de la Media Maratón Bambuquera Kids, en Neiva"
             loading="lazy"
             decoding="async"
             width="720"
             height="1280"
           />
-          <span class="timeline-date">Diciembre 2026 · próximamente</span>
+          {#- Al compilar después de diciembre de 2026 deja de decir «próximamente» y pasa a pasado. #}
+          {%- set cierrePendiente = fechas.mesActual <= "2026-12" %}
+          <span class="timeline-date">Diciembre 2026{% if cierrePendiente %} · próximamente{% endif %}</span>
           <h3>Cierre de año</h3>
           <p>
-            Celebraremos los aprendizajes, la permanencia, el liderazgo y el compromiso de los
+            {{ "Celebraremos" if cierrePendiente else "Celebramos" }} los aprendizajes, la permanencia, el liderazgo y el compromiso de los
             participantes, voluntarios, familias y aliados.
           </p>
         </article>
@@ -1093,102 +947,50 @@
 
       <div class="team-slider-shell">
         <div class="carrusel team-slider" id="teamSlider" role="region" tabindex="0" aria-label="Carrusel del equipo">
+          {#- Tarjetas desde site.equipo. Sin nombre, se muestra el cargo como título con estilo de etiqueta (no simula a una persona). #}
+          {%- for persona in site.equipo %}
           <article class="historia team-card-modern">
             <img
-              src="assets/img/opt/img-team-drirectora-480.webp"
-              srcset="assets/img/opt/img-team-drirectora-480.webp 480w, assets/img/opt/img-team-drirectora-919.webp 919w"
+              src="{{ persona.foto.src }}"
+              {%- if persona.foto.srcset %}
+              srcset="{{ persona.foto.srcset }}"
               sizes="(max-width: 759px) 78vw, 440px"
-              alt="Moira Quintero, directora de la Fundación Amigos Como Arroz"
+              {%- endif %}
+              alt="{{ persona.alt }}"
               loading="lazy"
               decoding="async"
-              width="720"
-              height="817"
+              width="{{ persona.foto.ancho }}"
+              height="{{ persona.foto.alto }}"
             />
             <div class="team-info-modern">
-              <span class="team-chip">Directora</span>
-              <h3>Moira Quintero</h3>
-              <p>Lidera la visión institucional, el crecimiento de la fundación y el relacionamiento estratégico.</p>
+              {%- if persona.nombre %}
+              <span class="team-chip">{{ persona.cargo }}</span>
+              <h3>{{ persona.nombre }}</h3>
+              {%- else %}
+              <h3 class="team-cargo">{{ persona.cargo }}</h3>
+              {%- endif %}
+              <p>{{ persona.descripcion }}</p>
               <div class="team-meta">
-                <span>Dirección general</span>
-                <span>+ alianzas</span>
+                {%- for etiqueta in persona.etiquetas %}
+                <span>{{ etiqueta }}</span>
+                {%- endfor %}
               </div>
             </div>
           </article>
-
-          <article class="historia team-card-modern">
-            <img
-              src="assets/img/opt/img-team-laura-373.webp"
-              alt="Integrante del equipo de coordinación de programas"
-              loading="lazy"
-              decoding="async"
-              width="720"
-              height="900"
-            />
-            <div class="team-info-modern">
-              <span class="team-chip">Coordinación</span>
-              <h3>Coordinación de programas</h3>
-              <p>Coordina las actividades educativas, la planeación y el seguimiento de cada programa.</p>
-              <div class="team-meta">
-                <span>Programas</span>
-                <span>Gestión</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="historia team-card-modern">
-            <img
-              src="assets/img/opt/img-team-andres-480.webp"
-              srcset="assets/img/opt/img-team-andres-480.webp 480w, assets/img/opt/img-team-andres-720.webp 720w"
-              sizes="(max-width: 759px) 78vw, 440px"
-              alt="Andrés Cabrera, integrante del equipo de acompañamiento"
-              loading="lazy"
-              decoding="async"
-              width="720"
-              height="960"
-            />
-            <div class="team-info-modern">
-              <span class="team-chip">Acompañamiento</span>
-              <h3>Andrés Cabrera</h3>
-              <p>Impulsa el bienestar emocional, el acompañamiento familiar y el enfoque psicosocial.</p>
-              <div class="team-meta">
-                <span>Bienestar</span>
-                <span>Familias</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="historia team-card-modern">
-            <img
-              src="assets/img/opt/img-team-karen-480.webp"
-              srcset="assets/img/opt/img-team-karen-480.webp 480w, assets/img/opt/img-team-karen-720.webp 720w"
-              sizes="(max-width: 759px) 78vw, 440px"
-              alt="Caren González, integrante del equipo de voluntariado"
-              loading="lazy"
-              decoding="async"
-              width="720"
-              height="900"
-            />
-            <div class="team-info-modern">
-              <span class="team-chip">Voluntariado</span>
-              <h3>Caren González</h3>
-              <p>Comprometida con una gestión sostenible que transforme recursos en impacto social.</p>
-              <div class="team-meta">
-                <span>Redes</span>
-                <span>Apoyo</span>
-              </div>
-            </div>
-          </article>
+          {%- endfor %}
         </div>
 
         <div class="team-pie">
-          <div class="team-slider-controls" aria-label="Controles del carrusel">
+          <div class="team-slider-controls" role="group" aria-label="Controles del carrusel">
             <button class="team-slider-btn" type="button" id="teamPrev" aria-label="Ver integrante anterior">&larr;</button>
             <button class="team-slider-btn" type="button" id="teamNext" aria-label="Ver integrante siguiente">&rarr;</button>
           </div>
-          <div class="team-dots" id="teamDots" aria-label="Indicadores del carrusel"></div>
+          <div class="team-dots" id="teamDots" role="group" aria-label="Indicadores del carrusel"></div>
         </div>
       </div>
     </section>
+
+    {%- include "partials/franja-aliados.njk" %}
 
     <!-- Informes de gestión -->
     <section class="pantalla pantalla--larga reports-section" id="informes" aria-labelledby="reports-title">
@@ -1201,7 +1003,7 @@
         <p class="eyebrow">Transparencia</p>
       </div>
 
-      <div class="reports-hub reveal" aria-label="Listado de informes de gestión">
+      <div class="reports-hub reveal" role="group" aria-label="Listado de informes de gestión">
         <div class="reports-summary">
           <span class="reports-summary-label">Archivo institucional</span>
           <h3>Informes institucionales.</h3>
@@ -1211,44 +1013,11 @@
         </div>
 
         <div class="reports-list">
-          <article class="report-row report-row--latest">
-            <div class="report-year">2025</div>
-            <div class="report-content">
-              <span class="report-status">Más reciente</span>
-              <h3>Informe de gestión 2025</h3>
-              <p>Resultados, alianzas, programas e impacto social del año en curso.</p>
-            </div>
-            <div class="report-actions">
-              <a class="report-link" href="informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2025.pdf" target="_blank" rel="noopener noreferrer">Ver documento</a>
-              <a class="report-link report-link--secondary" href="informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2025.pdf" download>Descargar PDF</a>
-            </div>
-          </article>
-
-          <article class="report-row">
-            <div class="report-year">2024</div>
-            <div class="report-content">
-              <span class="report-status">Histórico</span>
-              <h3>Informe de gestión 2024</h3>
-              <p>Actividades, beneficiarios, proyectos y gestión institucional del periodo.</p>
-            </div>
-            <div class="report-actions">
-              <a class="report-link" href="informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2024.pdf" target="_blank" rel="noopener noreferrer">Ver documento</a>
-              <a class="report-link report-link--secondary" href="informes/INFORME-GESTION-FUNDACION-AMIGOS-COMO-ARROZ-2024.pdf" download>Descargar PDF</a>
-            </div>
-          </article>
-
-          <article class="report-row report-row--legal">
-            <div class="report-year report-year--document">Legal</div>
-            <div class="report-content">
-              <span class="report-status">Documento legal</span>
-              <h3>PRESENTACION 5245</h3>
-              <p>Formulario 5245 – Presentación - calificación en el régimen tributario especial año 2025</p>
-            </div>
-            <div class="report-actions">
-              <a class="report-link" href="informes/PRESENTACION-5245.pdf" target="_blank" rel="noopener noreferrer">Ver documento</a>
-              <a class="report-link report-link--secondary" href="informes/PRESENTACION-5245.pdf" download="PRESENTACION 5245.pdf">Descargar PDF</a>
-            </div>
-          </article>
+          {#- Los documentos salen de site.documentos (los mismos de transparencia.html) #}
+          {%- for doc in site.documentos %}
+          {%- include "partials/documento.njk" %}
+          {%- endfor %}
+          <p class="reports-mas"><a href="transparencia.html">Ver todos los documentos de transparencia</a></p>
         </div>
       </div>
     </section>
@@ -1262,12 +1031,10 @@
             Escríbenos, haz una donación, únete como voluntario o conviértete en aliado estratégico.
             Cada contribución transforma vidas.
           </p>
-          <div class="contact-quick-actions" id="donar" aria-label="Donar, ser voluntario o inscribirse">
+          <div class="contact-quick-actions" id="donar" role="group" aria-label="Donar, ser voluntario o inscribirse">
             <a
               class="btn btn-pink"
-              href="{{ 'Hola, quiero hacer una donación a la Fundación Amigos Como Arroz.' | whatsapp }}"
-              target="_blank"
-              rel="noopener noreferrer"
+              {% donarAtributos raiz %}
               data-analytics-event="clic_donar"
               data-analytics-category="contacto"
               data-analytics-label="Contacto - donar"
@@ -1297,24 +1064,26 @@
               Inscribirme
             </a>
           </div>
-          {%- if site.donacion and site.donacion.medios.length %}
+          {%- if donar.pagina %}
           <div class="como-donar" aria-labelledby="como-donar-title">
             <h3 id="como-donar-title">Cómo donar</h3>
             <ul>
               {%- for medio in site.donacion.medios %}
-              <li><strong>{{ medio.nombre }}</strong><span>{{ medio.dato }}</span>{% if medio.titular %}<small>{{ medio.titular }}</small>{% endif %}</li>
+              <li><strong>{{ medio.nombre }}</strong><span>{{ medio.numero }}</span>{% if medio.titular %}<small>{{ medio.titular }}</small>{% endif %}</li>
               {%- endfor %}
             </ul>
-            <p>Cuando dones, escríbenos por WhatsApp para enviarte el certificado de donación.</p>
+            <p><a href="donar.html">Todas las formas de donar</a></p>
           </div>
           {%- endif %}
 
           <ul class="contact-list">
             <li class="contact-item">
               <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-              <div>
-                <strong>Ubicación</strong>
-                <small>Carrera 7A No. 16-25, barrio Quirinal · Neiva, Huila</small>
+              <div class="contact-sedes">
+                <strong>Sedes</strong>
+                {%- for sede in site.sedes %}
+                {% include "partials/sede.njk" %}
+                {%- endfor %}
               </div>
             </li>
             <li class="contact-item">
@@ -1343,6 +1112,12 @@
           </div>
 
           <form class="contact-form" id="contact-form" novalidate>
+            {#- Resumen de errores: lo llena contact-form.js al enviar con errores y recibe el foco #}
+            <div class="form-resumen" id="form-resumen" tabindex="-1" role="group" aria-labelledby="form-resumen-titulo" hidden>
+              <p class="form-resumen-titulo" id="form-resumen-titulo">Revisa estos campos antes de enviar:</p>
+              <ul></ul>
+            </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Nombre completo</label>
@@ -1378,10 +1153,18 @@
               </div>
             </div>
 
+            <p class="form-aviso" id="aviso-menor" hidden>Si inscribes a un menor, debes ser su madre, padre o acudiente.</p>
+
             <div class="form-group">
               <label for="message">Mensaje</label>
               <textarea id="message" name="message" placeholder="Escribe tu mensaje con los detalles importantes" minlength="10" maxlength="700" aria-describedby="message-error message-ayuda" required></textarea>
               <small class="field-error" id="message-error" aria-live="polite"></small>
+            </div>
+
+            <div class="form-group form-check">
+              <input id="autorizo" name="autorizo" type="checkbox" aria-describedby="autorizo-error" required />
+              <label for="autorizo">Autorizo el tratamiento de mis datos según la <a href="privacidad.html">Política de tratamiento de datos</a>.</label>
+              <small class="field-error" id="autorizo-error" aria-live="polite"></small>
             </div>
 
             <div class="contact-submit">
@@ -1399,37 +1182,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">
-        <p class="footer-copy">© <span id="current-year"></span> Fundación Amigos Como Arroz.<br>Transformando vidas en Neiva, Huila.</p>
-        <p class="xmas-footer-note" data-season-only="navidad" hidden>Felices fiestas y un próspero año nuevo para todas las familias.</p>
-      </div>
-
-      <nav class="footer-links" aria-label="Enlaces del pie de página">
-        <a href="#fundacion">Fundación</a>
-        <a href="#programas">Programas</a>
-        <a href="#impacto">Impacto</a>
-        <a href="#momentos">Momentos</a>
-        <a href="#testimonios">Testimonios</a>
-        <a href="#equipo">Equipo</a>
-        <a href="#informes">Informes</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-
-      <div class="footer-social" aria-label="Redes sociales">
-        <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-5.25 0-9.5 4.02-9.5 8.98 0 1.76.53 3.4 1.45 4.78L2.5 21.5l5.42-1.37c1.23.65 2.63 1.01 4.08 1.01 5.25 0 9.5-4.02 9.5-8.98S17.25 2.5 12 2.5zm4.4 12.5c-.18.5-1.06.97-1.47 1.03-.38.05-.85.08-1.37-.09-.32-.1-.72-.24-1.24-.46-2.18-.96-3.6-3.18-3.71-3.33-.11-.15-.89-1.2-.89-2.28 0-1.09.57-1.62.77-1.84.2-.22.44-.28.59-.28h.42c.14 0 .32-.05.5.38.18.43.62 1.49.67 1.6.06.11.09.24.02.38-.07.15-.11.24-.22.37-.11.13-.23.29-.33.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.56.86.77 1.59 1.01 1.81 1.12.22.11.35.09.48-.06.13-.15.55-.64.7-.86.15-.22.29-.18.5-.11.2.07 1.27.6 1.49.71.22.11.37.16.42.25.05.09.05.53-.13 1.03z"/></svg>
-        </a>
-        <a href="{{ site.instagram }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
-          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>
-        </a>
-        <a href="{{ site.facebook }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0 0 14.27 4.3c-2.3 0-3.87 1.4-3.87 3.98v2.22H7.8v3h2.6V21z"/></svg>
-        </a>
-      </div>
-    </div>
-  </footer>
+  {%- include "partials/pie.njk" %}
 
   <!-- Asistente (se abre desde la barra flotante) -->
   <div class="site-chatbot" id="site-chatbot" role="region" aria-label="Chat de ayuda de la fundación">
@@ -1450,7 +1203,7 @@
         </div>
       </div>
 
-      <div class="chatbot-quick" aria-label="Preguntas frecuentes">
+      <div class="chatbot-quick" role="group" aria-label="Preguntas frecuentes">
         <button type="button" data-chat-question="telefono">Teléfono</button>
         <button type="button" data-chat-question="ubicacion">Ubicación</button>
         <button type="button" data-chat-question="programas">Programas</button>
@@ -1459,15 +1212,16 @@
 
       <form class="chatbot-form" id="chatbotForm">
         <label class="sr-only" for="chatbotInput">Escribe tu pregunta</label>
-        <input id="chatbotInput" type="text" maxlength="600" autocomplete="off" placeholder="Escribe tu duda" />
+        <input id="chatbotInput" type="text" maxlength="600" autocomplete="off" placeholder="Escribe tu duda" aria-describedby="chatbot-privacidad" />
         <button type="submit">Enviar</button>
       </form>
+      <p class="chatbot-privacidad" id="chatbot-privacidad">No escribas datos personales sensibles. Tus mensajes se procesan con un servicio de IA. <a href="privacidad.html">Ver política</a>.</p>
     </div>
   </div>
 
-<script src="assets/js/analytics.js?v={{ site.cache.analytics }}" defer></script>
-<script type="application/json" id="site-data">{{ { whatsapp: site.whatsapp, whatsappLabel: site.whatsappLabel } | dump | safe }}</script>
-<script type="module" src="assets/js/main.js?v={{ site.cache.main }}"></script>
+{#- Datos para el JS (config.js): contacto y lo que usan las respuestas fijas del chat (respuestas.js). #}
+<script type="application/json" id="site-data">{{ { whatsapp: site.whatsapp, whatsappLabel: site.whatsappLabel, analytics: site.analytics, chat: { sedes: site.sedes, faq: site.faq, rte: site.legal.rte, donar: { pagina: donar.pagina, href: "donar.html" }, voluntariado: "voluntariado.html" } } | json | safe }}</script>
+<script type="module" src="assets/js/main.js?v={{ 'js' | huella }}"></script>
 
 </body>
 </html>

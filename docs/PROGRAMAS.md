@@ -1,5 +1,7 @@
 # Documentacion del index de Programas
 
+> **Actualizado en HU26.** Lo técnico al día está en [`CODIGO.md`](CODIGO.md); los datos de la fundación se editan en `src/_data/site.json` ([`GUIA-CONTENIDO.md`](GUIA-CONTENIDO.md)).
+
 Esta documentacion explica como esta organizado el apartado de Programas en la pagina principal y como se conecta con las paginas detalle (archivos en `src/programas/`, publicados en `/programas/`).
 
 ## 1. Punto de entrada en `src/index.html`
@@ -118,7 +120,7 @@ src/programas/
 La parte superior de la pagina detalle la genera la plantilla `interna.njk` y usa:
 
 ```html
-<header class="program-detail-header">
+<header class="site-header" id="site-header">  <!-- partials/nav.njk -->
 ```
 
 Incluye:
@@ -239,7 +241,7 @@ Los estilos visuales principales estan definidos con estas clases:
 - `.eje-transversal`: la franja rosa que cruza las cuatro pantallas con "Acompanamiento psicosocial · eje transversal".
 - `.pagina-portada`: primera pantalla de cada pagina de programa, con una foto propia.
 - `.program-page`: identifica que el usuario esta en la pagina de programas.
-- `.program-detail-header`: controla la barra superior de las paginas de programas.
+- La barra de las páginas de programas es la misma de la portada (`partials/nav.njk`); los 4 programas están en su menú.
 - `.program-detail-hero`: controla la introduccion visual de la pagina detalle.
 - `.program-detail-section`: controla cada bloque Semilla, Siembra, Cosecha y Acompanamiento Psicosocial.
 - `.program-detail-grid`: organiza la tarjeta y la linea de tiempo.
@@ -264,7 +266,7 @@ El recorrido queda asi:
 Cuando se agregue un nuevo programa, se deben actualizar tres partes:
 
 1. Agregar una nueva tarjeta en `src/index.html`.
-2. Agregar una nueva pagina dentro de `src/programas/` (copiando una existente y cambiando su encabezado `---`) y su URL en `sitemap.xml`.
+2. Agregar una nueva pagina dentro de `src/programas/` (copiando una existente y cambiando su encabezado `---`) (el sitemap se genera solo) y agregar el programa a `programas` en `site.json` (nombre, página, público y resumen) para que aparezca en el menú y en «Otros programas».
 3. Agregar o reutilizar estilos en `assets/css/sitio.css`.
 
 Para mantener el codigo ordenado, el `href` de la tarjeta debe coincidir siempre con el `id` de la seccion detalle.

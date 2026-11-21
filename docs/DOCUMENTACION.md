@@ -1,5 +1,7 @@
 # Documentacion del proyecto
 
+> **Actualizado en HU26.** Lo técnico al día está en [`CODIGO.md`](CODIGO.md); los datos de la fundación se editan en `src/_data/site.json` ([`GUIA-CONTENIDO.md`](GUIA-CONTENIDO.md)).
+
 Esta guia explica el sitio de la Fundacion Amigos Como Arroz de la forma mas directa posible: primero que hace cada archivo, despues como esta armada la pagina y al final como modificarla sin romper partes importantes.
 
 ## Resumen rapido
@@ -15,7 +17,7 @@ Abrir el HTML con doble clic ya no sirve: las paginas usan datos de plantilla y 
 
 - `src/index.html`: contenido de la pagina principal.
 - `src/programas/` y `src/sede-espinal/`: paginas internas (solo su contenido; cabecera y pie salen de `src/_includes/layouts/interna.njk`).
-- `src/_data/site.json`: WhatsApp, correo, redes y versiones de cache, escritos una sola vez.
+- `src/_data/site.json`: todos los datos de la fundación (contacto, sedes, legal, donaciones, cifras, equipo, preguntas frecuentes, documentos…), escritos una sola vez.
 - `assets/css/sitio.css`: colores, tipografia, pantallas, barra flotante y version movil (todo el estilo).
 - `assets/js/modules/`: interacciones, un archivo por funcionalidad (`main.js` los arranca).
 
@@ -215,7 +217,7 @@ Puntos de corte: 480, 560, 640, 760, 900 y 1080 px. Hasta 1079 px los enlaces de
 
 ### Cambiar colores principales
 
-Edita los tokens al inicio de `assets/css/sitio.css` (`--rosa`, `--sol`, `--vacio`…) y sube `cache.sitio` en `src/_data/site.json`.
+Edita los tokens al inicio de `assets/css/sitio.css` (`--rosa`, `--sol`, `--vacio`…) (la versión de caché se actualiza sola).
 
 ### Cambiar el telefono de contacto
 
@@ -255,7 +257,7 @@ Mantener `alt` es importante para accesibilidad.
 ## Recomendaciones de mantenimiento
 
 - Mantener `assets/` para logo, imagenes propias y recursos locales.
-- Despues de tocar un CSS o JS, subir su version en `cache` de `src/_data/site.json`.
+- Después de tocar un CSS o JS no hay que subir ninguna versión: la huella es automática.
 - Reemplazar nombres e imagenes genericas del equipo por informacion real.
 - Probar siempre en computador y celular despues de tocar header, hero, contacto o responsive.
 - Si se va a publicar formalmente, revisar SEO basico: imagen social, favicon, titulo, descripcion y datos reales.

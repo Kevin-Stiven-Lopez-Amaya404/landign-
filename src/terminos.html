@@ -1,0 +1,60 @@
+---
+layout: layouts/interna.njk
+title: "Términos de uso del sitio | Fundación Amigos Como Arroz"
+description: "Condiciones para usar el sitio de la Fundación Amigos Como Arroz en Neiva y Espinal: contenidos, fotos, informes, enlaces externos y el chat de ayuda."
+canonical: /terminos.html
+nombre: "Términos de uso"
+bodyClass: pagina-texto
+eleventyComputed:
+  indexar: "{{ site.legal.politicaRevisada }}"
+---
+{#-
+  EL TEXTO DEBE REVISARLO UN ABOGADO ANTES DE PUBLICARSE.
+  Usa el mismo interruptor que la política: site.legal.politicaRevisada.
+-#}
+    <article class="texto-legal container">
+      <header class="texto-legal-cabeza">
+        <p class="eyebrow">Condiciones</p>
+        <h1>Términos de uso del sitio</h1>
+      </header>
+      {%- include "partials/aviso-legal.njk" %}
+
+      <h2>1. Sobre este sitio</h2>
+      <p>
+        Este sitio es de {{ site.legal.razonSocial or site.name }}{% if site.legal.nit %} (NIT {{ site.legal.nit }}){% endif %}.
+        Al usarlo aceptas estos términos. Si no estás de acuerdo, por favor no lo uses.
+      </p>
+
+      <h2>2. Contenido y fotos</h2>
+      <p>
+        Los textos, el logo, las fotos y los videos son de la fundación o se usan con permiso. Las fotos muestran a
+        participantes de los programas, entre ellos niñas, niños y adolescentes: no las copies, edites ni publiques
+        en otro lugar sin autorización escrita de la fundación.
+      </p>
+
+      <h2>3. Informes y documentos</h2>
+      <p>
+        Puedes ver, descargar y compartir los informes y documentos de transparencia sin cambiarlos y citando a la
+        fundación como fuente. Reflejan la información disponible en la fecha de cada documento.
+      </p>
+
+      <h2>4. Enlaces a otros sitios</h2>
+      <p>
+        El sitio enlaza a WhatsApp, redes sociales y otros servicios. Esos sitios tienen sus propias condiciones y
+        políticas, y la fundación no responde por su contenido.
+      </p>
+
+      <h2>5. El chat de ayuda</h2>
+      <p>
+        El chat da respuestas automáticas, algunas generadas con inteligencia artificial. Puede equivocarse: para
+        inscripciones, donaciones, certificados o cualquier decisión importante, confirma siempre con el equipo por
+        WhatsApp o correo. No escribas datos personales sensibles en el chat. Más detalles en la
+        <a href="privacidad.html">Política de tratamiento de datos</a>.
+      </p>
+
+      <h2>6. Cambios</h2>
+      <p>La fundación puede actualizar estos términos. La versión vigente es la publicada en esta página.</p>
+
+      <h2>7. Contacto</h2>
+      <p>Si tienes preguntas, escríbenos a <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+    </article>

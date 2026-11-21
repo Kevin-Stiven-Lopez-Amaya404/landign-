@@ -1,0 +1,30 @@
+---
+layout: layouts/interna.njk
+bodyClass: pagina-texto
+migas:
+  - nombre: "Noticias"
+    url: "noticias/"
+---
+{#- Plantilla de una noticia (src/noticias/*.md). -#}
+{%- set fechaIso = page.date.toISOString().slice(0, 10) %}
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": title,
+      "description": description,
+      "datePublished": fechaIso,
+      "image": [site.url + "/" + (imagen or site.compartir.imagen)],
+      "author": { "@type": "Organization", "name": site.name, "url": site.url + "/" },
+      "publisher": { "@type": "Organization", "name": site.name, "logo": { "@type": "ImageObject", "url": site.url + "/assets/img/iconos/icon-512.png" } }
+    } | json | safe }}</script>
+    <article class="texto-legal container">
+      <header class="texto-legal-cabeza">
+        <p class="eyebrow"><time datetime="{{ fechaIso }}">{{ fechaIso | fechaLarga }}</time></p>
+        <h1>{{ title }}</h1>
+        <p class="lead">{{ description }}</p>
+      </header>
+      {%- if imagen %}
+      <img class="noticia-imagen" src="{{ raiz }}{{ imagen }}" alt="{{ alt }}" loading="lazy" decoding="async" />
+      {%- endif %}
+      {{ content | safe }}
+    </article>

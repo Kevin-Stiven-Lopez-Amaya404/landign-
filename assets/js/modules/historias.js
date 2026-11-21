@@ -34,31 +34,4 @@ export function initHistorias() {
     );
     secciones.forEach((s) => observador.observe(s));
   }
-
-  // Compartir: el menú nativo del teléfono; si no existe, copia el enlace.
-  document.querySelectorAll("[data-compartir]").forEach((boton) => {
-    boton.addEventListener("click", async () => {
-      const datos = { title: document.title, url: location.href.split("#")[0] };
-      try {
-        if (navigator.share) {
-          await navigator.share(datos);
-          return;
-        }
-        await navigator.clipboard.writeText(datos.url);
-        avisar(boton, "Enlace copiado");
-      } catch (error) {
-        if (error?.name !== "AbortError") avisar(boton, "No se pudo compartir");
-      }
-    });
-  });
-}
-
-function avisar(boton, texto) {
-  boton.querySelector(".carril-aviso")?.remove();
-  const aviso = document.createElement("span");
-  aviso.className = "carril-aviso";
-  aviso.setAttribute("role", "status");
-  aviso.textContent = texto;
-  boton.append(aviso);
-  setTimeout(() => aviso.remove(), 2400);
 }

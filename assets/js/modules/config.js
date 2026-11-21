@@ -1,7 +1,8 @@
 // Datos y ajustes compartidos por los módulos.
 
-// Datos de contacto: vienen de src/_data/site.json (Eleventy los escribe en <script id="site-data">).
-const siteData = JSON.parse(document.getElementById("site-data").textContent);
+// Datos de site.json que usa el JS (Eleventy los escribe en <script id="site-data">): contacto, analítica y chat.
+const siteData = JSON.parse(document.getElementById("site-data")?.textContent || "{}");
+export const SITE_DATA = siteData;
 export const CONTACT = {
   whatsapp: siteData.whatsapp,
   whatsappLabel: siteData.whatsappLabel
@@ -16,7 +17,6 @@ export const SELECTORS = {
   menuBackdrop: "#menu-backdrop",
   navLinks: ".nav-link",
   sections: "main section[id]",
-  currentYear: "#current-year",
   reveal: ".reveal",
   form: "#contact-form",
   formStatus: "#form-status",

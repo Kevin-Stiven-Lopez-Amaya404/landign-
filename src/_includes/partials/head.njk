@@ -1,0 +1,42 @@
+{#- Lo común del <head> de todas las páginas. Cada página define en su encabezado ---:
+    title, description, canonical (ruta desde la raíz, p. ej. "/programas/semilla.html" o "/programas/"),
+    ogImagen (opcional, ruta desde la raíz; si no, la general) e indexar: false (opcional, pone noindex).
+    Antes de incluirlo: {% set raiz = page.url | raiz %}. Lo propio de cada página va después del include. -#}
+{%- set urlCanonica = site.url + canonical -%}
+{%- set imagenCompartir = site.url + "/" + (ogImagen or site.compartir.imagen) -%}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}" />
+  <meta name="theme-color" content="#fbfaf8" />
+  <meta name="robots" content="{{ 'index, follow' if ({ indexar: indexar } | esIndexable) else 'noindex, follow' }}" />
+  <link rel="canonical" href="{{ urlCanonica }}" />
+  {%- if site.verificacion.google %}
+  <meta name="google-site-verification" content="{{ site.verificacion.google }}" />
+  {%- endif %}
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CO" />
+  <meta property="og:site_name" content="{{ site.name }}" />
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:url" content="{{ urlCanonica }}" />
+  <meta property="og:image" content="{{ imagenCompartir }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ site.compartir.alt }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ title }}" />
+  <meta name="twitter:description" content="{{ description }}" />
+  <meta name="twitter:image" content="{{ imagenCompartir }}" />
+
+  <link rel="icon" href="{{ raiz }}favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="{{ raiz }}assets/img/iconos/apple-touch-icon.png" />
+  <link rel="manifest" href="{{ raiz }}site.webmanifest" />
+
+  <link rel="preload" href="{{ raiz }}assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ raiz }}assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link href="{{ raiz }}assets/css/sitio.css?v={{ 'assets/css/sitio.css' | huella }}" rel="stylesheet" />
+  {#- Temporada (Navidad): se enciende y se apaga en assets/js/seasonal.js #}
+  <link href="{{ raiz }}assets/css/seasonal/navidad.css?v={{ 'assets/css/seasonal/navidad.css' | huella }}" rel="stylesheet" />
+  <script src="{{ raiz }}assets/js/seasonal.js?v={{ 'assets/js/seasonal.js' | huella }}"></script>

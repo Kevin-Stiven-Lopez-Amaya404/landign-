@@ -1,7 +1,10 @@
-import { SELECTORS, CONTACT, WHATSAPP_URL } from "./config.js";
+import { SELECTORS, SITE_DATA } from "./config.js";
+import { responder } from "./respuestas.js";
+import { atraparFoco } from "./foco.js";
 
 // Chatbot de la portada: las preguntas rápidas responden al instante con textos fijos; lo que la persona
-// escribe se responde con Claude (/api/chat). Si la API falla o no existe (npm start), vuelve a los textos fijos.
+// escribe se responde con Claude (/api/chat). Si la API falla o no existe (npm start), vuelve a los textos fijos
+// (respuestas.js, con los datos de site.json).
 export function initChatbot() {
   const toggle = document.querySelector(SELECTORS.chatbotToggle);
   const panel = document.querySelector(SELECTORS.chatbotPanel);
@@ -13,52 +16,7 @@ export function initChatbot() {
 
   if (!toggle || !panel || !messages || !form || !input) return;
 
-  const normalize = (text) =>
-    text
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-
-  // Cada respuesta es una lista de partes: texto o enlace { text, href }. Nunca HTML.
-  const whatsapp = (href = WHATSAPP_URL) => ({ text: CONTACT.whatsappLabel, href });
-  const answers = {
-    phone: ["Puedes comunicarte con la fundación al WhatsApp ", whatsapp(), "."],
-    location: ["Estamos ubicados en la Carrera 7A No. 16-25, barrio Quirinal, Neiva, Huila."],
-    programs: ["Nuestros programas principales son Semilla, Siembra, Cosecha y Acompañamiento Psicosocial."],
-    support: [
-      "Puedes apoyar como voluntario, aliado o donante. Escríbenos por WhatsApp al ",
-      whatsapp(`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero apoyar a la Fundación Amigos Como Arroz.")}`),
-      "."
-    ],
-    default: [
-      "Puedo ayudarte con teléfono, WhatsApp, ubicación, programas o formas de apoyo. Si necesitas atención directa, escríbenos al ",
-      whatsapp(),
-      "."
-    ]
-  };
-
-  const getAnswer = (question) => {
-    const text = normalize(question);
-
-    if (/(telefono|celular|whatsapp|contacto|comunicar|llamar|numero)/.test(text)) {
-      return answers.phone;
-    }
-
-    if (/(ubicacion|direccion|donde|carrera|quirinal|neiva|barrio)/.test(text)) {
-      return answers.location;
-    }
-
-    if (/(programa|semilla|siembra|cosecha|psicosocial|actividad)/.test(text)) {
-      return answers.programs;
-    }
-
-    if (/(apoyar|donar|donacion|voluntario|aliado|ayudar)/.test(text)) {
-      return answers.support;
-    }
-
-    return answers.default;
-  };
+  const getAnswer = (question) => responder(question, SITE_DATA);
 
   // Enlaces que puede traer una respuesta de Claude: solo https y solo estos sitios.
   const HOSTS_PERMITIDOS = /^(wa\.me|(www\.)?instagram\.com|(www\.)?facebook\.com|fundacionamigoscomoarroz\.com)$/;
@@ -93,6 +51,14 @@ export function initChatbot() {
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.textContent = part.text;
+      if (/^https?:/.test(part.href)) {
+        const aviso = document.createElement("span");
+        aviso.className = "sr-only";
+        aviso.textContent = " (se abre en una pestaña nueva)";
+        link.append(aviso);
+      } else {
+        link.removeAttribute("target");
+      }
       message.append(link);
     }
 
@@ -133,9 +99,15 @@ export function initChatbot() {
     }
   };
 
+  // El panel se comporta como un diálogo: foco dentro mientras está abierto, Escape lo cierra y el foco vuelve
+  // al botón que lo abrió.
+  let soltarFoco = null;
   const setOpen = (isOpen) => {
     panel.hidden = !isOpen;
     toggle.setAttribute("aria-expanded", String(isOpen));
+    soltarFoco?.();
+    soltarFoco = isOpen ? atraparFoco(panel, toggle) : null;
+    if (!isOpen) toggle.focus();
 
     if (isOpen) {
       setTimeout(() => input.focus(), 80);
